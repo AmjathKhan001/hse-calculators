@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | HSE Calculator</title>
+    <meta name="description" content="Get in touch with HSE Calculator team for support, partnerships, or custom calculator development.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="contact.html" class="nav-link active"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h1 class="section-title">Contact Us</h1>
+                <p class="section-subtitle">Get in touch with our team for support, partnerships, or custom calculator development.</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Office Address</h3>
+                            <p>Safety Solutions Plaza, Suite 304</p>
+                            <p>123 Safety Street</p>
+                            <p>Chennai, Tamil Nadu 600001</p>
+                            <p>India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone Numbers</h3>
+                            <p><strong>Customer Support:</strong> <a href="tel:+919750816163">+91 97508 16163</a></p>
+                            <p><strong>Technical Support:</strong> <a href="tel:+919840050505">+91 98400 50505</a></p>
+                            <p><strong>Emergency:</strong> <a href="tel:+911800123456">1800 123 456</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Addresses</h3>
+                            <p><strong>General Inquiries:</strong> <a href="mailto:info@hsecalculator.com">info@hsecalculator.com</a></p>
+                            <p><strong>Technical Support:</strong> <a href="mailto:support@hsecalculator.com">support@hsecalculator.com</a></p>
+                            <p><strong>Partnerships:</strong> <a href="mailto:partners@hsecalculator.com">partners@hsecalculator.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM IST</p>
+                            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM IST</p>
+                            <p><strong>Sunday:</strong> Closed</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <div class="form-card">
+                        <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+                        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                        
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" id="name" class="form-control" required 
+                                       placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" id="email" class="form-control" required 
+                                       placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" 
+                                       placeholder="Enter your phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company" class="form-label">Company/Organization</label>
+                                <input type="text" id="company" class="form-control" 
+                                       placeholder="Enter your company name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inquiry-type" class="form-label">Type of Inquiry *</label>
+                                <select id="inquiry-type" class="form-control" required>
+                                    <option value="">Select inquiry type</option>
+                                    <option value="technical-support">Technical Support</option>
+                                    <option value="calculator-request">Custom Calculator Request</option>
+                                    <option value="partnership">Partnership/Business</option>
+                                    <option value="training">Training/Seminars</option>
+                                    <option value="feedback">Feedback/Suggestions</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" id="subject" class="form-control" required 
+                                       placeholder="Enter message subject">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea id="message" class="form-control" rows="6" required 
+                                          placeholder="Please provide details of your inquiry..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletter" checked>
+                                    <span>Subscribe to our newsletter for updates and safety tips</span>
+                                </label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="6LcKZzApAAAAAIwX4qQZQ9WQ4Q7Q4Q7Q4Q7Q4Q7Q"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                            
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Section -->
+            <div class="team-section">
+                <h2 class="section-title">Meet Our Team</h2>
+                <p class="section-subtitle">Our dedicated team of safety professionals is here to assist you.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="member-info">
+                            <h3>Amjath Khan</h3>
+                            <p class="member-title">Founder & Lead Safety Consultant</p>
+                            <p class="member-bio">20+ years experience in industrial safety and HSE management.</p>
+                            <a href="mailto:amjath@hsecalculator.com" class="member-email">
+                                <i class="fas fa-envelope"></i> amjath@hsecalculator.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="member-info">
+                            <h3>Sarah Johnson</h3>
+                            <p class="member-title">Technical Support Manager</p>
+                            <p class="member-bio">Specializes in calculator development and technical solutions.</p>
+                            <a href="mailto:sarah@hsecalculator.com" class="member-email">
+                                <i class="fas fa-envelope"></i> sarah@hsecalculator.com
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="member-image">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="member-info">
+                            <h3>Robert Chen</h3>
+                            <p class="member-title">Training & Development Lead</p>
+                            <p class="member-bio">Conducts safety training sessions and develops educational materials.</p>
+                            <a href="mailto:robert@hsecalculator.com" class="member-email">
+                                <i class="fas fa-envelope"></i> robert@hsecalculator.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Quick answers to common questions about our services.</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How long does it take to develop a custom calculator?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Custom calculator development typically takes 2-4 weeks depending on complexity. Simple calculators can be delivered in 1-2 weeks, while complex multi-parameter calculators may require 4-6 weeks for development and testing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer training on how to use the calculators?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer both online and in-person training sessions. Our training covers calculator usage, interpretation of results, and integration into safety management systems. Contact us for training schedules and pricing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I integrate your calculators into my company's intranet?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! We offer enterprise solutions with custom branding, integration APIs, and dedicated support. Contact our partnerships team for integration options and pricing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What safety standards do your calculators comply with?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our calculators are developed based on OSHA, NIOSH, ANSI, ISO, and other international safety standards. Each calculator clearly indicates which standards it follows in the detailed information section.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is there a mobile app available?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our website is fully mobile-responsive and works on all devices. We are currently developing native mobile apps for iOS and Android, expected to launch in Q3 2025.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="map-section">
+                <h2 class="section-title">Visit Our Office</h2>
+                <div class="map-container">
+                    <!-- Google Maps Embed -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.008094348046!2d80.25085717508226!3d13.08220871246628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265d4a1759d2d%3A0xbf6c0c1c8e6c7f2b!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1628234567890!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="Our Office Location">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/@AmjathkhanOfficial" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu, India</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM IST</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <script>
+        // Contact Form Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !subject || !message) {
+                        showFormMessage('Please fill in all required fields.', 'error');
+                        return;
+                    }
+                    
+                    // Email validation
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(email)) {
+                        showFormMessage('Please enter a valid email address.', 'error');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    showFormMessage('Sending your message...', 'info');
+                    
+                    // Simulate form submission (in a real implementation, this would be an AJAX call)
+                    setTimeout(() => {
+                        // Success message
+                        showFormMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Clear message after 5 seconds
+                        setTimeout(() => {
+                            formMessage.style.display = 'none';
+                        }, 5000);
+                    }, 2000);
+                });
+            }
+            
+            // FAQ Toggle Functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle active class
+                    this.parentElement.classList.toggle('active');
+                    
+                    // Toggle answer visibility
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                    
+                    // Close other FAQs
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== this) {
+                            const otherAnswer = otherQuestion.nextElementSibling;
+                            const otherIcon = otherQuestion.querySelector('i');
+                            otherQuestion.parentElement.classList.remove('active');
+                            otherAnswer.style.maxHeight = null;
+                            otherIcon.classList.remove('fa-chevron-up');
+                            otherIcon.classList.add('fa-chevron-down');
+                        }
+                    });
+                });
+            });
+        });
+        
+        function showFormMessage(message, type) {
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = message;
+            formMessage.className = `form-message ${type}`;
+            formMessage.style.display = 'block';
+        }
+        
+        // Initialize FAQ heights
+        document.querySelectorAll('.faq-answer').forEach(answer => {
+            answer.style.maxHeight = '0px';
+        });
+    </script>
+    
+    <style>
+        /* Contact Section Styles */
+        .contact-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .contact-details p {
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+        
+        .contact-details a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .contact-details strong {
+            color: #2c3e50;
+        }
+        
+        /* Contact Form Styles */
+        .form-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-card p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .contact-form .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .contact-form .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .contact-form textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .btn-block {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+        }
+        
+        .form-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .form-message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        /* Team Section Styles */
+        .team-section {
+            padding: 60px 0;
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+        
+        .team-section .section-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .team-section .section-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .member-image {
+            height: 200px;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .member-image i {
+            font-size: 100px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-info h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .member-title {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .member-bio {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .member-email {
+            color: #3498db;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .member-email:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+            border-radius: 15px;
+            margin-bottom: 60px;
+        }
+        
+        .faq-section .section-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .faq-section .section-subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid #e0e6ed;
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-question h3 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 18px;
+            flex: 1;
+        }
+        
+        .faq-question i {
+            color: #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px 25px;
+        }
+        
+        .faq-answer p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        /* Map Section Styles */
+        .map-section {
+            padding: 60px 0;
+            background: white;
+            border-radius: 15px;
+        }
+        
+        .map-section .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 40px 0;
+            }
+            
+            .contact-card {
+                padding: 20px;
+            }
+            
+            .form-card {
+                padding: 25px;
+            }
+            
+            .team-section, .faq-section, .map-section {
+                padding: 40px 20px;
+            }
+            
+            .faq-question h3 {
+                font-size: 16px;
+            }
+            
+            .member-image {
+                height: 150px;
+            }
+            
+            .member-image i {
+                font-size: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin: 0 auto 15px;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
