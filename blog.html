@@ -3,13 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - HSE Calculator</title>
+    <title>HSE Blog | Safety Articles & Updates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c5aa0;
+            --light: #f5f7fa;
+        }
+        
+        body {
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+        
+        .blog-post {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .blog-post h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .blog-post p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .coming-soon {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>HSE & Safety Blog</h1>
-        <p>Coming soon: Articles on workplace safety, tool tutorials, and industry updates.</p>
-        <a href="/" class="btn btn-primary">← Back to Home</a>
+        <h1>HSE Safety Blog</h1>
+        
+        <div class="coming-soon">
+            <h2>📝 Coming Soon</h2>
+            <p>We're working on creating valuable content about workplace safety, HSE best practices, tool tutorials, and industry updates.</p>
+            <p>Check back soon for informative articles!</p>
+        </div>
+        
+        <!-- Example Blog Post Template (Uncomment when ready) -->
+        <!--
+        <div class="blog-post">
+            <h2>Understanding Risk Assessment in Workplace Safety</h2>
+            <p>Learn how to properly assess risks in your workplace using our calculators...</p>
+            <p><small>Posted on December 28, 2024</small></p>
+        </div>
+        -->
+        
+        <div class="back-btn">
+            <a href="index.html" class="btn">← Back to Home</a>
+        </div>
     </div>
 </body>
 </html>
