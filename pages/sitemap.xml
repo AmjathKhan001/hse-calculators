@@ -1,39 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Main Pages -->
     <url>
         <loc>https://www.hsecalculator.com/</loc>
-        <lastmod>2024-12-28</lastmod>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
+    
+    <!-- Calculator Pages -->
     <url>
-        <loc>https://www.hsecalculator.com/products.html</loc>
-        <lastmod>2024-12-28</lastmod>
+        <loc>https://www.hsecalculator.com/calculators/risk-assessment.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/noise-exposure.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/chemical-exposure.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/incident-rate.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/fall-protection.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/heat-stress.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/ventilation.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/ppe-selection.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/lifting-safety.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/calculators/environmental-impact.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Product Pages -->
+    <url>
+        <loc>https://www.hsecalculator.com/pages/products.html</loc>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    
+    <!-- Tools Pages -->
     <url>
-        <loc>https://www.hsecalculator.com/blog.html</loc>
-        <lastmod>2024-12-28</lastmod>
+        <loc>https://www.hsecalculator.com/pages/tools.html</loc>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
+    
+    <!-- Blog Pages -->
     <url>
-        <loc>https://www.hsecalculator.com/privacy.html</loc>
-        <lastmod>2024-12-28</lastmod>
+        <loc>https://www.hsecalculator.com/pages/blog.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://www.hsecalculator.com/pages/privacy.html</loc>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
+    
     <url>
-        <loc>https://www.hsecalculator.com/terms.html</loc>
-        <lastmod>2024-12-28</lastmod>
+        <loc>https://www.hsecalculator.com/pages/terms.html</loc>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
+    
     <url>
-        <loc>https://www.hsecalculator.com/affiliate.html</loc>
-        <lastmod>2024-12-28</lastmod>
+        <loc>https://www.hsecalculator.com/pages/affiliate-disclosure.html</loc>
+        <lastmod>2025-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
+    
+    <url>
+        <loc>https://www.hsecalculator.com/pages/sitemap.html</loc>
+        <lastmod>2025-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
 </urlset>
