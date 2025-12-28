@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting Safety Calculator | HSE Calculator</title>
+    <meta name="description"content="Calculate safe working loads, center of gravity, and lifting equipment requirements for material handling operations.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Lifting Safety Calculator</h1>
+            <p class="section-subtitle">Calculate safe working loads, center of gravity, and lifting equipment requirements for material handling operations.</p>
+            
+            <div class="calculator-form" id="lifting-calculator-form">
+                <div class="form-group">
+                    <label for="load-weight" class="form-label">Load Weight (lbs):</label>
+                    <input type="number" id="load-weight" class="form-control" min="1" max="1000000" value="5000" 
+                           data-tooltip="Enter the weight of the load to be lifted">
+                </div>
+                
+                <div class="form-group">
+                    <label for="load-dimensions" class="form-label">Load Dimensions (feet):</label>
+                    <div class="form-row">
+                        <input type="number" id="load-length" class="form-control" placeholder="Length" min="1" value="10">
+                        <input type="number" id="load-width" class="form-control" placeholder="Width" min="1" value="6">
+                        <input type="number" id="load-height" class="form-control" placeholder="Height" min="1" value="8">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lifting-equipment" class="form-label">Lifting Equipment:</label>
+                    <select id="lifting-equipment" class="form-control" data-tooltip="Select the lifting equipment to be used">
+                        <option value="crane">Mobile Crane</option>
+                        <option value="forklift">Forklift</option>
+                        <option value="hoist">Chain Hoist</option>
+                        <option value="jack">Hydraulic Jack</option>
+                        <option value="rigging">Rigging/Slings</option>
+                        <option value="manual">Manual Lifting</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lifting-angle" class="form-label">Lifting Angle (degrees):</label>
+                    <input type="number" id="lifting-angle" class="form-control" min="0" max="90" value="60" 
+                           data-tooltip="Enter the angle between sling legs (0° = vertical, 90° = horizontal)">
+                    <small class="form-text">For multiple sling legs only</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="safety-factor" class="form-label">Safety Factor:</label>
+                    <select id="safety-factor" class="form-control" data-tooltip="Select required safety factor">
+                        <option value="3">3:1 (General Lifting)</option>
+                        <option value="4">4:1 (Personnel Lifting)</option>
+                        <option value="5" selected>5:1 (Critical Lifts)</option>
+                        <option value="6">6:1 (Unknown Loads)</option>
+                        <option value="7">7:1 (Extreme Conditions)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="number-slings" class="form-label">Number of Sling Legs:</label>
+                    <select id="number-slings" class="form-control" data-tooltip="Select number of sling legs">
+                        <option value="1">1 (Vertical)</option>
+                        <option value="2" selected>2 (Bridle)</option>
+                        <option value="3">3 (Triangle)</option>
+                        <option value="4">4 (Quad)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="center-gravity" class="form-label">Center of Gravity Offset (inches):</label>
+                    <input type="number" id="center-gravity" class="form-control" min="0" max="120" value="12" 
+                           data-tooltip="Enter offset from geometric center">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lift-height" class="form-label">Lift Height (feet):</label>
+                    <input type="number" id="lift-height" class="form-control" min="1" max="500" value="20" 
+                           data-tooltip="Enter required lifting height">
+                </div>
+                
+                <button id="calculate-lifting" class="btn btn-primary">
+                    <i class="fas fa-cogs"></i> Calculate Lifting Safety
+                </button>
+                
+                <div id="lifting-result" class="result-box">
+                    <h3>Lifting Safety Analysis</h3>
+                    <div class="result-value" id="lifting-value"></div>
+                    <div class="result-interpretation" id="lifting-interpretation"></div>
+                    
+                    <div class="lifting-details mt-3" id="lifting-details"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('lifting-calculator-form', 'lifting-safety')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Load Information:</strong> Enter weight and dimensions of the load.</p>
+                    <p>2. <strong>Equipment Selection:</strong> Select the lifting equipment to be used.</p>
+                    <p>3. <strong>Lifting Configuration:</strong> Enter lifting angle, number of slings, and safety factor.</p>
+                    <p>4. <strong>Calculation:</strong> The calculator determines SWL, load distribution, and safety requirements.</p>
+                    
+                    <h5 class="mt-3">Safe Working Load (SWL) Formula</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Lift Type</th>
+                                <th>SWL Formula</th>
+                                <th>Safety Factor</th>
+                                <th>Standard</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Single Vertical</td>
+                                <td>SWL = WLL</td>
+                                <td>5:1 minimum</td>
+                                <td>ASME B30.9</td>
+                            </tr>
+                            <tr>
+                                <td>Two-Leg Bridle</td>
+                                <td>SWL = 2 × WLL × cos(θ/2)</td>
+                                <td>5:1 minimum</td>
+                                <td>ASME B30.9</td>
+                            </tr>
+                            <tr>
+                                <td>Three-Leg Triangle</td>
+                                <td>SWL = 3 × WLL × load factor</td>
+                                <td>5:1 minimum</td>
+                                <td>ASME B30.9</td>
+                            </tr>
+                            <tr>
+                                <td>Four-Leg Quad</td>
+                                <td>SWL = 3 × WLL (assumes 3 legs carry load)</td>
+                                <td>5:1 minimum</td>
+                                <td>ASME B30.9</td>
+                            </tr>
+                            <tr>
+                                <td>Critical Lift</td>
+                                <td>SWL = WLL / 10</td>
+                                <td>10:1 minimum</td>
+                                <td>OSHA 1926.1431</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Lifting Safety Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Lifting Safety Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Lifting Safety Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Lifting Safety Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Fall Protection Calculator</h3>
+                            <p>Calculate fall distances, clearance requirements, and anchor point strength.</p>
+                            <a href="fall-protection.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>PPE Selection Calculator</h3>
+                            <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
+                            <a href="ppe-selection.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Lifting Safety Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-lifting').addEventListener('click', calculateLiftingSafety);
+        });
+        
+        function calculateLiftingSafety() {
+            // Get input values
+            const loadWeight = parseFloat(document.getElementById('load-weight').value);
+            const loadLength = parseFloat(document.getElementById('load-length').value);
+            const loadWidth = parseFloat(document.getElementById('load-width').value);
+            const loadHeight = parseFloat(document.getElementById('load-height').value);
+            const liftingEquipment = document.getElementById('lifting-equipment').value;
+            const liftingAngle = parseFloat(document.getElementById('lifting-angle').value);
+            const safetyFactor = parseFloat(document.getElementById('safety-factor').value);
+            const numSlings = parseInt(document.getElementById('number-slings').value);
+            const cogOffset = parseFloat(document.getElementById('center-gravity').value);
+            const liftHeight = parseFloat(document.getElementById('lift-height').value);
+            
+            // Validate inputs
+            if (isNaN(loadWeight) || loadWeight <= 0) {
+                alert('Please enter a valid load weight.');
+                return;
+            }
+            
+            if (isNaN(loadLength) || isNaN(loadWidth) || isNaN(loadHeight) || 
+                loadLength <= 0 || loadWidth <= 0 || loadHeight <= 0) {
+                alert('Please enter valid load dimensions.');
+                return;
+            }
+            
+            // Calculate load volume
+            const loadVolume = loadLength * loadWidth * loadHeight; // cubic feet
+            
+            // Calculate load density
+            const loadDensity = loadWeight / loadVolume; // lbs/cubic foot
+            
+            // Calculate sling tension based on angle
+            const angleRad = (liftingAngle * Math.PI) / 180;
+            let slingTensionFactor = 1;
+            
+            if (numSlings > 1 && liftingAngle > 0) {
+                // For bridle hitch: Tension = Load / (n × cos(θ/2))
+                slingTensionFactor = 1 / (numSlings * Math.cos(angleRad / 2));
+            } else if (numSlings === 1) {
+                slingTensionFactor = 1;
+            }
+            
+            const slingTension = loadWeight * slingTensionFactor;
+            
+            // Calculate required WLL (Working Load Limit)
+            const requiredWLL = slingTension * safetyFactor;
+            
+            // Calculate equipment capacity requirements
+            let equipmentCapacity;
+            switch(liftingEquipment) {
+                case 'crane':
+                    equipmentCapacity = requiredWLL * 1.25; // Crane capacity includes boom, radius factors
+                    break;
+                case 'forklift':
+                    equipmentCapacity = requiredWLL * 1.5; // Forklift capacity includes load center
+                    break;
+                case 'hoist':
+                    equipmentCapacity = requiredWLL;
+                    break;
+                case 'jack':
+                    equipmentCapacity = requiredWLL * 2; // Jacks typically have higher safety margins
+                    break;
+                default:
+                    equipmentCapacity = requiredWLL;
+            }
+            
+            // Calculate center of gravity effects
+            const maxOffset = Math.min(loadLength, loadWidth) * 12 / 2; // Maximum possible offset in inches
+            const stabilityFactor = 1 - (cogOffset / maxOffset);
+            
+            // Calculate wind load effect (simplified)
+            const windPressure = 20; // psf (typical for 50 mph wind)
+            const windArea = (loadLength * loadHeight) / 2; // Assumes load presents area to wind
+            const windLoad = windPressure * windArea; // lbs
+            
+            // Calculate total dynamic load
+            const dynamicLoad = loadWeight + windLoad;
+            
+            // Determine lift classification
+            let liftClass, liftColor, recommendations;
+            
+            if (loadWeight > 100000 || liftHeight > 100) {
+                liftClass = 'Critical Lift';
+                liftColor = '#e74c3c';
+                recommendations = 'Requires engineered lift plan, multiple safety checks, and specialized supervision.';
+            } else if (loadWeight > 20000 || liftHeight > 50) {
+                liftClass = 'Heavy Lift';
+                liftColor = '#f39c12';
+                recommendations = 'Requires written lift plan, experienced operator, and ground control.';
+            } else if (loadWeight > 5000) {
+                liftClass = 'Medium Lift';
+                liftColor = '#3498db';
+                recommendations = 'Standard lift procedures apply. Ensure proper rigging and load control.';
+            } else {
+                liftClass = 'Light Lift';
+                liftColor = '#27ae60';
+                recommendations = 'Follow standard safety procedures. Ensure load is secure and balanced.';
+            }
+            
+            // Check stability
+            let stabilityStatus;
+            if (stabilityFactor > 0.8) {
+                stabilityStatus = 'Stable';
+            } else if (stabilityFactor > 0.6) {
+                stabilityStatus = 'Marginally Stable';
+            } else {
+                stabilityStatus = 'Unstable - Do Not Lift';
+            }
+            
+            // Display results
+            document.getElementById('lifting-value').innerHTML = `
+                <div class="result-item">
+                    <strong>Lift Classification:</strong> <span style="color: ${liftColor}; font-weight: bold;">${liftClass}</span>
+                </div>
+                <div class="result-item">
+                    <strong>Required Equipment Capacity:</strong> ${equipmentCapacity.toFixed(0)} lbs
+                </div>
+                <div class="result-item">
+                    <strong>Sling Tension per Leg:</strong> ${slingTension.toFixed(0)} lbs
+                </div>
+                <div class="result-item">
+                    <strong>Load Stability:</strong> ${stabilityStatus}
+                </div>
+            `;
+            
+            document.getElementById('lifting-interpretation').innerHTML = `
+                <p><strong>Load Density:</strong> ${loadDensity.toFixed(2)} lbs/ft³ (${loadDensity > 100 ? 'Heavy' : loadDensity > 50 ? 'Medium' : 'Light'} density)</p>
+                <p><strong>Recommendations:</strong> ${recommendations}</p>
+                <p><strong>Safety Factor:</strong> ${safetyFactor}:1 ${safetyFactor >= 5 ? '✓ Meets OSHA requirements' : '✗ Below minimum requirements'}</p>
+            `;
+            
+            // Show detailed calculations
+            document.getElementById('lifting-details').innerHTML = `
+                <div class="lifting-calculations">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Calculation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Load Weight</td>
+                                <td>${loadWeight.toLocaleString()} lbs</td>
+                                <td>Given</td>
+                            </tr>
+                            <tr>
+                                <td>Load Volume</td>
+                                <td>${loadVolume.toLocaleString()} ft³</td>
+                                <td>${loadLength}' × ${loadWidth}' × ${loadHeight}'</td>
+                            </tr>
+                            <tr>
+                                <td>Number of Sling Legs</td>
+                                <td>${numSlings}</td>
+                                <td>Selected configuration</td>
+                            </tr>
+                            <tr>
+                                <td>Lifting Angle</td>
+                                <td>${liftingAngle}°</td>
+                                <td>Angle between sling legs</td>
+                            </tr>
+                            <tr>
+                                <td>Sling Tension Factor</td>
+                                <td>${slingTensionFactor.toFixed(3)}</td>
+                                <td>1 / (${numSlings} × cos(${liftingAngle}°/2))</td>
+                            </tr>
+                            <tr>
+                                <td>Total Sling Tension</td>
+                                <td>${slingTension.toFixed(0)} lbs</td>
+                                <td>Load × Tension Factor</td>
+                            </tr>
+                            <tr>
+                                <td>Required WLL per Sling</td>
+                                <td>${requiredWLL.toFixed(0)} lbs</td>
+                                <td>Tension × Safety Factor (${safetyFactor}:1)</td>
+                            </tr>
+                            <tr>
+                                <td>Center of Gravity Offset</td>
+                                <td>${cogOffset}" from center</td>
+                                <td>${cogOffset > maxOffset/2 ? '⚠️ Excessive offset' : 'Within acceptable range'}</td>
+                            </tr>
+                            <tr>
+                                <td>Wind Load (50 mph)</td>
+                                <td>${windLoad.toFixed(0)} lbs</td>
+                                <td>Additional dynamic load</td>
+                            </tr>
+                            <tr>
+                                <td>Total Dynamic Load</td>
+                                <td>${dynamicLoad.toFixed(0)} lbs</td>
+                                <td>Static + Wind load</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="lifting-tips mt-3">
+                        <h5>Safe Lifting Practices:</h5>
+                        <ul>
+                            <li>Always conduct pre-lift meeting and hazard assessment</li>
+                            <li>Verify equipment certifications and inspection records</li>
+                            <li>Use tag lines to control load rotation and movement</li>
+                            <li>Maintain clear communication between operator and ground personnel</li>
+                            <li>Never stand under suspended loads</li>
+                            <li>Consider weather conditions, especially wind</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('lifting-result').classList.add('active');
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+    
+    <style>
+        .lifting-calculations table {
+            width: 100%;
+            font-size: 14px;
+        }
+        
+        .lifting-calculations td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .lifting-tips ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .lifting-tips li {
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+        
+        .form-row input {
+            flex: 1;
+        }
+    </style>
+</body>
+</html>
