@@ -1,0 +1,123 @@
+# robots.txt for HSE Calculator
+# https://www.hsecalculator.com/
+# Generated: March 15, 2025
+
+User-agent: *
+Allow: /
+
+# Disallow crawlers from accessing admin or private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /search/
+Disallow: /*.php$
+Disallow: /*.inc$
+Disallow: /*.sql$
+Disallow: /*.gz$
+Disallow: /*.zip$
+Disallow: /*.tar$
+
+# Allow all assets
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://www.hsecalculator.com/sitemap.xml
+
+# Crawl delay - be gentle on the server
+Crawl-delay: 2
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+Disallow: /private/
+Crawl-delay: 1
+
+# Bing-specific directives
+User-agent: bingbot
+Allow: /
+Disallow: /private/
+Crawl-delay: 1
+
+# Yandex-specific directives
+User-agent: Yandex
+Allow: /
+Disallow: /private/
+Crawl-delay: 3
+
+# Baidu-specific directives
+User-agent: Baiduspider
+Allow: /
+Disallow: /private/
+Crawl-delay: 5
+
+# DuckDuckGo-specific directives
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /private/
+Crawl-delay: 1
+
+# Twitter-specific directives
+User-agent: Twitterbot
+Allow: /
+
+# Facebook-specific directives
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /private/
+
+# LinkedIn-specific directives
+User-agent: LinkedInBot
+Allow: /
+Disallow: /private/
+
+# Common ad bots - block them
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+# Development and testing environments
+User-agent: *
+Disallow: /*?*
+Disallow: /*&*
+Disallow: /*#
+Disallow: /*.json$
+Disallow: /*.xml$  # Except sitemap
+Allow: /sitemap.xml
+
+# Block specific file types that shouldn't be indexed
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.xls$
+Disallow: /*.xlsx$
+Disallow: /*.ppt$
+Disallow: /*.pptx$
+
+# Development and staging
+User-agent: *
+Disallow: /staging/
+Disallow: /test/
+Disallow: /dev/
+Disallow: /development/
+
+# Comments
+# This robots.txt file allows search engines to index all public content
+# while protecting private and administrative areas.
+# Update frequency: Update this file when adding new sections to the website.
