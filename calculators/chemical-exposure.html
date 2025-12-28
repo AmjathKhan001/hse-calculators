@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Exposure Calculator | HSE Calculator</title>
+    <meta name="description" content="Calculate chemical exposure levels and assess workplace compliance with occupational exposure limits.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator-styles.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DRRTSHLC01');
+    </script>
+    
+    <!-- HTML2PDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Calculator Content -->
+    <section class="calculator-section">
+        <div class="container">
+            <h1 class="section-title">Chemical Exposure Calculator</h1>
+            <p class="section-subtitle">Calculate chemical exposure levels and assess workplace compliance with occupational exposure limits.</p>
+            
+            <div class="calculator-form" id="chemical-calculator-form">
+                <div class="form-group">
+                    <label for="chemical-name" class="form-label">Chemical Name/Substance:</label>
+                    <input type="text" id="chemical-name" class="form-control" placeholder="e.g., Toluene, Ammonia, etc." 
+                           data-tooltip="Enter the name of the chemical substance">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cas-number" class="form-label">CAS Number (optional):</label>
+                    <input type="text" id="cas-number" class="form-control" placeholder="e.g., 108-88-3">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exposure-concentration" class="form-label">Exposure Concentration (ppm or mg/m³):</label>
+                        <input type="number" id="exposure-concentration" class="form-control" min="0" step="0.01" value="50" 
+                               data-tooltip="Enter the measured or estimated exposure concentration">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="concentration-unit" class="form-label">Unit:</label>
+                        <select id="concentration-unit" class="form-control" data-tooltip="Select concentration unit">
+                            <option value="ppm">ppm (parts per million)</option>
+                            <option value="mg_m3">mg/m³ (milligrams per cubic meter)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exposure-duration" class="form-label">Exposure Duration (hours):</label>
+                    <input type="number" id="exposure-duration" class="form-control" min="0.1" max="24" step="0.1" value="8" 
+                           data-tooltip="Enter daily exposure duration in hours">
+                    <small class="form-text">Typical work shift is 8 hours</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exposure-frequency" class="form-label">Exposure Frequency (days/week):</label>
+                    <input type="number" id="exposure-frequency" class="form-control" min="1" max="7" value="5" 
+                           data-tooltip="Enter number of exposure days per week">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exposure-standard" class="form-label">Exposure Standard:</label>
+                    <select id="exposure-standard" class="form-control" data-tooltip="Select the applicable exposure standard">
+                        <option value="osha_peL">OSHA PEL (Permissible Exposure Limit)</option>
+                        <option value="acgih_tlv">ACGIH TLV (Threshold Limit Value)</option>
+                        <option value="niosh_rel">NIOSH REL (Recommended Exposure Limit)</option>
+                        <option value="weel">WEEL (Workplace Environmental Exposure Level)</option>
+                        <option value="custom">Custom Limit</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="custom-limit-group" style="display: none;">
+                    <label for="custom-limit" class="form-label">Custom Exposure Limit:</label>
+                    <input type="number" id="custom-limit" class="form-control" min="0" step="0.01" placeholder="Enter custom limit">
+                </div>
+                
+                <button id="calculate-chemical" class="btn btn-primary">
+                    <i class="fas fa-flask"></i> Calculate Exposure
+                </button>
+                
+                <div id="chemical-result" class="result-box">
+                    <h3>Chemical Exposure Assessment</h3>
+                    <div class="result-value" id="chemical-value"></div>
+                    <div class="result-interpretation" id="chemical-interpretation"></div>
+                    
+                    <div class="exposure-details mt-3" id="exposure-details"></div>
+                    
+                    <div class="print-actions">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('chemical-calculator-form', 'chemical-exposure')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calculator-info mt-4">
+                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
+                    <p>1. <strong>Chemical Information:</strong> Enter the chemical name and optional CAS number.</p>
+                    <p>2. <strong>Exposure Data:</strong> Enter the measured or estimated exposure concentration and duration.</p>
+                    <p>3. <strong>Exposure Standard:</strong> Select the applicable occupational exposure limit.</p>
+                    <p>4. <strong>Calculation:</strong> The calculator determines the exposure ratio and compliance status.</p>
+                    
+                    <h5 class="mt-3">Common Exposure Limits (Example Values)</h5>
+                    <table class="risk-matrix">
+                        <thead>
+                            <tr>
+                                <th>Chemical</th>
+                                <th>OSHA PEL (8-hr TWA)</th>
+                                <th>ACGIH TLV</th>
+                                <th>NIOSH REL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Toluene</td>
+                                <td>200 ppm</td>
+                                <td>20 ppm</td>
+                                <td>100 ppm</td>
+                            </tr>
+                            <tr>
+                                <td>Benzene</td>
+                                <td>1 ppm</td>
+                                <td>0.5 ppm</td>
+                                <td>0.1 ppm</td>
+                            </tr>
+                            <tr>
+                                <td>Ammonia</td>
+                                <td>50 ppm</td>
+                                <td>25 ppm</td>
+                                <td>25 ppm</td>
+                            </tr>
+                            <tr>
+                                <td>Carbon Monoxide</td>
+                                <td>50 ppm</td>
+                                <td>25 ppm</td>
+                                <td>35 ppm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3>Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Chemical Exposure Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Chemical Exposure Calculator').twitter()">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Chemical Exposure Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Chemical Exposure Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title">Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Noise Exposure Calculator</h3>
+                            <p>Determine daily noise exposure and compliance with occupational limits.</p>
+                            <a href="noise-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Heat Stress Calculator</h3>
+                            <p>Assess heat stress risk based on temperature, humidity, and work intensity.</p>
+                            <a href="heat-stress.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
+    
+    <script>
+        // Chemical Exposure Calculator specific logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculate-chemical').addEventListener('click', calculateChemicalExposure);
+            
+            // Show/hide custom limit field
+            document.getElementById('exposure-standard').addEventListener('change', function() {
+                const customGroup = document.getElementById('custom-limit-group');
+                customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+            });
+        });
+        
+        function calculateChemicalExposure() {
+            // Get input values
+            const chemicalName = document.getElementById('chemical-name').value || 'Unknown Chemical';
+            const exposureConcentration = parseFloat(document.getElementById('exposure-concentration').value);
+            const concentrationUnit = document.getElementById('concentration-unit').value;
+            const exposureDuration = parseFloat(document.getElementById('exposure-duration').value);
+            const exposureFrequency = parseInt(document.getElementById('exposure-frequency').value);
+            const exposureStandard = document.getElementById('exposure-standard').value;
+            const customLimit = document.getElementById('custom-limit').value ? parseFloat(document.getElementById('custom-limit').value) : null;
+            
+            // Validate inputs
+            if (isNaN(exposureConcentration) || exposureConcentration < 0) {
+                alert('Please enter a valid exposure concentration (positive number).');
+                return;
+            }
+            
+            if (isNaN(exposureDuration) || exposureDuration <= 0 || exposureDuration > 24) {
+                alert('Please enter a valid exposure duration (0.1 to 24 hours).');
+                return;
+            }
+            
+            if (isNaN(exposureFrequency) || exposureFrequency < 1 || exposureFrequency > 7) {
+                alert('Please enter a valid exposure frequency (1 to 7 days).');
+                return;
+            }
+            
+            // Get exposure limit based on standard (example values for common chemicals)
+            let exposureLimit;
+            switch(exposureStandard) {
+                case 'osha_pel':
+                    exposureLimit = 100; // Default example value in ppm
+                    break;
+                case 'acgih_tlv':
+                    exposureLimit = 50; // Default example value in ppm
+                    break;
+                case 'niosh_rel':
+                    exposureLimit = 75; // Default example value in ppm
+                    break;
+                case 'custom':
+                    if (!customLimit || isNaN(customLimit) || customLimit <= 0) {
+                        alert('Please enter a valid custom exposure limit.');
+                        return;
+                    }
+                    exposureLimit = customLimit;
+                    break;
+                default:
+                    exposureLimit = 100;
+            }
+            
+            // Calculate exposure ratio (if concentration is in mg/m³, convert to ppm for comparison)
+            // Simplified conversion: For most gases at 25°C: mg/m³ = (ppm × molecular weight) / 24.45
+            let exposureRatio;
+            if (concentrationUnit === 'mg_m3') {
+                // Assume average molecular weight of 50 for conversion (actual depends on chemical)
+                const ppmEquivalent = (exposureConcentration * 24.45) / 50;
+                exposureRatio = ppmEquivalent / exposureLimit;
+            } else {
+                exposureRatio = exposureConcentration / exposureLimit;
+            }
+            
+            // Calculate Time-Weighted Average (TWA) exposure
+            const weeklyTWA = exposureConcentration * exposureDuration * exposureFrequency / 40; // 40-hour work week
+            
+            // Determine compliance status and recommendations
+            let complianceStatus, interpretation, actionRequired, riskLevel;
+            
+            if (exposureRatio <= 0.5) {
+                complianceStatus = 'Within Limits';
+                interpretation = 'Exposure is well below the occupational exposure limit';
+                actionRequired = 'Continue routine monitoring';
+                riskLevel = 'Low';
+            } else if (exposureRatio <= 1.0) {
+                complianceStatus = 'At Action Level';
+                interpretation = 'Exposure is at or approaching the limit';
+                actionRequired = 'Implement exposure controls and increase monitoring frequency';
+                riskLevel = 'Moderate';
+            } else if (exposureRatio <= 2.0) {
+                complianceStatus = 'Above Limit';
+                interpretation = 'Exposure exceeds occupational exposure limit';
+                actionRequired = 'Immediate engineering controls required, consider respiratory protection';
+                riskLevel = 'High';
+            } else {
+                complianceStatus = 'Significantly Above Limit';
+                interpretation = 'Exposure significantly exceeds occupational exposure limit';
+                actionRequired = 'Stop activity immediately, implement engineering controls, require respiratory protection';
+                riskLevel = 'Very High';
+            }
+            
+            // Display results
+            document.getElementById('chemical-value').innerHTML = `
+                <div class="result-item">
+                    <strong>Chemical:</strong> ${chemicalName}
+                </div>
+                <div class="result-item">
+                    <strong>Exposure Ratio:</strong> ${exposureRatio.toFixed(2)} (Limit: ${exposureLimit} ${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'})
+                </div>
+                <div class="result-item">
+                    <strong>Compliance Status:</strong> <span class="status-${riskLevel.toLowerCase().replace(' ', '-')}">${complianceStatus}</span>
+                </div>
+                <div class="result-item">
+                    <strong>Risk Level:</strong> ${riskLevel}
+                </div>
+            `;
+            
+            document.getElementById('chemical-interpretation').innerHTML = `
+                <p><strong>Interpretation:</strong> ${interpretation}</p>
+                <p><strong>Action Required:</strong> ${actionRequired}</p>
+            `;
+            
+            // Show exposure details
+            document.getElementById('exposure-details').innerHTML = `
+                <div class="exposure-table">
+                    <table class="result-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Measured Concentration</td>
+                                <td>${exposureConcentration.toFixed(2)}</td>
+                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}</td>
+                            </tr>
+                            <tr>
+                                <td>Exposure Duration (Daily)</td>
+                                <td>${exposureDuration.toFixed(1)}</td>
+                                <td>hours</td>
+                            </tr>
+                            <tr>
+                                <td>Exposure Frequency</td>
+                                <td>${exposureFrequency}</td>
+                                <td>days/week</td>
+                            </tr>
+                            <tr>
+                                <td>Weekly TWA Exposure</td>
+                                <td>${weeklyTWA.toFixed(2)}</td>
+                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}-hours</td>
+                            </tr>
+                            <tr>
+                                <td>Selected Standard</td>
+                                <td colspan="2">${document.getElementById('exposure-standard').options[document.getElementById('exposure-standard').selectedIndex].text}</td>
+                            </tr>
+                            <tr>
+                                <td>Exposure Limit</td>
+                                <td>${exposureLimit}</td>
+                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('chemical-result').classList.add('active');
+        }
+        
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
+            const opt = {
+                margin: 1,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+        
+        function shareCalculator(title) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
+            
+            return {
+                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
+                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
+                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
+                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
+            };
+        }
+    </script>
+</body>
+</html>
