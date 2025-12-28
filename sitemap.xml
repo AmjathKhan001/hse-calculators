@@ -7,9 +7,33 @@
         <priority>1.0</priority>
     </url>
     <url>
+        <loc>https://www.hsecalculator.com/products.html</loc>
+        <lastmod>2024-12-28</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.hsecalculator.com/blog.html</loc>
+        <lastmod>2024-12-28</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.hsecalculator.com/privacy.html</loc>
         <lastmod>2024-12-28</lastmod>
         <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
     </url>
-    <!-- Add all other pages -->
+    <url>
+        <loc>https://www.hsecalculator.com/terms.html</loc>
+        <lastmod>2024-12-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.hsecalculator.com/affiliate.html</loc>
+        <lastmod>2024-12-28</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
 </urlset>
