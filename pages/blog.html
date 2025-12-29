@@ -9,177 +9,260 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CSS -->
+    <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Additional Blog CSS -->
+    <link rel="stylesheet" href="css/blog.css">
     
 </head>
 <body>
     <!-- Header -->
-<header class="header">
-    <div class="container">
-        <nav class="navbar">
-            <a href="../index.html" class="logo">
-                <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                <span>HSE Calculator</span>
-            </a>
-            
-            <div class="nav-links" id="navLinks">
-                <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
-                <a href="products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                <a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a>
-                <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-            </div>
-            
-            <div class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </div>
-</header>
-
-    <!-- Blog Page -->
-    <section class="blog-page">
+    <header class="header">
         <div class="container">
-            <h1 class="section-title">HSE Blog & Articles</h1>
-            <p class="section-subtitle">Latest insights, guides, and information on health, safety, and environment topics</p>
-            
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
+                    <a href="products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="blog.html" class="nav-link active"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>HSE Blog & Articles</h1>
+            <p class="text-lead text-center">Latest insights, guides, and information on health, safety, and environment topics</p>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-page section">
+        <div class="container">
             <!-- Featured Article -->
-            <div class="featured-article">
+            <div class="featured-article mb-5">
                 <div class="featured-image">
-                    <img src="../assets/blog/featured.jpg" alt="Workplace Safety">
+                    <img src="../assets/blog/featured.jpg" alt="Workplace Safety" class="img-fluid">
+                    <div class="featured-badge">Featured</div>
                 </div>
                 <div class="featured-content">
-                    <span class="article-category">Featured</span>
-                    <h2>The Importance of Risk Assessment in Workplace Safety</h2>
-                    <div class="article-meta">
+                    <div class="article-meta mb-3">
+                        <span class="badge badge-primary">Workplace Safety</span>
                         <span><i class="far fa-calendar"></i> March 15, 2025</span>
                         <span><i class="far fa-clock"></i> 5 min read</span>
                         <span><i class="far fa-user"></i> Amjath Khan</span>
                     </div>
-                    <p>Learn how proper risk assessment can prevent accidents and save lives in the workplace. This comprehensive guide covers the essential steps of risk assessment and how our calculators can help.</p>
-                    <a href="#" class="btn btn-primary">Read Article</a>
+                    <h2 class="mb-3">The Importance of Risk Assessment in Workplace Safety</h2>
+                    <p class="text-muted mb-4">Learn how proper risk assessment can prevent accidents and save lives in the workplace. This comprehensive guide covers the essential steps of risk assessment and how our calculators can help.</p>
+                    <div class="article-actions">
+                        <a href="article/risk-assessment-importance.html" class="btn btn-primary">
+                            <i class="fas fa-book-reader"></i> Read Full Article
+                        </a>
+                        <a href="../calculators/risk-assessment.html" class="btn btn-outline">
+                            <i class="fas fa-calculator"></i> Try Calculator
+                        </a>
+                    </div>
                 </div>
             </div>
-            
+
+            <!-- Blog Filter -->
+            <div class="blog-filter mb-5">
+                <h3 class="mb-4">Browse by Category</h3>
+                <div class="filter-tags">
+                    <a href="#" class="tag active">All Articles</a>
+                    <a href="#" class="tag">Workplace Safety</a>
+                    <a href="#" class="tag">Risk Assessment</a>
+                    <a href="#" class="tag">PPE & Equipment</a>
+                    <a href="#" class="tag">Chemical Safety</a>
+                    <a href="#" class="tag">Environmental</a>
+                    <a href="#" class="tag">Training</a>
+                    <a href="#" class="tag">Regulations</a>
+                </div>
+            </div>
+
             <!-- Blog Grid -->
-            <div class="blog-grid">
+            <h2 class="section-title mb-4">Latest Articles</h2>
+            <div class="blog-grid mb-5">
                 <!-- Article 1 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/noise-protection.jpg" alt="Noise Protection">
+                        <img src="../assets/blog/noise-protection.jpg" alt="Noise Protection" class="img-fluid">
+                        <div class="category-badge">Hearing Protection</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">Hearing Protection</span>
-                        <h3 class="blog-title">Understanding Noise Exposure Limits and PPE Selection</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> March 10, 2025</span>
-                            <span><i class="far fa-clock"></i> 4 min read</span>
+                            <span><i class="far fa-clock"></i> 4 min</span>
                         </div>
+                        <h3 class="blog-title">Understanding Noise Exposure Limits and PPE Selection</h3>
                         <p class="blog-excerpt">A guide to occupational noise exposure limits, calculation methods, and proper hearing protection selection.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/noise-exposure-guide.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">4 min read</span>
+                        </div>
                     </div>
-                </div>
-                
+                </article>
+
                 <!-- Article 2 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/chemical-safety.jpg" alt="Chemical Safety">
+                        <img src="../assets/blog/chemical-safety.jpg" alt="Chemical Safety" class="img-fluid">
+                        <div class="category-badge">Chemical Safety</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">Chemical Safety</span>
-                        <h3 class="blog-title">Chemical Exposure Limits: What Every Safety Professional Should Know</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> March 5, 2025</span>
-                            <span><i class="far fa-clock"></i> 6 min read</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
                         </div>
+                        <h3 class="blog-title">Chemical Exposure Limits: What Every Safety Professional Should Know</h3>
                         <p class="blog-excerpt">Understanding TWA, STEL, and Ceiling limits for chemical exposure in the workplace.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/chemical-exposure-limits.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">6 min read</span>
+                        </div>
                     </div>
-                </div>
-                
+                </article>
+
                 <!-- Article 3 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/fall-protection.jpg" alt="Fall Protection">
+                        <img src="../assets/blog/fall-protection.jpg" alt="Fall Protection" class="img-fluid">
+                        <div class="category-badge">Fall Protection</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">Fall Protection</span>
-                        <h3 class="blog-title">Fall Protection Systems: Calculating Clearance Requirements</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> March 1, 2025</span>
-                            <span><i class="far fa-clock"></i> 5 min read</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
                         </div>
+                        <h3 class="blog-title">Fall Protection Systems: Calculating Clearance Requirements</h3>
                         <p class="blog-excerpt">How to calculate fall clearance and select appropriate fall protection systems for different work scenarios.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/fall-protection-systems.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">5 min read</span>
+                        </div>
                     </div>
-                </div>
-                
+                </article>
+
                 <!-- Article 4 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/incident-rates.jpg" alt="Incident Rates">
+                        <img src="../assets/blog/incident-rates.jpg" alt="Incident Rates" class="img-fluid">
+                        <div class="category-badge">Safety Metrics</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">Safety Metrics</span>
-                        <h3 class="blog-title">TRIR, DART, and Other Safety Performance Metrics Explained</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> February 25, 2025</span>
-                            <span><i class="far fa-clock"></i> 7 min read</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
                         </div>
+                        <h3 class="blog-title">TRIR, DART, and Other Safety Performance Metrics Explained</h3>
                         <p class="blog-excerpt">Understanding key safety performance indicators and how to calculate them for your organization.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/safety-performance-metrics.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">7 min read</span>
+                        </div>
                     </div>
-                </div>
-                
+                </article>
+
                 <!-- Article 5 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/ppe-selection.jpg" alt="PPE Selection">
+                        <img src="../assets/blog/ppe-selection.jpg" alt="PPE Selection" class="img-fluid">
+                        <div class="category-badge">PPE</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">PPE</span>
-                        <h3 class="blog-title">The Complete Guide to PPE Selection Based on Hazard Assessment</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> February 20, 2025</span>
-                            <span><i class="far fa-clock"></i> 8 min read</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
                         </div>
+                        <h3 class="blog-title">The Complete Guide to PPE Selection Based on Hazard Assessment</h3>
                         <p class="blog-excerpt">Step-by-step guide to selecting appropriate personal protective equipment for different workplace hazards.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/ppe-selection-guide.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">8 min read</span>
+                        </div>
                     </div>
-                </div>
-                
+                </article>
+
                 <!-- Article 6 -->
-                <div class="blog-card">
+                <article class="blog-card">
                     <div class="blog-image">
-                        <img src="../assets/blog/heat-stress.jpg" alt="Heat Stress">
+                        <img src="../assets/blog/heat-stress.jpg" alt="Heat Stress" class="img-fluid">
+                        <div class="category-badge">Environmental Safety</div>
                     </div>
                     <div class="blog-content">
-                        <span class="article-category">Environmental Safety</span>
-                        <h3 class="blog-title">Heat Stress Management: Calculating WBGT and Implementing Controls</h3>
-                        <div class="blog-meta">
+                        <div class="blog-meta mb-2">
                             <span><i class="far fa-calendar"></i> February 15, 2025</span>
-                            <span><i class="far fa-clock"></i> 6 min read</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
                         </div>
+                        <h3 class="blog-title">Heat Stress Management: Calculating WBGT and Implementing Controls</h3>
                         <p class="blog-excerpt">How to assess heat stress risks using WBGT calculations and implement effective control measures.</p>
-                        <a href="#" class="btn btn-primary btn-small">Read More</a>
+                        <div class="blog-footer">
+                            <a href="article/heat-stress-management.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-arrow-right"></i> Read More
+                            </a>
+                            <span class="read-time">6 min read</span>
+                        </div>
                     </div>
-                </div>
+                </article>
             </div>
-            
+
+            <!-- Pagination -->
+            <div class="pagination mb-5">
+                <a href="#" class="page-link disabled">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </a>
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <span class="page-ellipsis">...</span>
+                <a href="#" class="page-link">8</a>
+                <a href="#" class="page-link">
+                    Next <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
             <!-- Newsletter Subscription -->
             <div class="newsletter-section">
                 <div class="newsletter-card">
-                    <h3><i class="fas fa-envelope"></i> Subscribe to Our Newsletter</h3>
-                    <p>Get the latest HSE articles, tool updates, and safety tips directly in your inbox.</p>
+                    <div class="newsletter-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Stay Updated with HSE Insights</h3>
+                    <p class="mb-4">Get the latest articles, tool updates, and safety tips delivered directly to your inbox.</p>
                     <form class="newsletter-form">
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <input type="email" placeholder="Your email address" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Subscribe
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-paper-plane"></i> Subscribe to Newsletter
                         </button>
+                        <p class="text-small text-center mt-3">No spam. Unsubscribe anytime.</p>
                     </form>
                 </div>
             </div>
@@ -208,7 +291,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="../index.html">Home</a></li>
-                        <li><a href="../calculators/risk-assessment.html">Calculators</a></li>
+                        <li><a href="all-calculators.html">Calculators</a></li>
                         <li><a href="products.html">Safety Products</a></li>
                         <li><a href="tools.html">Tools</a></li>
                         <li><a href="blog.html">Blog</a></li>
@@ -244,121 +327,5 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    
-    <style>
-        .blog-page {
-            padding: var(--spacing-xl) 0;
-        }
-        
-        .featured-article {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: var(--spacing-xl);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        @media (min-width: 768px) {
-            .featured-article {
-                flex-direction: row;
-            }
-        }
-        
-        .featured-image {
-            flex: 1;
-            min-height: 300px;
-            overflow: hidden;
-        }
-        
-        .featured-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .featured-content {
-            flex: 1;
-            padding: var(--spacing-xl);
-        }
-        
-        .article-category {
-            display: inline-block;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 5px 10px;
-            border-radius: var(--radius-sm);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .featured-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .article-meta {
-            display: flex;
-            gap: var(--spacing-md);
-            color: var(--gray);
-            margin-bottom: var(--spacing-md);
-            font-size: 0.9rem;
-        }
-        
-        .article-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .newsletter-section {
-            margin-top: var(--spacing-xl);
-        }
-        
-        .newsletter-card {
-            background: linear-gradient(135deg, var(--primary-color), #1a3a6e);
-            color: var(--white);
-            padding: var(--spacing-xl);
-            border-radius: var(--radius-lg);
-            text-align: center;
-        }
-        
-        .newsletter-card h3 {
-            color: var(--white);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .newsletter-card p {
-            opacity: 0.9;
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .newsletter-form {
-            display: flex;
-            gap: var(--spacing-md);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 768px) {
-            .newsletter-form {
-                flex-direction: column;
-            }
-        }
-        
-        .newsletter-form .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-    </style>
 </body>
 </html>
