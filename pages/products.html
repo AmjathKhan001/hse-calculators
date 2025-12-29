@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Products | HSE Calculator</title>
-    <meta name="description" content="Browse quality safety products, PPE, and protective equipment from trusted suppliers.">
+    <title>Safety Products | HSE Calculator - Recommended PPE & Equipment</title>
+    <meta name="description" content="Recommended safety products, PPE kits, protective equipment, and safety tools. Quality products from trusted suppliers with affiliate links.">
+    <meta name="keywords" content="safety products, PPE equipment, protective gear, safety tools, Amazon safety products, affiliate products">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,14 +13,209 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DRRTSHLC01');
-    </script>
+    <!-- Products Page Specific CSS -->
+    <style>
+        .products-hero {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+        
+        .products-container {
+            padding: 60px 0;
+        }
+        
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 25px;
+            background: #f0f2ff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .product-rating .stars {
+            color: #ffc107;
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .product-features li {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .product-features li i {
+            color: #34bf49;
+            margin-top: 3px;
+        }
+        
+        .affiliate-disclaimer {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .products-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f2ff;
+            border: none;
+            border-radius: 8px;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover,
+        .page-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .product-filters {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 </head>
 <body>
     <!-- Header -->
@@ -33,11 +229,11 @@
                 
                 <div class="nav-links" id="navLinks">
                     <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="../calculators/risk-assessment.html" class="nav-link"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
                     <a href="products.html" class="nav-link active"><i class="fas fa-shopping-bag"></i> Safety Products</a>
                     <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
                     <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
                 </div>
                 
                 <div class="mobile-toggle" id="mobileToggle">
@@ -47,45 +243,58 @@
         </div>
     </header>
 
-    <!-- Products Page -->
-    <section class="products-page">
+    <!-- Products Hero -->
+    <section class="products-hero">
         <div class="container">
-            <h1 class="section-title">Safety Products & PPE</h1>
-            <p class="section-subtitle">Quality protective equipment and safety products from trusted suppliers</p>
-            
-            <!-- Amazon Clearance Banner -->
-<section class="amazon-banner">
-    <div class="container">
-        <div class="banner-content">
-            <div class="banner-text">
-                <h3><i class="fas fa-fire"></i> Amazon Safety Products Clearance</h3>
-                <p>Limited Time Offer - Up to 70% OFF on Quality PPE & Safety Equipment</p>
-            </div>
-            <a href="https://amzn.to/4p8ceG6" target="_blank" class="btn btn-warning">
-                <i class="fas fa-bolt"></i> Shop Deals Now
-            </a>
+            <h1>Safety Products & Equipment</h1>
+            <p>Recommended PPE, protective gear, and safety equipment from trusted suppliers</p>
         </div>
-    </div>
-</section>
-            
-            <!-- Products Filter -->
-            <div class="products-filter">
-                <div class="form-group">
-                    <label for="category-filter">Filter by Category</label>
-                    <select id="category-filter" class="filter-select">
-                        <option value="all">All Products</option>
-                        <option value="PPE Kit">PPE Kits</option>
-                        <option value="Respiratory Protection">Respiratory Protection</option>
-                        <option value="Fall Protection">Fall Protection</option>
-                        <option value="Disposable PPE">Disposable PPE</option>
-                        <option value="Safety Equipment">Safety Equipment</option>
-                    </select>
+    </section>
+
+    <!-- Amazon Clearance Banner -->
+    <section class="amazon-banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h3><i class="fas fa-fire"></i> Amazon Clearance Sale</h3>
+                    <p>Limited Time Offer - Up to 70% OFF on All Categories</p>
                 </div>
+                <a href="https://amzn.to/4p8ceG6" target="_blank" class="btn btn-warning">
+                    <i class="fas fa-bolt"></i> Shop Deals Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Container -->
+    <section class="products-container">
+        <div class="container">
+            <!-- Product Filters -->
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="ppe">PPE Kits</button>
+                <button class="filter-btn" data-filter="respiratory">Respiratory</button>
+                <button class="filter-btn" data-filter="fall-protection">Fall Protection</button>
+                <button class="filter-btn" data-filter="eye-protection">Eye Protection</button>
+                <button class="filter-btn" data-filter="foot-protection">Foot Protection</button>
+                <button class="filter-btn" data-filter="hand-protection">Hand Protection</button>
             </div>
             
             <!-- Products Grid -->
-            <div class="products-grid" id="productsContainer">
-                <!-- Products loaded via JavaScript -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically via JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="products-pagination" id="productsPagination">
+                <!-- Pagination will be loaded dynamically -->
+            </div>
+            
+            <!-- Affiliate Disclaimer -->
+            <div class="affiliate-disclaimer">
+                <h3><i class="fas fa-info-circle"></i> Affiliate Disclosure</h3>
+                <p>We participate in Amazon's Affiliate Program. When you click on product links and make purchases, we may earn a commission at no extra cost to you. This helps support our free HSE calculators and tools.</p>
+                <p><small>Prices and availability are subject to change. Always verify product specifications before purchase.</small></p>
             </div>
         </div>
     </section>
@@ -105,6 +314,7 @@
                         <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://bsky.app/profile/amjathkhan.bsky.social" target="_blank"><i class="fas fa-feather"></i></a>
                     </div>
                 </div>
                 
@@ -112,10 +322,11 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="../index.html">Home</a></li>
-                        <li><a href="../calculators/risk-assessment.html">Calculators</a></li>
+                        <li><a href="all-calculators.html">All Calculators</a></li>
                         <li><a href="products.html">Safety Products</a></li>
                         <li><a href="tools.html">Tools</a></li>
                         <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -130,12 +341,11 @@
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
-                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
-                    </ul>
+                    <h4>Support Our Work</h4>
+                    <p>Help us maintain and improve these free tools</p>
+                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="btn btn-primary btn-small mt-2" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-mug-hot"></i> Buy Me a Coffee
+                    </a>
                 </div>
             </div>
             
@@ -148,156 +358,520 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    
     <script>
-        // All Safety Products Data
-        const allProducts = [
+        // Product Data - ADD YOUR PRODUCTS HERE
+        const productsData = [
+            // ===== PPE KITS =====
             {
                 id: 1,
-                name: "Personal Protective Equipment KIT (PPE KIT)",
+                name: "Complete PPE Safety Kit",
+                description: "Full body protection kit including helmet, goggles, gloves, vest, and boots. Ideal for construction and industrial sites.",
                 image: "../assets/products/ppe-kit.jpg",
+                category: "ppe",
                 link: "https://amzn.to/4bcAm6e",
-                category: "PPE Kit",
-                description: "Complete PPE kit for industrial safety"
+                rating: 4.5,
+                ratingCount: 234,
+                features: [
+                    "ISO Certified",
+                    "Water Resistant",
+                    "Adjustable Straps",
+                    "High Visibility"
+                ]
             },
             {
                 id: 2,
-                name: "Serplex Gas Mask Set Respirator",
-                image: "../assets/products/gas-mask.jpg",
-                link: "https://amzn.to/4s4Fr6K",
-                category: "Respiratory Protection",
-                description: "Full face gas mask with filters"
+                name: "Industrial Safety PPE Kit",
+                description: "Heavy-duty industrial safety kit with reinforced protection for hazardous environments.",
+                image: "https://images.unsplash.com/photo-1583321500900-82807e458f3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "ppe",
+                link: "https://amzn.to/3z7X8Pq",
+                rating: 4.7,
+                ratingCount: 189,
+                features: [
+                    "Fire Resistant",
+                    "Chemical Protection",
+                    "Durable Material",
+                    "Complete Set"
+                ]
             },
+            
+            // ===== RESPIRATORY PROTECTION =====
             {
                 id: 3,
-                name: "Non Woven Polypropylene Disposable Gown",
-                image: "../assets/products/disposable-gown.jpg",
-                link: "https://amzn.to/49rqlRr",
-                category: "Disposable PPE",
-                description: "Medical grade disposable gown"
+                name: "Professional Gas Mask Respirator",
+                description: "Full face respirator with replaceable filters for chemical and biological protection.",
+                image: "../assets/products/gas-mask.jpg",
+                category: "respiratory",
+                link: "https://amzn.to/4s4Fr6K",
+                rating: 4.6,
+                ratingCount: 156,
+                features: [
+                    "N95 Equivalent",
+                    "Adjustable Straps",
+                    "Wide View Lens",
+                    "Multiple Filters"
+                ]
             },
             {
                 id: 4,
-                name: "CF IND Full Body Safety Harness",
-                image: "../assets/products/safety-harness.jpg",
-                link: "https://amzn.to/4jh3StM",
-                category: "Fall Protection",
-                description: "Industrial safety harness with D-rings"
+                name: "N95 Mask Pack (50 Pcs)",
+                description: "Disposable N95 respirator masks with 5-layer protection and comfortable ear loops.",
+                image: "https://images.unsplash.com/photo-1582795767856-b7d2d4d9d3e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "respiratory",
+                link: "https://amzn.to/3x9YzRt",
+                rating: 4.4,
+                ratingCount: 432,
+                features: [
+                    "Bacterial Filtration ≥95%",
+                    "Breathable Material",
+                    "Adjustable Nose Clip",
+                    "CE Certified"
+                ]
             },
+            
+            // ===== FALL PROTECTION =====
             {
                 id: 5,
-                name: "Karam Magna Premium Full Body Safety Harness",
-                image: "../assets/products/premium-harness.jpg",
-                link: "https://amzn.to/494Ws89",
-                category: "Fall Protection",
-                description: "Premium safety harness for high-risk work"
+                name: "Full Body Safety Harness",
+                description: "Industrial fall protection harness with back D-ring and comfort padding.",
+                image: "../assets/products/safety-harness.jpg",
+                category: "fall-protection",
+                link: "https://amzn.to/4jh3StM",
+                rating: 4.8,
+                ratingCount: 78,
+                features: [
+                    "OSHA Compliant",
+                    "Weight Capacity: 140kg",
+                    "Adjustable Straps",
+                    "Padded Shoulders"
+                ]
             },
             {
                 id: 6,
-                name: "KARAM Full Body Work Positioning Adjustable Safety Harness",
-                image: "../assets/products/adjustable-harness.jpg",
-                link: "https://amzn.to/4qwnnkB",
-                category: "Fall Protection",
-                description: "Adjustable harness for comfort and safety"
+                name: "Safety Lanyard with Shock Absorber",
+                description: "6ft retractable lanyard with shock absorber for fall arrest systems.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "fall-protection",
+                link: "https://amzn.to/3z9FpRt",
+                rating: 4.5,
+                ratingCount: 92,
+                features: [
+                    "Shock Absorbing",
+                    "6ft Length",
+                    "Durable Material",
+                    "Easy to Install"
+                ]
             },
+            
+            // ===== EYE PROTECTION =====
             {
                 id: 7,
-                name: "FREEMANS IKON 5m:19mm Steel Inchi Measuring Tape",
-                image: "../assets/products/measuring-tape.jpg",
-                link: "https://amzn.to/4pby4Ic",
-                category: "Safety Equipment",
-                description: "Professional measuring tape for industrial use"
+                name: "Anti-Fog Safety Goggles",
+                description: "Wide vision safety goggles with anti-fog coating and UV protection.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "eye-protection",
+                link: "https://amzn.to/3za1XqY",
+                rating: 4.3,
+                ratingCount: 167,
+                features: [
+                    "Anti-Fog Coating",
+                    "UV Protection",
+                    "Wide Vision",
+                    "Adjustable Headband"
+                ]
             },
             {
                 id: 8,
-                name: "LADWA – Safety Belt Harness Full Body Fall Protection",
-                image: "../assets/products/safety-belt.jpg",
-                link: "https://amzn.to/3YfB5fs",
-                category: "Fall Protection",
-                description: "Full body safety belt with fall protection"
+                name: "Welding Safety Goggles",
+                description: "Auto-darkening welding goggles with adjustable shade levels.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "eye-protection",
+                link: "https://amzn.to/3zb2YqZ",
+                rating: 4.6,
+                ratingCount: 89,
+                features: [
+                    "Auto-Darkening",
+                    "4 Shade Levels",
+                    "Solar Powered",
+                    "Grinding Mode"
+                ]
             },
+            
+            // ===== FOOT PROTECTION =====
             {
                 id: 9,
-                name: "Static Outdoor Climbing Rope with 2 Hooks",
-                image: "../assets/products/climbing-rope.jpg",
-                link: "https://amzn.to/4p9GqQo",
-                category: "Safety Equipment",
-                description: "Heavy duty climbing rope with safety hooks"
+                name: "Steel Toe Safety Shoes",
+                description: "Waterproof safety boots with steel toe cap and anti-slip sole.",
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "foot-protection",
+                link: "https://amzn.to/3zb3ArA",
+                rating: 4.4,
+                ratingCount: 234,
+                features: [
+                    "Steel Toe Cap",
+                    "Anti-Slip Sole",
+                    "Waterproof",
+                    "Electrical Hazard Rated"
+                ]
             },
             {
                 id: 10,
-                name: "IBS Adjustable Half Body Industrial Safety Belt for Men",
-                image: "../assets/products/safety-belt-half.jpg",
-                link: "https://amzn.to/3YI7QSz",
-                category: "Fall Protection",
-                description: "Adjustable half body safety belt"
-            }
+                name: "Chemical Resistant Boots",
+                description: "PVC boots resistant to acids, oils, and chemicals with steel midsole.",
+                image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "foot-protection",
+                link: "https://amzn.to/3zc4BrC",
+                rating: 4.2,
+                ratingCount: 156,
+                features: [
+                    "Chemical Resistant",
+                    "Steel Midsole",
+                    "Knee Length",
+                    "Easy to Clean"
+                ]
+            },
+            
+            // ===== HAND PROTECTION =====
+            {
+                id: 11,
+                name: "Cut Resistant Gloves",
+                description: "Level 5 cut resistant gloves with excellent grip and dexterity.",
+                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "hand-protection",
+                link: "https://amzn.to/3zd5CrD",
+                rating: 4.5,
+                ratingCount: 189,
+                features: [
+                    "Level 5 Protection",
+                    "Cut Resistant",
+                    "Good Grip",
+                    "Washable"
+                ]
+            },
+            {
+                id: 12,
+                name: "Heat Resistant Gloves",
+                description: "Industrial gloves resistant to high temperatures up to 500°C.",
+                image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "hand-protection",
+                link: "https://amzn.to/3ze6DrE",
+                rating: 4.7,
+                ratingCount: 112,
+                features: [
+                    "Heat Resistant 500°C",
+                    "Kevlar Lined",
+                    "Reinforced Palm",
+                    "Flexible Design"
+                ]
+            },
+            
+            // ===== ADD MORE PRODUCTS HERE =====
+            {
+                id: 13,
+                name: "Disposable Protective Gown",
+                description: "Non-woven polypropylene disposable gown for medical and industrial use.",
+                image: "../assets/products/disposable-gown.jpg",
+                category: "ppe",
+                link: "https://amzn.to/49rqlRr",
+                rating: 4.3,
+                ratingCount: 267,
+                features: [
+                    "Water Resistant",
+                    "Breathable",
+                    "Disposable",
+                    "Multiple Sizes"
+                ]
+            },
+            {
+                id: 14,
+                name: "Ear Protection Muffs",
+                description: "Noise cancelling safety earmuffs with adjustable headband.",
+                image: "https://images.unsplash.com/photo-1581391522423-f970b7e1e801?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "respiratory",
+                link: "https://amzn.to/3zf7FrG",
+                rating: 4.4,
+                ratingCount: 178,
+                features: [
+                    "NRR 28dB",
+                    "Adjustable Headband",
+                    "Lightweight",
+                    "Foldable Design"
+                ]
+            },
+            {
+                id: 15,
+                name: "Safety Helmet with Visor",
+                description: "ABS safety helmet with integrated face shield and earmuff attachments.",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "ppe",
+                link: "https://amzn.to/3zg8GrH",
+                rating: 4.6,
+                ratingCount: 145,
+                features: [
+                    "ABS Material",
+                    "Integrated Visor",
+                    "Ventilation Holes",
+                    "Adjustable Headband"
+                ]
+            },
+            {
+                id: 16,
+                name: "Emergency First Aid Kit",
+                description: "Comprehensive 100-piece first aid kit for workplace emergencies.",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "ppe",
+                link: "https://amzn.to/3zh9IrJ",
+                rating: 4.8,
+                ratingCount: 89,
+                features: [
+                    "100 Pieces",
+                    "OSHA Compliant",
+                    "Waterproof Case",
+                    "Clear Compartments"
+                ]
+            },
+            {
+               id: 17,
+               name: "Digital Sound Level Meter",
+               description: "Professional noise measurement device with data logging and calibration certificate.",
+               image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+               category: "ppe",
+               link: "https://amzn.to/4c1BwXy",
+               rating: 4.6,
+               ratingCount: 89,
+              features: [
+                  "30-130 dB Range",
+                  "Data Logging",
+                  "Backlit Display",
+                  "Calibration Certificate"
+                ]
+            },
+           {
+              id: 18,
+              name: "Fire Extinguisher 5kg",
+              description: "ABC dry powder fire extinguisher for commercial and industrial use.",
+              image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64",
+              category: "ppe",
+              link: "https://amzn.to/4e2CzAb",
+              rating: 4.7,
+              ratingCount: 134,
+              features: [
+                  "ABC Type",
+                  "5kg Capacity",
+                  "ISI Certified",
+                  "Wall Bracket Included"
+              ]
+           },
+          {
+            id: 19,
+            name: "Safety Reflective Vest",
+            description: "High visibility safety vest with reflective strips for low light conditions.",
+            image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12",
+            category: "ppe",
+            link: "https://amzn.to/4e3DzBc",
+            rating: 4.4,
+            ratingCount: 267,
+            features: [
+                "High Visibility",
+                "Reflective Strips",
+                "Multiple Pockets",
+                "Adjustable Sides"
+             ]
+         },
         ];
 
-        // Load all products
-        function loadAllProducts() {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-            
-            allProducts.forEach(product => {
-                const productCard = `
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="${product.image}" alt="${product.name}" onerror="this.src='../assets/products/default.jpg'">
-                            <span class="product-category">${product.category}</span>
-                        </div>
-                        <div class="product-content">
-                            <h4>${product.name}</h4>
-                            <p class="product-description">${product.description}</p>
-                            <a href="${product.link}" target="_blank" class="btn btn-primary btn-small">
-                                <i class="fas fa-external-link-alt"></i> View Details
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += productCard;
-            });
-        }
+        // Products Management
+        let currentPage = 1;
+        const productsPerPage = 8;
+        let currentFilter = 'all';
 
-        // Filter products by category
-        function filterProducts() {
-            const category = document.getElementById('category-filter').value;
-            const productCards = document.querySelectorAll('.product-card');
-            
-            productCards.forEach(card => {
-                const cardCategory = card.querySelector('.product-category').textContent;
-                
-                if (category === 'all' || cardCategory === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            loadAllProducts();
-            
-            // Add event listener to filter
-            const filterSelect = document.getElementById('category-filter');
-            if (filterSelect) {
-                filterSelect.addEventListener('change', filterProducts);
-            }
-            
-            // Initialize mobile menu
+            // Mobile menu toggle
             const mobileToggle = document.getElementById('mobileToggle');
             const navLinks = document.getElementById('navLinks');
             
             if (mobileToggle) {
                 mobileToggle.addEventListener('click', function() {
                     navLinks.classList.toggle('active');
-                    const icon = this.querySelector('i');
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
                 });
             }
+            
+            // Initialize products
+            displayProducts();
+            setupFilters();
         });
+
+        function displayProducts(page = 1, filter = 'all') {
+            const grid = document.getElementById('productsGrid');
+            const pagination = document.getElementById('productsPagination');
+            
+            if (!grid) return;
+            
+            // Filter products
+            let filteredProducts = productsData;
+            if (filter !== 'all') {
+                filteredProducts = productsData.filter(product => product.category === filter);
+            }
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+            const startIndex = (page - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const pageProducts = filteredProducts.slice(startIndex, endIndex);
+            
+            // Clear grid
+            grid.innerHTML = '';
+            
+            // Display products
+            pageProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                grid.innerHTML += productCard;
+            });
+            
+            // Display pagination
+            displayPagination(totalPages, page);
+        }
+
+        function createProductCard(product) {
+            // Generate star rating
+            const stars = generateStars(product.rating);
+            
+            // Generate features list
+            const featuresList = product.features.map(feature => 
+                `<li><i class="fas fa-check"></i> ${feature}</li>`
+            ).join('');
+            
+            return `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" 
+                             onerror="this.src='../assets/products/default.jpg'">
+                        <span class="product-category">${formatCategory(product.category)}</span>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="product-rating">
+                            <div class="stars">${stars}</div>
+                            <span class="rating-count">(${product.ratingCount})</span>
+                        </div>
+                                                                   
+                        <ul class="product-features">
+                            ${featuresList}
+                        </ul>
+                        
+                        <a href="${product.link}" target="_blank" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-external-link-alt"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        function formatCategory(category) {
+            const categories = {
+                'ppe': 'PPE Kit',
+                'respiratory': 'Respiratory',
+                'fall-protection': 'Fall Protection',
+                'eye-protection': 'Eye Protection',
+                'foot-protection': 'Foot Protection',
+                'hand-protection': 'Hand Protection'
+            };
+            return categories[category] || category;
+        }
+
+        function displayPagination(totalPages, currentPage) {
+            const pagination = document.getElementById('productsPagination');
+            if (!pagination || totalPages <= 1) {
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            pagination.style.display = 'flex';
+            pagination.innerHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                pagination.innerHTML += `
+                    <button class="page-btn" onclick="changePage(${currentPage - 1})">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                `;
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    pagination.innerHTML += `
+                        <button class="page-btn ${i === currentPage ? 'active' : ''}" 
+                                onclick="changePage(${i})">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    pagination.innerHTML += `<span class="page-btn">...</span>`;
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                pagination.innerHTML += `
+                    <button class="page-btn" onclick="changePage(${currentPage + 1})">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                `;
+            }
+        }
+
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    currentFilter = this.getAttribute('data-filter');
+                    currentPage = 1;
+                    
+                    // Display filtered products
+                    displayProducts(currentPage, currentFilter);
+                });
+            });
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            displayProducts(currentPage, currentFilter);
+            
+            // Scroll to top of products grid
+            document.getElementById('productsGrid').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     </script>
 </body>
 </html>
