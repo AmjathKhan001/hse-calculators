@@ -3,288 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - HSE Calculator | Get Support & Subscribe</title>
-    <meta name="description" content="Contact HSE Calculator team for support, calculator suggestions, partnership inquiries, or technical assistance. Subscribe to our newsletter.">
-    <meta name="keywords" content="HSE calculator support, safety tools contact, HSE newsletter, subscribe safety updates">
+    <title>Contact Us | HSE Calculator</title>
+    <meta name="description" content="Contact HSE Calculator team for support, suggestions, or partnership inquiries.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Contact Page Specific CSS -->
-    <style>
-        .contact-hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 80px 0 40px;
-            text-align: center;
-        }
-        
-        .contact-container {
-            padding: 60px 0;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 40px 0;
-        }
-        
-        .contact-form-section, .contact-info-section {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 14px 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .contact-method {
-            text-align: center;
-            padding: 25px;
-            background: #f8f9ff;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .contact-method:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .contact-method h4 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .contact-method p {
-            color: #666;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .contact-link {
-            color: #667eea;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .contact-link:hover {
-            text-decoration: underline;
-        }
-        
-        .social-contact {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .social-contact a {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f2ff;
-            color: #667eea;
-            transition: all 0.3s ease;
-        }
-        
-        .social-contact a:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        /* Newsletter Section */
-        .newsletter-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 50px;
-            border-radius: 15px;
-            margin: 50px 0;
-            text-align: center;
-        }
-        
-        .newsletter-content h2 {
-            color: white;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-        
-        .newsletter-content p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .newsletter-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .newsletter-form .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .newsletter-form .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-        
-        .newsletter-form .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .newsletter-form .form-control:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: white;
-        }
-        
-        .privacy-check {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 20px 0;
-            text-align: left;
-        }
-        
-        .privacy-check input[type="checkbox"] {
-            margin-top: 5px;
-        }
-        
-        .privacy-check label {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: normal;
-            font-size: 0.95rem;
-        }
-        
-        .privacy-check a {
-            color: white;
-            text-decoration: underline;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            margin-top: 60px;
-        }
-        
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .faq-item {
-            background: #f8f9ff;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .faq-item h4 {
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .faq-item h4 i {
-            color: #667eea;
-        }
-        
-        @media (max-width: 992px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-methods {
-                grid-template-columns: 1fr;
-            }
-            
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .contact-form-section, .contact-info-section {
-                padding: 25px;
-            }
-            
-            .contact-hero {
-                padding: 60px 0 30px;
-            }
-            
-            .newsletter-section {
-                padding: 30px 20px;
-            }
-            
-            .newsletter-content h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
@@ -315,195 +43,124 @@
         </div>
     </header>
 
-    <!-- Contact Hero -->
-    <section class="contact-hero">
+    <!-- Contact Page Content -->
+    <section class="page-header">
         <div class="container">
-            <h1>Contact HSE Calculator</h1>
-            <p>Get support, suggest improvements, or inquire about partnerships</p>
+            <h1>Contact Us</h1>
+            <p class="text-lead text-center">Get in touch for support, suggestions, or partnership inquiries</p>
         </div>
     </section>
 
-    <!-- Contact Container -->
-    <section class="contact-container">
+    <section class="contact-page section">
         <div class="container">
             <div class="contact-grid">
                 <!-- Contact Form -->
-                <div class="contact-form-section">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Send Us a Message</h2>
-                    
+                <div class="contact-form-card">
+                    <h3 class="mb-4">Send us a Message</h3>
                     <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Your Name *</label>
-                            <input type="text" id="name" class="form-control" required placeholder="Enter your full name">
+                        <div class="form-row mb-3">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" required placeholder="your@email.com">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject *</label>
+                        <div class="form-group mb-3">
+                            <label for="subject" class="form-label">Subject</label>
                             <select id="subject" class="form-control" required>
-                                <option value="">Select a subject</option>
-                                <option value="calculator-support">Calculator Support</option>
-                                <option value="bug-report">Bug Report</option>
-                                <option value="feature-request">Feature Request</option>
+                                <option value="">Select a topic</option>
+                                <option value="support">Technical Support</option>
+                                <option value="suggestion">Feature Suggestion</option>
                                 <option value="partnership">Partnership Inquiry</option>
-                                <option value="affiliate">Affiliate Program</option>
-                                <option value="general">General Question</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="message">Your Message *</label>
-                            <textarea id="message" class="form-control" required placeholder="Please describe your inquiry in detail..."></textarea>
+                        <div class="form-group mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" class="form-control" rows="5" required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem;">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
                     </form>
-                    
-                    <div id="formMessage" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px;"></div>
                 </div>
                 
-                <!-- Contact Information -->
-                <div class="contact-info-section">
-                    <h2 style="color: #764ba2; margin-bottom: 25px;">Contact Information</h2>
+                <!-- Contact Info -->
+                <div class="contact-info-card">
+                    <h3 class="mb-4">Contact Information</h3>
                     
-                    <p style="color: #666; margin-bottom: 25px;">
-                        We're here to help you with any questions about our HSE calculators, tools, or safety resources.
-                    </p>
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h4>Email</h4>
+                            <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a>
+                        </div>
+                    </div>
                     
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h4>Email Us</h4>
-                            <p>contact@amjathkhan.com</p>
-                            <a href="mailto:contact@amjathkhan.com" class="contact-link">Send Email</a>
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
                         </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <h4>Call Us</h4>
-                            <p>+91-9750816163</p>
-                            <a href="tel:+919750816163" class="contact-link">Call Now</a>
+                        <div class="contact-content">
+                            <h4>Phone</h4>
+                            <a href="tel:+919750816163">+91-9750816163</a>
                         </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
+                    </div>
+                    
+                    <div class="contact-item mb-4">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-content">
                             <h4>Website</h4>
-                            <p>www.amjathkhan.com</p>
-                            <a href="https://www.amjathkhan.com" target="_blank" class="contact-link">Visit Site</a>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h4>Response Time</h4>
-                            <p>Within 24 hours</p>
-                            <span style="color: #34bf49; font-weight: 600;">Mon-Sun: 9AM-6PM IST</span>
+                            <a href="https://www.amjathkhan.com" target="_blank">www.amjathkhan.com</a>
                         </div>
                     </div>
                     
-                    <div style="background: #f0f2ff; padding: 20px; border-radius: 10px; margin-top: 25px;">
-                        <h4 style="color: #667eea; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-                            <i class="fas fa-info-circle"></i> What to Expect
-                        </h4>
-                        <p style="color: #666; font-size: 0.95rem; margin: 0;">
-                            We typically respond within 24 hours. For urgent matters, please call us directly. Include as much detail as possible for faster resolution.
-                        </p>
-                    </div>
-                    
-                    <div class="social-contact">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank" title="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://x.com/amjikhan" target="_blank" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.instagram.com/amjathkhan_official" target="_blank" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://bsky.app/profile/amjathkhan.bsky.social" target="_blank" title="Bluesky">
-                            <i class="fas fa-feather"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Newsletter Subscription -->
-            <div class="newsletter-section">
-                <div class="newsletter-content">
-                    <h2>Subscribe to Our Newsletter</h2>
-                    <p>Get weekly safety tips, calculator updates, and exclusive resources directly in your inbox. Stay updated with the latest HSE tools and best practices.</p>
-                    
-                    <form id="newsletterForm" class="newsletter-form">
-                        <div class="form-group">
-                            <input type="text" id="newsletterName" class="form-control" placeholder="Your Name" required>
+                    <div class="social-contact mt-4">
+                        <h4 class="mb-3">Follow Us</h4>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/Amjathkhan.s" target="_blank" class="social-link">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="https://x.com/amjikhan" target="_blank" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/amjathkhan-shiekusman" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/amjathkhan_official" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
                         </div>
-                        
-                        <div class="form-group">
-                            <input type="email" id="newsletterEmail" class="form-control" placeholder="Email Address" required>
-                        </div>
-                        
-                        <div class="privacy-check">
-                            <input type="checkbox" id="newsletterPrivacy" required>
-                            <label for="newsletterPrivacy">
-                                I agree to receive emails and accept the <a href="privacy.html">Privacy Policy</a>
-                            </label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="background: white; color: #667eea; padding: 14px 40px; font-weight: 600; font-size: 1.1rem;">
-                            <i class="fas fa-envelope"></i> Subscribe Now
-                        </button>
-                    </form>
-                    
-                    <div id="newsletterMessage" style="display: none; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;"></div>
-                    
-                    <div style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8;">
-                        <p><i class="fas fa-shield-alt"></i> We respect your privacy. Unsubscribe anytime.</p>
                     </div>
                 </div>
             </div>
             
             <!-- FAQ Section -->
-            <div class="faq-section">
-                <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Frequently Asked Questions</h2>
-                <p style="text-align: center; color: #666; max-width: 700px; margin: 0 auto 40px;">
-                    Find quick answers to common questions about HSE Calculator
-                </p>
-                
-                <div class="faq-grid">
+            <div class="faq-section mt-5">
+                <h3 class="mb-4">Frequently Asked Questions</h3>
+                <div class="faq-list">
                     <div class="faq-item">
-                        <h4><i class="fas fa-question-circle"></i> Are the calculators really free?</h4>
-                        <p style="color: #666;">Yes! All our HSE calculators and safety tools are completely free to use. No registration, no hidden costs.</p>
+                        <button class="faq-question">Are the calculators free to use?</button>
+                        <div class="faq-answer">
+                            <p>Yes, all our HSE calculators are completely free to use. No registration or subscription required.</p>
+                        </div>
                     </div>
                     
                     <div class="faq-item">
-                        <h4><i class="fas fa-question-circle"></i> Can I suggest a new calculator?</h4>
-                        <p style="color: #666;">Absolutely! We welcome suggestions for new calculators. Use the contact form above to share your ideas.</p>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <h4><i class="fas fa-question-circle"></i> How accurate are the calculations?</h4>
-                        <p style="color: #666;">Our calculators are based on industry standards and regulations. However, they should be used as guidelines and verified by qualified professionals.</p>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <h4><i class="fas fa-question-circle"></i> Do you provide safety consulting?</h4>
-                        <p style="color: #666;">Yes, Amjath Khan offers professional HSE consulting services. Contact us for customized safety solutions.</p>
+                        <button class="faq-question">Can I use these calculations for official reports?</button>
+                        <div class="faq-answer">
+                            <p>Our calculators are designed for professional use and follow standard industry formulas. However, always verify with your organization's specific requirements.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -523,9 +180,8 @@
                     <div class="footer-social">
                         <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
                         <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://bsky.app/profile/amjathkhan.bsky.social" target="_blank"><i class="fas fa-feather"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman" target="_blank"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 
@@ -537,7 +193,6 @@
                         <li><a href="products.html">Safety Products</a></li>
                         <li><a href="tools.html">Tools</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -547,142 +202,25 @@
                         <li><a href="privacy.html">Privacy Policy</a></li>
                         <li><a href="terms.html">Terms of Use</a></li>
                         <li><a href="affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="sitemap.html">Sitemap</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h4>Support Our Work</h4>
-                    <p>Help us maintain and improve these free tools</p>
-                    <a href="https://buymeacoffee.com/s.amjathkhan" target="_blank" class="btn btn-primary btn-small mt-2" style="display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-mug-hot"></i> Buy Me a Coffee
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@amjathkhan.com</p>
+                    <a href="contact.html" class="btn btn-primary btn-small mt-2">
+                        <i class="fas fa-paper-plane"></i> Contact Us
                     </a>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
-                <p>Professional tools for workplace safety and compliance</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    <script>
-        // Contact Form Handling
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileToggle = document.getElementById('mobileToggle');
-            const navLinks = document.getElementById('navLinks');
-            
-            if (mobileToggle) {
-                mobileToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                });
-            }
-            
-            // Contact form submission
-            const contactForm = document.getElementById('contactForm');
-            const formMessage = document.getElementById('formMessage');
-            
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const subject = document.getElementById('subject').value;
-                    const message = document.getElementById('message').value;
-                    
-                    // Simple validation
-                    if (!name || !email || !subject || !message) {
-                        showMessage(formMessage, 'Please fill in all required fields.', 'error');
-                        return;
-                    }
-                    
-                    // Save contact to localStorage
-                    const contacts = JSON.parse(localStorage.getItem('hseContacts') || '[]');
-                    contacts.push({
-                        name: name,
-                        email: email,
-                        subject: subject,
-                        message: message,
-                        timestamp: new Date().toISOString()
-                    });
-                    localStorage.setItem('hseContacts', JSON.stringify(contacts));
-                    
-                    // Show success message
-                    showMessage(formMessage, 'Thank you! Your message has been sent. We will respond within 24 hours.', 'success');
-                    
-                    // Reset form
-                    contactForm.reset();
-                });
-            }
-            
-            // Newsletter form submission
-            const newsletterForm = document.getElementById('newsletterForm');
-            const newsletterMessage = document.getElementById('newsletterMessage');
-            
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const name = document.getElementById('newsletterName').value;
-                    const email = document.getElementById('newsletterEmail').value;
-                    const privacyCheck = document.getElementById('newsletterPrivacy').checked;
-                    
-                    // Validation
-                    if (!name || !email || !privacyCheck) {
-                        showMessage(newsletterMessage, 'Please fill all fields and agree to privacy policy.', 'error');
-                        return;
-                    }
-                    
-                    // Save subscription
-                    const subscriptions = JSON.parse(localStorage.getItem('hseSubscriptions') || '[]');
-                    subscriptions.push({
-                        name: name,
-                        email: email,
-                        timestamp: new Date().toISOString()
-                    });
-                    localStorage.setItem('hseSubscriptions', JSON.stringify(subscriptions));
-                    
-                    // Show success message
-                    showMessage(newsletterMessage, 'Thank you for subscribing! Check your email for confirmation.', 'success');
-                    
-                    // Reset form
-                    newsletterForm.reset();
-                });
-            }
-            
-            function showMessage(element, text, type) {
-                if (!element) return;
-                
-                element.textContent = text;
-                element.style.display = 'block';
-                element.style.padding = '15px';
-                element.style.borderRadius = '8px';
-                element.style.marginTop = '20px';
-                element.style.textAlign = 'center';
-                
-                if (type === 'success') {
-                    element.style.backgroundColor = '#d4edda';
-                    element.style.color = '#155724';
-                    element.style.border = '1px solid #c3e6cb';
-                } else {
-                    element.style.backgroundColor = '#f8d7da';
-                    element.style.color = '#721c24';
-                    element.style.border = '1px solid #f5c6cb';
-                }
-                
-                // Hide message after 5 seconds
-                setTimeout(() => {
-                    element.style.display = 'none';
-                }, 5000);
-            }
-        });
-    </script>
 </body>
 </html>
