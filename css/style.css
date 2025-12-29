@@ -1476,3 +1476,140 @@ a:hover {
         padding: 20px;
     }
 }
+/* ===== COMPACT SOCIAL SHARING ===== */
+.social-sharing {
+    padding: 50px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.social-card.compact {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-card.compact h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.social-card.compact p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.social-card.compact .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-card.compact .social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-card.compact .social-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-card.compact .social-btn.facebook:hover {
+    background: #1877F2;
+}
+
+.social-card.compact .social-btn.twitter:hover {
+    background: #1DA1F2;
+}
+
+.social-card.compact .social-btn.linkedin:hover {
+    background: #0077B5;
+}
+
+.social-card.compact .social-btn.whatsapp:hover {
+    background: #25D366;
+}
+
+/* ===== COMPACT SUPPORT SECTION ===== */
+.support-section {
+    padding: 50px 0;
+}
+
+.support-card.compact {
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.support-card.compact h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.support-card.compact p {
+    opacity: 0.9;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.btn-coffee {
+    background: white;
+    color: #ff5e62;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-coffee:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .social-card.compact {
+        padding: 20px;
+    }
+    
+    .social-card.compact h3 {
+        font-size: 1.5rem;
+    }
+    
+    .social-card.compact .social-buttons {
+        gap: 10px;
+    }
+    
+    .support-card.compact {
+        padding: 25px 20px;
+    }
+}
