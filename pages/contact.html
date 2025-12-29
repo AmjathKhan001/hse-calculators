@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - HSE Calculator | Get Support & Connect</title>
-    <meta name="description" content="Contact HSE Calculator team for support, calculator suggestions, partnership inquiries, or technical assistance.">
-    <meta name="keywords" content="HSE calculator support, safety tools contact, HSE help, technical support, partnership inquiry">
+    <title>Contact Us - HSE Calculator | Get Support & Subscribe</title>
+    <meta name="description" content="Contact HSE Calculator team for support, calculator suggestions, partnership inquiries, or technical assistance. Subscribe to our newsletter.">
+    <meta name="keywords" content="HSE calculator support, safety tools contact, HSE newsletter, subscribe safety updates">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -149,6 +149,79 @@
             transform: translateY(-3px);
         }
         
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .newsletter-content h2 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        
+        .newsletter-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+        }
+        
+        .privacy-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .privacy-check input[type="checkbox"] {
+            margin-top: 5px;
+        }
+        
+        .privacy-check label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+            font-size: 0.95rem;
+        }
+        
+        .privacy-check a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* FAQ Section */
         .faq-section {
             margin-top: 60px;
         }
@@ -200,6 +273,14 @@
             
             .contact-hero {
                 padding: 60px 0 30px;
+            }
+            
+            .newsletter-section {
+                padding: 30px 20px;
+            }
+            
+            .newsletter-content h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -361,6 +442,41 @@
                 </div>
             </div>
             
+            <!-- Newsletter Subscription -->
+            <div class="newsletter-section">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get weekly safety tips, calculator updates, and exclusive resources directly in your inbox. Stay updated with the latest HSE tools and best practices.</p>
+                    
+                    <form id="newsletterForm" class="newsletter-form">
+                        <div class="form-group">
+                            <input type="text" id="newsletterName" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="newsletterEmail" class="form-control" placeholder="Email Address" required>
+                        </div>
+                        
+                        <div class="privacy-check">
+                            <input type="checkbox" id="newsletterPrivacy" required>
+                            <label for="newsletterPrivacy">
+                                I agree to receive emails and accept the <a href="privacy.html">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="background: white; color: #667eea; padding: 14px 40px; font-weight: 600; font-size: 1.1rem;">
+                            <i class="fas fa-envelope"></i> Subscribe Now
+                        </button>
+                    </form>
+                    
+                    <div id="newsletterMessage" style="display: none; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;"></div>
+                    
+                    <div style="margin-top: 25px; font-size: 0.9rem; opacity: 0.8;">
+                        <p><i class="fas fa-shield-alt"></i> We respect your privacy. Unsubscribe anytime.</p>
+                    </div>
+                </div>
+            </div>
+            
             <!-- FAQ Section -->
             <div class="faq-section">
                 <h2 style="text-align: center; color: #333; margin-bottom: 20px;">Frequently Asked Questions</h2>
@@ -481,14 +597,11 @@
                     
                     // Simple validation
                     if (!name || !email || !subject || !message) {
-                        showMessage('Please fill in all required fields.', 'error');
+                        showMessage(formMessage, 'Please fill in all required fields.', 'error');
                         return;
                     }
                     
-                    // In a real app, you would send this to a server
-                    // For demo purposes, we'll show success message
-                    
-                    // Save contact to localStorage (for demo)
+                    // Save contact to localStorage
                     const contacts = JSON.parse(localStorage.getItem('hseContacts') || '[]');
                     contacts.push({
                         name: name,
@@ -500,35 +613,72 @@
                     localStorage.setItem('hseContacts', JSON.stringify(contacts));
                     
                     // Show success message
-                    showMessage('Thank you! Your message has been sent. We will respond within 24 hours.', 'success');
+                    showMessage(formMessage, 'Thank you! Your message has been sent. We will respond within 24 hours.', 'success');
                     
                     // Reset form
                     contactForm.reset();
                 });
             }
             
-            function showMessage(text, type) {
-                if (!formMessage) return;
+            // Newsletter form submission
+            const newsletterForm = document.getElementById('newsletterForm');
+            const newsletterMessage = document.getElementById('newsletterMessage');
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('newsletterName').value;
+                    const email = document.getElementById('newsletterEmail').value;
+                    const privacyCheck = document.getElementById('newsletterPrivacy').checked;
+                    
+                    // Validation
+                    if (!name || !email || !privacyCheck) {
+                        showMessage(newsletterMessage, 'Please fill all fields and agree to privacy policy.', 'error');
+                        return;
+                    }
+                    
+                    // Save subscription
+                    const subscriptions = JSON.parse(localStorage.getItem('hseSubscriptions') || '[]');
+                    subscriptions.push({
+                        name: name,
+                        email: email,
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem('hseSubscriptions', JSON.stringify(subscriptions));
+                    
+                    // Show success message
+                    showMessage(newsletterMessage, 'Thank you for subscribing! Check your email for confirmation.', 'success');
+                    
+                    // Reset form
+                    newsletterForm.reset();
+                });
+            }
+            
+            function showMessage(element, text, type) {
+                if (!element) return;
                 
-                formMessage.textContent = text;
-                formMessage.style.display = 'block';
-                formMessage.style.padding = '15px';
-                formMessage.style.borderRadius = '8px';
-                formMessage.style.marginTop = '20px';
+                element.textContent = text;
+                element.style.display = 'block';
+                element.style.padding = '15px';
+                element.style.borderRadius = '8px';
+                element.style.marginTop = '20px';
+                element.style.textAlign = 'center';
                 
                 if (type === 'success') {
-                    formMessage.style.backgroundColor = '#d4edda';
-                    formMessage.style.color = '#155724';
-                    formMessage.style.border = '1px solid #c3e6cb';
+                    element.style.backgroundColor = '#d4edda';
+                    element.style.color = '#155724';
+                    element.style.border = '1px solid #c3e6cb';
                 } else {
-                    formMessage.style.backgroundColor = '#f8d7da';
-                    formMessage.style.color = '#721c24';
-                    formMessage.style.border = '1px solid #f5c6cb';
+                    element.style.backgroundColor = '#f8d7da';
+                    element.style.color = '#721c24';
+                    element.style.border = '1px solid #f5c6cb';
                 }
                 
                 // Hide message after 5 seconds
                 setTimeout(() => {
-                    formMessage.style.display = 'none';
+                    element.style.display = 'none';
                 }, 5000);
             }
         });
