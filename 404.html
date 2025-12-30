@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | HSE Calculator</title>
+    <meta name="description" content="The page you're looking for cannot be found. Explore our safety calculators and tools.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        .error-page {
+            padding: var(--spacing-xxl) 0;
+            background: linear-gradient(135deg, var(--light-color) 0%, #f8f9fa 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .error-code:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            color: var(--warning-color);
+            margin-bottom: var(--spacing-lg);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+        
+        .error-search {
+            background: var(--white);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            padding: 12px 30px;
+        }
+        
+        .popular-calculators {
+            margin-top: var(--spacing-xl);
+        }
+        
+        .popular-calculators h3 {
+            margin-bottom: var(--spacing-lg);
+            color: var(--dark-color);
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .calculator-card {
+            background: var(--white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+        
+        .calculator-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .calculator-card h4 {
+            margin-bottom: var(--spacing-xs);
+            color: var(--dark-color);
+        }
+        
+        .calculator-card p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .safety-tip {
+            background: var(--info-light);
+            border-left: 4px solid var(--info-color);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            text-align: left;
+            border-radius: var(--radius-sm);
+        }
+        
+        .safety-tip h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--info-color);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-actions .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                    <span>HSE Calculator</span>
+                </a>
+                
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                    <a href="pages/all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
+                    <a href="pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
+                    <a href="pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
+                    <a href="pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
+                    <a href="pages/contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 404 Error Content -->
+    <section class="error-page">
+        <div class="container">
+            <div class="error-container">
+                <div class="error-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                
+                <h1 class="error-code">404</h1>
+                <h2 class="error-title">Safety Hazard: Page Not Found</h2>
+                
+                <p class="error-message">
+                    The page you're looking for seems to have encountered a safety issue and is unavailable. 
+                    It might have been moved, deleted, or you may have entered an incorrect URL. 
+                    Don't worry - we have plenty of safety tools and calculators to help you get back on track.
+                </p>
+                
+                <div class="error-actions">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="pages/all-calculators.html" class="btn btn-secondary">
+                        <i class="fas fa-calculator"></i> Browse Calculators
+                    </a>
+                    <a href="pages/contact.html" class="btn btn-outline">
+                        <i class="fas fa-headset"></i> Report Issue
+                    </a>
+                </div>
+                
+                <!-- Search Box -->
+                <div class="error-search">
+                    <h3>Search for Safety Tools</h3>
+                    <p class="mb-2">Find the calculator or tool you need:</p>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search calculators, tools, or articles...">
+                        <button class="btn btn-primary" id="searchButton">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Popular Calculators -->
+                <div class="popular-calculators">
+                    <h3>Popular HSE Calculators</h3>
+                    <p>Quick access to our most used safety calculators:</p>
+                    
+                    <div class="calculator-grid">
+                        <a href="calculators/risk-assessment.html" class="calculator-card">
+                            <div class="calculator-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h4>Risk Assessment</h4>
+                            <p>Evaluate workplace hazards and risks</p>
+                            <span class="btn btn-small">Open Calculator</span>
+                        </a>
+                        
+                        <a href="calculators/noise-exposure.html" class="calculator-card">
+                            <div class="calculator-icon">
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                            <h4>Noise Exposure</h4>
+                            <p>Calculate noise levels and exposure times</p>
+                            <span class="btn btn-small">Open Calculator</span>
+                        </a>
+                        
+                        <a href="calculators/ppe-selection.html" class="calculator-card">
+                            <div class="calculator-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h4>PPE Selection</h4>
+                            <p>Choose appropriate personal protective equipment</p>
+                            <span class="btn btn-small">Open Calculator</span>
+                        </a>
+                        
+                        <a href="calculators/incident-rate.html" class="calculator-card">
+                            <div class="calculator-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Incident Rate</h4>
+                            <p>Calculate safety performance metrics</p>
+                            <span class="btn btn-small">Open Calculator</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Safety Tip -->
+                <div class="safety-tip">
+                    <h4><i class="fas fa-lightbulb"></i> Safety Tip of the Day</h4>
+                    <p>
+                        <strong>404 Safety Protocol:</strong> When you encounter a missing page or broken link on our site, 
+                        it's similar to finding a safety hazard in the workplace. Report it immediately using our 
+                        <a href="pages/contact.html">contact form</a> so we can fix it and keep our digital workplace safe for everyone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="index.html" class="footer-logo">
+                        <img src="assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://bsky.app/profile/amjathkhan.bsky.social" target="_blank"><i class="fas fa-feather"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/all-calculators.html">All Calculators</a></li>
+                        <li><a href="pages/products.html">Safety Products</a></li>
+                        <li><a href="pages/tools.html">Tools</a></li>
+                        <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="pages/terms.html">Terms of Use</a></li>
+                        <li><a href="pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                    <a href="pages/contact.html" class="btn btn-primary btn-small mt-2">
+                        <i class="fas fa-paper-plane"></i> Contact Form
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm) {
+                window.location.href = `pages/tools.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        });
+        
+        // Allow Enter key to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchButton').click();
+            }
+        });
+        
+        // Add error reporting functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Log 404 error for analytics (optional)
+            console.log('404 Error: Page not found -', window.location.href);
+            
+            // Suggest alternative pages based on URL
+            const currentPath = window.location.pathname;
+            const pathParts = currentPath.split('/').filter(part => part);
+            
+            // If the path contains calculator-related terms, suggest calculators page
+            if (pathParts.some(part => part.includes('calc') || part.includes('tool'))) {
+                const suggestion = document.createElement('div');
+                suggestion.className = 'safety-tip mt-2';
+                suggestion.innerHTML = `
+                    <h4><i class="fas fa-compass"></i> Navigation Tip</h4>
+                    <p>Looking for a calculator? Try browsing our <a href="pages/all-calculators.html">All Calculators</a> page.</p>
+                `;
+                document.querySelector('.popular-calculators').after(suggestion);
+            }
+        });
+    </script>
+</body>
+</html>
