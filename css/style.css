@@ -880,3 +880,219 @@ a:focus {
     white-space: nowrap;
     border: 0;
 }
+/* ===============================
+   Featured Products Section
+   =============================== */
+
+.featured-products {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+}
+
+.featured-products .section-title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 2.2rem;
+}
+
+.featured-products .section-subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.product-image {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(52, 152, 219, 0.9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.product-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-content h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    min-height: 48px;
+}
+
+.product-content .btn {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .featured-products .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .featured-products {
+        padding: 40px 0;
+    }
+    
+    .featured-products .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .featured-products .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 15px;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+}
+
+/* For exactly 6 products - if you want 2 rows of 3 */
+@media (min-width: 993px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* For exactly 4 products - if you want 2 rows of 2 */
+@media (max-width: 992px) and (min-width: 769px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Text Center Utility */
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 30px;
+}
+
+/* Button Styles */
+.btn-outline {
+    background: transparent;
+    border: 2px solid #3498db;
+    color: #3498db;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary.btn-small {
+    background: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary.btn-small:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Product Image Fallback */
+.product-image img[onerror] {
+    background: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img[onerror]::before {
+    content: "Image";
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
