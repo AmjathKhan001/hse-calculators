@@ -10,9 +10,47 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <style>
+        .legal-page {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .legal-content {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .legal-content h2 {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        .legal-content h3 {
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.2rem;
+        }
+        
+        .legal-content p, .legal-content ul {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .legal-content ul {
+            list-style: disc;
+            padding-left: var(--spacing-lg);
+        }
+        
+        .legal-content li {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -26,11 +64,11 @@
                 
                 <div class="nav-links" id="navLinks">
                     <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="../calculators/risk-assessment.html" class="nav-link"><i class="fas fa-calculator"></i> Calculators</a>
+                    <a href="all-calculators.html" class="nav-link"><i class="fas fa-calculator"></i> All Calculators</a>
                     <a href="products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
                     <a href="tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
                     <a href="blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
                 </div>
                 
                 <div class="mobile-toggle" id="mobileToggle">
@@ -134,6 +172,7 @@
                         <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://bsky.app/profile/amjathkhan.bsky.social" target="_blank"><i class="fas fa-feather"></i></a>
                     </div>
                 </div>
                 
@@ -141,10 +180,11 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="../index.html">Home</a></li>
-                        <li><a href="../calculators/risk-assessment.html">Calculators</a></li>
+                        <li><a href="all-calculators.html">All Calculators</a></li>
                         <li><a href="products.html">Safety Products</a></li>
                         <li><a href="tools.html">Tools</a></li>
                         <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -177,43 +217,5 @@
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
-    
-    <style>
-        .legal-page {
-            padding: var(--spacing-xl) 0;
-        }
-        
-        .legal-content {
-            background: var(--white);
-            padding: var(--spacing-xl);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .legal-content h2 {
-            margin-top: var(--spacing-lg);
-            margin-bottom: var(--spacing-md);
-            color: var(--primary-color);
-        }
-        
-        .legal-content h3 {
-            margin-top: var(--spacing-md);
-            margin-bottom: var(--spacing-sm);
-            font-size: 1.2rem;
-        }
-        
-        .legal-content p, .legal-content ul {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .legal-content ul {
-            list-style: disc;
-            padding-left: var(--spacing-lg);
-        }
-        
-        .legal-content li {
-            margin-bottom: 5px;
-        }
-    </style>
 </body>
 </html>
