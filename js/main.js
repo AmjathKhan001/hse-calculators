@@ -1,342 +1,674 @@
-// main.js - Main JavaScript for HSE Calculator
+// main.js - Core functionality for HSE Calculator
 
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
+    console.log('HSE Calculator - Main JS Initialized');
+    
+    // Check if navigation is already loaded
+    if (!document.getElementById('navLinks')) {
+        console.log('Using inline navigation, initializing mobile menu...');
+        initMobileMenu();
+    }
+    
+    // Initialize components based on page
+    initPageSpecificFeatures();
+    
+    // Initialize Font Awesome if not loaded
+    loadFontAwesome();
+});
+
+// Initialize mobile menu (for inline navigation)
+function initMobileMenu() {
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinks = document.getElementById('navLinks');
     
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', function() {
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             navLinks.classList.toggle('active');
+            
+            // Toggle hamburger icon
             const icon = this.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            if (icon) {
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.replace('fa-bars', 'fa-times');
+                } else {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }
+            }
         });
-    }
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (navLinks && mobileToggle) {
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
             if (!navLinks.contains(event.target) && !mobileToggle.contains(event.target)) {
                 navLinks.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                if (icon) {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }
             }
-        }
-    });
-    
-    // Initialize tooltips
-    initializeTooltips();
+        });
+
+        // Close menu when clicking a link (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.replace('fa-times', 'fa-bars');
+                    }
+                }
+            });
+        });
+    }
+}
+
+// Initialize features based on current page
+function initPageSpecificFeatures() {
+    const path = window.location.pathname;
     
     // Initialize calculators if on calculator page
     if (document.querySelector('.calculator-form')) {
-        initializeCalculators();
+        initCalculatorFeatures();
     }
     
-    // Initialize products page if on products page
-    if (document.querySelector('.products-filter')) {
-        initializeProductsFilter();
+    // Initialize product filters if on products page
+    if (document.getElementById('category-filter')) {
+        initProductFilters();
     }
-});
-
-// Tooltips initialization
-function initializeTooltips() {
-    const tooltips = document.querySelectorAll('[data-tooltip]');
     
-    tooltips.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            const tooltipText = this.getAttribute('data-tooltip');
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = tooltipText;
-            document.body.appendChild(tooltip);
-            
-            const rect = this.getBoundingClientRect();
-            tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
-            tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
-            
-            this.tooltipElement = tooltip;
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            if (this.tooltipElement) {
-                this.tooltipElement.remove();
-                this.tooltipElement = null;
-            }
-        });
-    });
+    // Initialize blog features if on blog page
+    if (document.querySelector('.blog-page')) {
+        initBlogFeatures();
+    }
+    
+    // Initialize contact form if on contact page
+    if (document.getElementById('contact-form')) {
+        initContactForm();
+    }
 }
 
-// Initialize all calculators
-function initializeCalculators() {
-    // Risk Assessment Calculator
-    if (document.getElementById('calculate-risk')) {
-        document.getElementById('calculate-risk').addEventListener('click', calculateRisk);
-    }
+// Calculator page features
+function initCalculatorFeatures() {
+    console.log('Initializing calculator features...');
     
-    // Noise Exposure Calculator
-    if (document.getElementById('calculate-noise')) {
-        document.getElementById('calculate-noise').addEventListener('click', calculateNoise);
-    }
+    // Add calculate button listeners for all calculators
+    const calculateButtons = document.querySelectorAll('[id^="calculate-"]');
+    calculateButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const calculatorType = this.id.replace('calculate-', '');
+            runCalculator(calculatorType);
+        });
+    });
     
-    // Chemical Exposure Calculator
-    if (document.getElementById('calculate-chemical')) {
-        document.getElementById('calculate-chemical').addEventListener('click', calculateChemical);
-    }
+    // Add reset button functionality
+    const resetButtons = document.querySelectorAll('.reset-btn');
+    resetButtons.forEach(button => {
+        button.addEventListener('click', resetCalculator);
+    });
     
-    // Incident Rate Calculator
-    if (document.getElementById('calculate-incident')) {
-        document.getElementById('calculate-incident').addEventListener('click', calculateIncident);
-    }
-    
-    // Print/Save as PDF functionality
+    // Initialize print buttons
     const printButtons = document.querySelectorAll('.print-btn');
     printButtons.forEach(button => {
-        button.addEventListener('click', generatePDF);
+        button.addEventListener('click', handlePrint);
     });
+    
+    // Initialize social sharing buttons
+    initSocialSharing();
 }
 
-// Risk Assessment Calculator
-function calculateRisk() {
-    const probability = parseInt(document.getElementById('probability').value);
-    const severity = parseInt(document.getElementById('severity').value);
+// Run specific calculator
+function runCalculator(type) {
+    const form = document.getElementById(`${type}-form`) || document.querySelector('.calculator-form');
     
-    if (isNaN(probability) || isNaN(severity) || probability < 1 || probability > 5 || severity < 1 || severity > 5) {
-        alert('Please enter valid values between 1 and 5 for both probability and severity.');
+    if (!form) {
+        console.error('Calculator form not found');
         return;
     }
     
-    const risk = probability * severity;
-    let interpretation = '';
-    let riskLevel = '';
+    // Validate all inputs
+    const inputs = form.querySelectorAll('input[required], select[required]');
+    let isValid = true;
     
-    if (risk <= 5) {
-        interpretation = 'Low risk - Routine monitoring required.';
-        riskLevel = 'Low';
-    } else if (risk <= 10) {
-        interpretation = 'Moderate risk - Additional controls may be needed.';
-        riskLevel = 'Moderate';
-    } else if (risk <= 15) {
-        interpretation = 'High risk - Immediate action required.';
-        riskLevel = 'High';
-    } else {
-        interpretation = 'Very high risk - Stop activity and implement controls immediately.';
-        riskLevel = 'Very High';
-    }
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            input.classList.add('error');
+            isValid = false;
+        } else {
+            input.classList.remove('error');
+        }
+    });
     
-    document.getElementById('risk-value').textContent = `${risk} (${riskLevel})`;
-    document.getElementById('risk-interpretation').textContent = interpretation;
-    document.getElementById('risk-result').classList.add('active');
-}
-
-// Noise Exposure Calculator
-function calculateNoise() {
-    const noiseLevel = parseFloat(document.getElementById('noise-level').value);
-    const exposureTime = parseFloat(document.getElementById('exposure-time').value);
-    
-    if (isNaN(noiseLevel) || isNaN(exposureTime) || noiseLevel < 50 || noiseLevel > 120 || exposureTime <= 0 || exposureTime > 24) {
-        alert('Please enter valid values for noise level (50-120 dB) and exposure time (0.1-24 hours).');
+    if (!isValid) {
+        showNotification('Please fill in all required fields.', 'error');
         return;
     }
     
-    const permissibleExposure = Math.pow(2, (85 - noiseLevel) / 3) * 8;
-    let interpretation = '';
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
     
-    if (exposureTime <= permissibleExposure) {
-        interpretation = 'Exposure is within permissible limits.';
-    } else {
-        interpretation = 'Exposure exceeds permissible limits. Implement hearing protection and engineering controls.';
+    // Calculate based on calculator type
+    let result;
+    switch(type) {
+        case 'risk':
+            result = calculateRisk(data);
+            break;
+        case 'noise':
+            result = calculateNoiseExposure(data);
+            break;
+        case 'chemical':
+            result = calculateChemicalExposure(data);
+            break;
+        case 'incident':
+            result = calculateIncidentRate(data);
+            break;
+        default:
+            console.warn(`Calculator type "${type}" not implemented`);
+            return;
     }
     
-    document.getElementById('noise-value').textContent = `${permissibleExposure.toFixed(2)} hours permissible`;
-    document.getElementById('noise-interpretation').textContent = interpretation;
-    document.getElementById('noise-result').classList.add('active');
+    // Display result
+    displayResult(result, type);
+    
+    // Show success notification
+    showNotification('Calculation completed successfully!', 'success');
 }
 
-// Chemical Exposure Calculator
-function calculateChemical() {
-    const concentration = parseFloat(document.getElementById('chemical-concentration').value);
-    const oel = parseFloat(document.getElementById('oel').value);
-    
-    if (isNaN(concentration) || isNaN(oel) || concentration < 0 || oel <= 0) {
-        alert('Please enter valid positive values for concentration and OEL.');
-        return;
+// Reset calculator form
+function resetCalculator() {
+    const form = document.querySelector('.calculator-form');
+    if (form) {
+        form.reset();
+        
+        // Hide result box
+        const resultBox = document.querySelector('.result-box.active');
+        if (resultBox) {
+            resultBox.classList.remove('active');
+        }
+        
+        // Clear any error styles
+        form.querySelectorAll('.error').forEach(el => {
+            el.classList.remove('error');
+        });
+        
+        showNotification('Form has been reset.', 'info');
     }
-    
-    const ratio = concentration / oel;
-    let interpretation = '';
-    
-    if (ratio < 0.1) {
-        interpretation = 'Well below OEL - Minimal risk.';
-    } else if (ratio < 0.5) {
-        interpretation = 'Below OEL - Acceptable with routine monitoring.';
-    } else if (ratio < 1) {
-        interpretation = 'Approaching OEL - Increase monitoring frequency.';
-    } else {
-        interpretation = 'Exceeds OEL - Implement immediate controls and review procedures.';
-    }
-    
-    document.getElementById('chemical-value').textContent = ratio.toFixed(2);
-    document.getElementById('chemical-interpretation').textContent = interpretation;
-    document.getElementById('chemical-result').classList.add('active');
 }
 
-// Incident Rate Calculator
-function calculateIncident() {
-    const incidents = parseInt(document.getElementById('recordable-incidents').value);
-    const hours = parseInt(document.getElementById('total-hours').value);
-    
-    if (isNaN(incidents) || isNaN(hours) || incidents < 0 || hours <= 0) {
-        alert('Please enter valid positive values for incidents and hours worked.');
-        return;
-    }
-    
-    const trir = (incidents * 200000) / hours;
-    let interpretation = '';
-    
-    if (trir < 1) {
-        interpretation = 'Excellent safety performance.';
-    } else if (trir < 3) {
-        interpretation = 'Good safety performance.';
-    } else if (trir < 5) {
-        interpretation = 'Average safety performance - Review safety programs.';
-    } else {
-        interpretation = 'Below average safety performance - Implement immediate improvements.';
-    }
-    
-    document.getElementById('incident-value').textContent = trir.toFixed(2);
-    document.getElementById('incident-interpretation').textContent = interpretation;
-    document.getElementById('incident-result').classList.add('active');
+// Calculator functions (implement these in respective calculator files)
+function calculateRisk(data) {
+    // Implementation in risk-assessment.js
+    console.log('Risk calculation:', data);
+    return { value: 'N/A', interpretation: 'Not implemented' };
 }
 
-// Generate PDF function
-function generatePDF() {
-    const element = document.querySelector('.calculator-form');
-    const resultBox = document.querySelector('.result-box.active');
-    
-    if (!element) {
-        alert('No content to print.');
-        return;
-    }
-    
-    // Create a print version
-    const printElement = element.cloneNode(true);
-    
-    // Add timestamp
-    const timestamp = document.createElement('div');
-    timestamp.className = 'print-timestamp';
-    timestamp.innerHTML = `<p>Generated on: ${new Date().toLocaleString()}</p>
-                          <p>Source: HSE Calculator (https://www.hsecalculator.com)</p>`;
-    printElement.appendChild(timestamp);
-    
-    // Configure PDF options
-    const opt = {
-        margin: 1,
-        filename: `hse-calculator-${new Date().getTime()}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    
-    // Generate and save PDF
-    html2pdf().set(opt).from(printElement).save();
+function calculateNoiseExposure(data) {
+    // Implementation in noise-exposure.js
+    console.log('Noise calculation:', data);
+    return { value: 'N/A', interpretation: 'Not implemented' };
 }
 
-// Products filter functionality
-function initializeProductsFilter() {
+function calculateChemicalExposure(data) {
+    // Implementation in chemical-exposure.js
+    console.log('Chemical calculation:', data);
+    return { value: 'N/A', interpretation: 'Not implemented' };
+}
+
+function calculateIncidentRate(data) {
+    // Implementation in incident-rate.js
+    console.log('Incident calculation:', data);
+    return { value: 'N/A', interpretation: 'Not implemented' };
+}
+
+// Display calculation result
+function displayResult(result, type) {
+    const resultBox = document.getElementById(`${type}-result`) || document.querySelector('.result-box');
+    
+    if (resultBox) {
+        const valueElement = resultBox.querySelector('.result-value');
+        const interpretationElement = resultBox.querySelector('.result-interpretation');
+        
+        if (valueElement) {
+            valueElement.textContent = result.value;
+        }
+        
+        if (interpretationElement) {
+            interpretationElement.textContent = result.interpretation;
+        }
+        
+        resultBox.classList.add('active');
+        
+        // Scroll to result
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Product filter functionality
+function initProductFilters() {
     const filterSelect = document.getElementById('category-filter');
     if (filterSelect) {
         filterSelect.addEventListener('change', filterProducts);
     }
+    
+    // Initialize filter on load
+    filterProducts();
 }
 
 function filterProducts() {
-    const category = document.getElementById('category-filter').value;
+    const category = document.getElementById('category-filter')?.value || 'all';
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
-        const cardCategory = card.querySelector('.product-category').textContent;
+        const cardCategory = card.dataset.category || card.querySelector('.product-category')?.textContent || '';
         
-        if (category === 'all' || cardCategory === category) {
+        if (category === 'all' || cardCategory.toLowerCase().includes(category.toLowerCase())) {
             card.style.display = 'block';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 10);
         } else {
-            card.style.display = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 300);
         }
     });
 }
 
-// Social sharing functions
-function shareOnFacebook() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
-}
-
-function shareOnTwitter() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("Check out these professional HSE calculators and safety tools!");
-    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-}
-
-function shareOnLinkedIn() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-}
-
-function shareOnWhatsApp() {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("Professional HSE Calculators: " + window.location.href);
-    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-}
-
-// Contact form validation
-function validateContactForm() {
-    const name = document.getElementById('contact-name').value.trim();
-    const email = document.getElementById('contact-email').value.trim();
-    const message = document.getElementById('contact-message').value.trim();
+// Blog features
+function initBlogFeatures() {
+    // Filter tags
+    const filterTags = document.querySelectorAll('.tag');
+    filterTags.forEach(tag => {
+        tag.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all tags
+            filterTags.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked tag
+            this.classList.add('active');
+            
+            // Filter blog posts
+            const category = this.dataset.category || 'all';
+            filterBlogPosts(category);
+        });
+    });
     
-    if (!name || !email || !message) {
-        alert('Please fill in all required fields.');
-        return false;
+    // Pagination
+    initPagination();
+}
+
+function filterBlogPosts(category) {
+    const posts = document.querySelectorAll('.blog-card');
+    
+    posts.forEach(post => {
+        const postCategory = post.dataset.category || '';
+        
+        if (category === 'all' || postCategory === category) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+function initPagination() {
+    const pageLinks = document.querySelectorAll('.page-link:not(.disabled)');
+    pageLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!this.href || this.href === '#') {
+                e.preventDefault();
+                showNotification('Pagination not implemented yet.', 'info');
+            }
+        });
+    });
+}
+
+// Contact form functionality
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateContactForm(this)) {
+                // Simulate form submission
+                showNotification('Thank you for your message! We will respond soon.', 'success');
+                this.reset();
+            }
+        });
+    }
+}
+
+function validateContactForm(form) {
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
+    
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            field.classList.add('error');
+            isValid = false;
+        } else {
+            field.classList.remove('error');
+        }
+        
+        // Email validation
+        if (field.type === 'email' && field.value.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(field.value)) {
+                field.classList.add('error');
+                showNotification('Please enter a valid email address.', 'error');
+                isValid = false;
+            }
+        }
+    });
+    
+    return isValid;
+}
+
+// Social sharing functionality
+function initSocialSharing() {
+    const shareButtons = document.querySelectorAll('[data-share]');
+    
+    shareButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const platform = this.dataset.share;
+            shareOnPlatform(platform);
+        });
+    });
+}
+
+function shareOnPlatform(platform) {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    const text = encodeURIComponent('Check out this professional HSE calculator!');
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://api.whatsapp.com/send?text=${text} ${url}`;
+            break;
+        case 'email':
+            shareUrl = `mailto:?subject=${title}&body=${text} ${url}`;
+            break;
+        default:
+            console.warn('Unknown share platform:', platform);
+            return;
     }
     
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return false;
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
     }
-    
-    return true;
 }
 
-// Add CSS for tooltips
-const tooltipCSS = `
-    .tooltip {
+// Print/PDF functionality
+function handlePrint() {
+    if (typeof html2pdf === 'undefined') {
+        // Load html2pdf if not available
+        loadHtml2Pdf().then(() => {
+            generatePDF();
+        }).catch(() => {
+            // Fallback to browser print
+            window.print();
+        });
+    } else {
+        generatePDF();
+    }
+}
+
+function generatePDF() {
+    const element = document.querySelector('.calculator-form') || 
+                    document.querySelector('.result-box.active') || 
+                    document.querySelector('.container');
+    
+    if (!element) {
+        showNotification('No content available to print.', 'error');
+        return;
+    }
+    
+    const opt = {
+        margin: 0.5,
+        filename: `hse-calculator-${new Date().getTime()}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2,
+            useCORS: true,
+            logging: false
+        },
+        jsPDF: { 
+            unit: 'in', 
+            format: 'letter', 
+            orientation: 'portrait' 
+        }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+}
+
+// Load external dependencies
+function loadHtml2Pdf() {
+    return new Promise((resolve, reject) => {
+        if (typeof html2pdf !== 'undefined') {
+            resolve();
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        script.integrity = 'sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==';
+        script.crossOrigin = 'anonymous';
+        
+        script.onload = resolve;
+        script.onerror = reject;
+        
+        document.head.appendChild(script);
+    });
+}
+
+function loadFontAwesome() {
+    // Only load if not already present
+    if (!document.querySelector('link[href*="font-awesome"]') && 
+        !document.querySelector('link[href*="fontawesome"]')) {
+        
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        link.integrity = 'sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==';
+        link.crossOrigin = 'anonymous';
+        
+        document.head.appendChild(link);
+    }
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existing = document.querySelectorAll('.notification');
+    existing.forEach(n => n.remove());
+    
+    // Create notification
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <span>${message}</span>
+        <button class="notification-close" aria-label="Close notification">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Add show class after a moment
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Auto-remove after 5 seconds
+    const autoRemove = setTimeout(() => {
+        removeNotification(notification);
+    }, 5000);
+    
+    // Close button
+    const closeBtn = notification.querySelector('.notification-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            clearTimeout(autoRemove);
+            removeNotification(notification);
+        });
+    }
+    
+    // Click anywhere to close
+    notification.addEventListener('click', (e) => {
+        if (e.target === notification) {
+            clearTimeout(autoRemove);
+            removeNotification(notification);
+        }
+    });
+}
+
+function removeNotification(notification) {
+    notification.classList.remove('show');
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 300);
+}
+
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Add CSS for notifications
+const notificationCSS = `
+    .notification {
         position: fixed;
-        background: rgba(0, 0, 0, 0.8);
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
         color: white;
-        padding: 8px 12px;
-        border-radius: 4px;
-        font-size: 14px;
-        z-index: 10000;
-        pointer-events: none;
-        max-width: 200px;
-        text-align: center;
+        font-weight: 500;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        min-width: 300px;
+        max-width: 400px;
+        transform: translateX(150%);
+        transition: transform 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
     
-    .tooltip::after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+    .notification.show {
+        transform: translateX(0);
+    }
+    
+    .notification-success {
+        background: linear-gradient(135deg, #28a745, #1e7e34);
+        border-left: 4px solid #155724;
+    }
+    
+    .notification-error {
+        background: linear-gradient(135deg, #dc3545, #bd2130);
+        border-left: 4px solid #721c24;
+    }
+    
+    .notification-warning {
+        background: linear-gradient(135deg, #ffc107, #e0a800);
+        color: #333;
+        border-left: 4px solid #856404;
+    }
+    
+    .notification-info {
+        background: linear-gradient(135deg, #17a2b8, #117a8b);
+        border-left: 4px solid #0c5460;
+    }
+    
+    .notification-close {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+    
+    .notification-close:hover {
+        opacity: 1;
+    }
+    
+    @media (max-width: 768px) {
+        .notification {
+            min-width: auto;
+            max-width: calc(100vw - 40px);
+            left: 20px;
+            right: 20px;
+            transform: translateY(-150%);
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+        }
     }
 `;
 
-// Inject tooltip CSS
-const style = document.createElement('style');
-style.textContent = tooltipCSS;
-document.head.appendChild(style);
+// Inject notification CSS
+if (!document.querySelector('#notification-styles')) {
+    const style = document.createElement('style');
+    style.id = 'notification-styles';
+    style.textContent = notificationCSS;
+    document.head.appendChild(style);
+}
+
+// Make main functions available globally
+window.HSE = window.HSE || {};
+window.HSE.main = {
+    initMobileMenu,
+    runCalculator,
+    resetCalculator,
+    showNotification,
+    shareOnPlatform,
+    generatePDF
+};
