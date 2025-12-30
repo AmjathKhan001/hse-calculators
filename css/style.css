@@ -108,12 +108,6 @@ button, input, select, textarea {
     --z-tooltip: 1070;
 }
 
-/* ===== HEADER/NAVIGATION IMPORT CONTAINER ===== */
-#header-container,
-#footer-container {
-    min-height: 60px;
-}
-
 /* ===== SKIP TO MAIN CONTENT (Accessibility) ===== */
 .skip-to-content {
     position: absolute;
@@ -278,7 +272,6 @@ a:focus {
     display: flex;
     gap: var(--spacing-lg);
     align-items: center;
-    list-style: none;
 }
 
 .nav-link {
@@ -805,6 +798,77 @@ a:focus {
         page-break-inside: avoid;
     }
 }
+
+/* ===== SOCIAL SHARING ===== */
+.social-sharing {
+    margin-top: var(--spacing-xl);
+}
+
+.social-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+}
+
+.social-card h3 {
+    color: var(--dark-color);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-card p {
+    color: var(--gray);
+    margin-bottom: var(--spacing-lg);
+}
+
+.social-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    min-width: 140px;
+}
+
+.social-btn.facebook {
+    background: #3b5998;
+}
+
+.social-btn.twitter {
+    background: #1da1f2;
+}
+
+.social-btn.linkedin {
+    background: #0077b5;
+}
+
+.social-btn.whatsapp {
+    background: #25d366;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== ACCESSIBILITY ===== */
 .sr-only {
     position: absolute;
     width: 1px;
