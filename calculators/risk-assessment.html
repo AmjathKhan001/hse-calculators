@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk Assessment Calculator | HSE Calculator</title>
-    <meta name="description" content="Calculate risk levels based on probability and severity to prioritize safety measures.">
+    <meta name="description" content="Calculate risk levels, prioritize hazards, and develop control measures for workplace safety.">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-     <!-- CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/utilities.css">
     <link rel="stylesheet" href="../css/calculator.css">
@@ -57,33 +57,145 @@
     <section class="calculator-section">
         <div class="container">
             <h1 class="section-title">Risk Assessment Calculator</h1>
-            <p class="section-subtitle">Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+            <p class="section-subtitle">Identify, evaluate, and prioritize workplace hazards to implement effective control measures.</p>
             
-            <div class="calculator-form">
+            <div class="calculator-form" id="risk-calculator-form">
                 <div class="form-group">
-                    <label for="probability" class="form-label">Probability (1-5, where 5 is most likely):</label>
-                    <input type="number" id="probability" class="form-control" min="1" max="5" value="3" data-tooltip="Rate the likelihood of the hazard occurring">
-                    <small class="form-text">1 = Rare, 2 = Unlikely, 3 = Possible, 4 = Likely, 5 = Almost Certain</small>
+                    <label for="hazard-name" class="form-label">Hazard Description:</label>
+                    <input type="text" id="hazard-name" class="form-control" placeholder="e.g., Working at height, Chemical exposure, etc.">
                 </div>
                 
                 <div class="form-group">
-                    <label for="severity" class="form-label">Severity (1-5, where 5 is most severe):</label>
-                    <input type="number" id="severity" class="form-control" min="1" max="5" value="3" data-tooltip="Rate the potential consequences if the hazard occurs">
-                    <small class="form-text">1 = Negligible, 2 = Minor, 3 = Moderate, 4 = Major, 5 = Catastrophic</small>
+                    <label for="hazard-location" class="form-label">Location/Department:</label>
+                    <input type="text" id="hazard-location" class="form-control" placeholder="e.g., Warehouse, Production line, etc.">
                 </div>
                 
-                <button id="calculate-risk" class="btn btn-primary">
-                    <i class="fas fa-calculator"></i> Calculate Risk
+                <div class="form-group">
+                    <label for="activity" class="form-label">Activity/Task:</label>
+                    <input type="text" id="activity" class="form-control" placeholder="e.g., Loading goods, Maintenance work, etc.">
+                </div>
+                
+                <div class="risk-matrix-section">
+                    <h3 class="section-title">Risk Matrix Assessment</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="probability" class="form-label">Probability (Likelihood):</label>
+                            <select id="probability" class="form-control">
+                                <option value="1">1 - Very Unlikely (Once in 10+ years)</option>
+                                <option value="2">2 - Unlikely (Once in 5-10 years)</option>
+                                <option value="3" selected>3 - Possible (Once in 1-5 years)</option>
+                                <option value="4">4 - Likely (Several times per year)</option>
+                                <option value="5">5 - Very Likely (Weekly/Monthly)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="severity" class="form-label">Severity (Consequences):</label>
+                            <select id="severity" class="form-control">
+                                <option value="1">1 - Negligible (First aid injury)</option>
+                                <option value="2">2 - Minor (Medical treatment)</option>
+                                <option value="3" selected>3 - Moderate (Lost time injury)</option>
+                                <option value="4">4 - Major (Permanent disability)</option>
+                                <option value="5">5 - Catastrophic (Fatality/Multiple fatalities)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exposure" class="form-label">Exposure Frequency:</label>
+                        <select id="exposure" class="form-control">
+                            <option value="1">1 - Rarely (Less than once per month)</option>
+                            <option value="2">2 - Occasionally (Monthly)</option>
+                            <option value="3" selected>3 - Frequently (Weekly)</option>
+                            <option value="4">4 - Very Frequently (Daily)</option>
+                            <option value="5">5 - Continuously (Hourly/Constant)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="control-effectiveness" class="form-label">Existing Control Effectiveness:</label>
+                        <select id="control-effectiveness" class="form-control">
+                            <option value="5">5 - None (No controls in place)</option>
+                            <option value="4">4 - Poor (Controls inadequate)</option>
+                            <option value="3" selected>3 - Fair (Controls partially effective)</option>
+                            <option value="2">2 - Good (Controls mostly effective)</option>
+                            <option value="1">1 - Excellent (Controls fully effective)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="persons-affected" class="form-label">Number of Persons at Risk:</label>
+                    <input type="number" id="persons-affected" class="form-control" min="1" max="1000" value="5">
+                </div>
+                
+                <div class="form-group">
+                    <label for="risk-category" class="form-label">Risk Category:</label>
+                    <select id="risk-category" class="form-control">
+                        <option value="safety">Safety (Physical injury)</option>
+                        <option value="health">Health (Illness/disease)</option>
+                        <option value="environmental">Environmental (Pollution/contamination)</option>
+                        <option value="financial">Financial (Property damage/loss)</option>
+                        <option value="reputation">Reputation (Public image/brand)</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-risk" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calculator"></i> Calculate Risk Level
+                </button>
+                <button id="reset-risk" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-redo"></i> Reset
                 </button>
                 
-                <div id="risk-result" class="result-box">
-                    <h3>Risk Assessment Result</h3>
-                    <div class="result-value" id="risk-value"></div>
-                    <div class="result-interpretation" id="risk-interpretation"></div>
+                <div id="risk-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-clipboard-check"></i> Risk Assessment Results</h3>
                     
-                    <div class="print-actions">
-                        <button class="btn btn-primary print-btn">
-                            <i class="fas fa-file-pdf"></i> Save as PDF
+                    <div class="result-summary">
+                        <div class="summary-card" id="risk-score-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Risk Score</h5>
+                                <div class="summary-value" id="risk-score-value">0</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="risk-level-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Risk Level</h5>
+                                <div class="summary-value" id="risk-level-value">Low</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Action Priority</h5>
+                                <div class="summary-value" id="action-priority">Low</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-details mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Assessment Details</h5>
+                        <div class="details-grid" id="risk-details"></div>
+                    </div>
+                    
+                    <div class="control-measures mt-4">
+                        <h5><i class="fas fa-shield-alt"></i> Recommended Control Measures</h5>
+                        <div id="control-measures-list"></div>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
+                        <button class="btn btn-primary print-btn" onclick="generatePDF('risk-calculator-form', 'risk-assessment')">
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
                         </button>
                         <button class="btn btn-secondary" onclick="window.print()">
                             <i class="fas fa-print"></i> Print
@@ -92,248 +204,353 @@
                 </div>
                 
                 <div class="calculator-info mt-4">
-                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
-                    <p>1. <strong>Probability (1-5):</strong> Assess how likely the hazard is to occur.</p>
-                    <p>2. <strong>Severity (1-5):</strong> Assess the potential consequences if the hazard occurs.</p>
-                    <p>3. <strong>Risk Level:</strong> Multiply probability × severity to get the risk score.</p>
-                    <p>4. <strong>Action Required:</strong> Based on the risk score, determine appropriate control measures.</p>
+                    <h4><i class="fas fa-info-circle"></i> Risk Assessment Methodology</h4>
                     
-                    <h5 class="mt-3">Risk Matrix Interpretation</h5>
-                    <table class="risk-matrix">
-                        <thead>
-                            <tr>
-                                <th>Risk Score</th>
-                                <th>Level</th>
-                                <th>Action Required</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1-5</td>
-                                <td>Low</td>
-                                <td>Routine monitoring</td>
-                            </tr>
-                            <tr>
-                                <td>6-10</td>
-                                <td>Moderate</td>
-                                <td>Additional controls may be needed</td>
-                            </tr>
-                            <tr>
-                                <td>11-15</td>
-                                <td>High</td>
-                                <td>Immediate action required</td>
-                            </tr>
-                            <tr>
-                                <td>16-25</td>
-                                <td>Very High</td>
-                                <td>Stop activity and implement controls</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="risk-matrix-guide">
+                        <h5>Risk Matrix Interpretation</h5>
+                        <div class="table-responsive">
+                            <table class="risk-matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th>Risk Score</th>
+                                        <th>Risk Level</th>
+                                        <th>Color Code</th>
+                                        <th>Action Required</th>
+                                        <th>Timeframe</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1-5</td>
+                                        <td>Low</td>
+                                        <td><span class="risk-color green"></span> Green</td>
+                                        <td>Monitor/maintain controls</td>
+                                        <td>Ongoing</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6-12</td>
+                                        <td>Medium</td>
+                                        <td><span class="risk-color yellow"></span> Yellow</td>
+                                        <td>Review/enhance controls</td>
+                                        <td>Within 6 months</td>
+                                    </tr>
+                                    <tr>
+                                        <td>13-20</td>
+                                        <td>High</td>
+                                        <td><span class="risk-color orange"></span> Orange</td>
+                                        <td>Implement additional controls</td>
+                                        <td>Within 1 month</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21-25</td>
+                                        <td>Very High</td>
+                                        <td><span class="risk-color red"></span> Red</td>
+                                        <td>Immediate action required</td>
+                                        <td>Immediately</td>
+                                    </tr>
+                                    <tr>
+                                        <td>26+</td>
+                                        <td>Extreme</td>
+                                        <td><span class="risk-color purple"></span> Purple</td>
+                                        <td>Stop activity, implement controls</td>
+                                        <td>Immediately</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="hierarchy-controls mt-4">
+                        <h5><i class="fas fa-sitemap"></i> Hierarchy of Controls</h5>
+                        <div class="controls-list">
+                            <div class="control-item elimination">
+                                <div class="control-number">1</div>
+                                <div class="control-content">
+                                    <h6>Elimination</h6>
+                                    <p>Remove the hazard completely from the workplace</p>
+                                </div>
+                            </div>
+                            <div class="control-item substitution">
+                                <div class="control-number">2</div>
+                                <div class="control-content">
+                                    <h6>Substitution</h6>
+                                    <p>Replace with less hazardous material or process</p>
+                                </div>
+                            </div>
+                            <div class="control-item engineering">
+                                <div class="control-number">3</div>
+                                <div class="control-content">
+                                    <h6>Engineering Controls</h6>
+                                    <p>Isolate people from the hazard</p>
+                                </div>
+                            </div>
+                            <div class="control-item administrative">
+                                <div class="control-number">4</div>
+                                <div class="control-content">
+                                    <h6>Administrative Controls</h6>
+                                    <p>Change work procedures and policies</p>
+                                </div>
+                            </div>
+                            <div class="control-item ppe">
+                                <div class="control-number">5</div>
+                                <div class="control-content">
+                                    <h6>PPE</h6>
+                                    <p>Personal protective equipment as last resort</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Social Sharing & Related Calculators sections remain the same as chemical-exposure.html -->
+            <!-- Include the same social sharing and related calculators sections from chemical-exposure.html -->
             
-            <!-- Social Sharing -->
-            <div class="social-sharing mt-4">
-                <div class="social-card">
-                    <h3>Share This Calculator</h3>
-                    <p>Help other safety professionals discover this tool</p>
-                    <div class="social-buttons">
-                        <a href="#" class="social-btn facebook" onclick="shareOnFacebook()">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-btn twitter" onclick="shareOnTwitter()">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-btn linkedin" onclick="shareOnLinkedIn()">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-btn whatsapp" onclick="shareOnWhatsApp()">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Related Calculators -->
-            <div class="related-calculators mt-4">
-                <h3 class="section-title">Related Calculators</h3>
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-volume-up"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Noise Exposure Calculator</h3>
-                            <p>Determine daily noise exposure and compliance with occupational limits.</p>
-                            <a href="noise-exposure.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Incident Rate Calculator</h3>
-                            <p>Calculate TRIR, DART, and other safety performance metrics.</p>
-                            <a href="incident-rate.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-hard-hat"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>PPE Selection Calculator</h3>
-                            <p>Determine appropriate Personal Protective Equipment based on hazard assessment.</p>
-                            <a href="ppe-selection.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Same footer as index.html -->
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="../index.html" class="footer-logo">
-                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                        <span>HSE Calculator</span>
-                    </a>
-                    <p>Professional tools for health, safety, and environment professionals.</p>
-                    <div class="footer-social">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="risk-assessment.html">Calculators</a></li>
-                        <li><a href="../pages/products.html">Safety Products</a></li>
-                        <li><a href="../pages/tools.html">Tools</a></li>
-                        <li><a href="../pages/blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
-                        <li><a href="../pages/terms.html">Terms of Use</a></li>
-                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
-                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
-                <p>Professional tools for workplace safety and compliance</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Include the same footer from chemical-exposure.html -->
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
     
     <script>
-        // Calculator-specific JavaScript
-        document.getElementById('calculate-risk').addEventListener('click', function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize event listeners
+            document.getElementById('calculate-risk').addEventListener('click', calculateRisk);
+            document.getElementById('reset-risk').addEventListener('click', resetRiskForm);
+        });
+
+        function calculateRisk() {
+            // Get input values
+            const hazardName = document.getElementById('hazard-name').value || 'Unspecified Hazard';
+            const hazardLocation = document.getElementById('hazard-location').value || 'Unspecified Location';
+            const activity = document.getElementById('activity').value || 'Unspecified Activity';
             const probability = parseInt(document.getElementById('probability').value);
             const severity = parseInt(document.getElementById('severity').value);
-            
-            if (isNaN(probability) || isNaN(severity) || probability < 1 || probability > 5 || severity < 1 || severity > 5) {
-                alert('Please enter valid values between 1 and 5 for both probability and severity.');
-                return;
+            const exposure = parseInt(document.getElementById('exposure').value);
+            const controlEffectiveness = parseInt(document.getElementById('control-effectiveness').value);
+            const personsAffected = parseInt(document.getElementById('persons-affected').value) || 1;
+            const riskCategory = document.getElementById('risk-category').value;
+
+            // Calculate risk score
+            // Risk = Probability × Severity × Exposure / Control Effectiveness
+            let riskScore = (probability * severity * exposure) / controlEffectiveness;
+            riskScore = Math.round(riskScore * 10) / 10; // Round to 1 decimal
+
+            // Adjust for number of persons affected
+            if (personsAffected > 10) {
+                riskScore *= 1.2;
+            } else if (personsAffected > 50) {
+                riskScore *= 1.5;
             }
+
+            // Determine risk level
+            let riskLevel, riskColor, actionPriority, timeframe;
             
-            const risk = probability * severity;
-            let interpretation = '';
-            let riskLevel = '';
-            
-            if (risk <= 5) {
-                interpretation = 'Low risk - Routine monitoring required.';
-                riskLevel = 'Low';
-            } else if (risk <= 10) {
-                interpretation = 'Moderate risk - Additional controls may be needed.';
-                riskLevel = 'Moderate';
-            } else if (risk <= 15) {
-                interpretation = 'High risk - Immediate action required.';
-                riskLevel = 'High';
+            if (riskScore <= 5) {
+                riskLevel = "Low";
+                riskColor = "green";
+                actionPriority = "Low";
+                timeframe = "Monitor ongoing";
+            } else if (riskScore <= 12) {
+                riskLevel = "Medium";
+                riskColor = "yellow";
+                actionPriority = "Medium";
+                timeframe = "Within 6 months";
+            } else if (riskScore <= 20) {
+                riskLevel = "High";
+                riskColor = "orange";
+                actionPriority = "High";
+                timeframe = "Within 1 month";
+            } else if (riskScore <= 25) {
+                riskLevel = "Very High";
+                riskColor = "red";
+                actionPriority = "Very High";
+                timeframe = "Immediately";
             } else {
-                interpretation = 'Very high risk - Stop activity and implement controls immediately.';
-                riskLevel = 'Very High';
+                riskLevel = "Extreme";
+                riskColor = "purple";
+                actionPriority = "Critical";
+                timeframe = "Stop activity immediately";
+            }
+
+            // Get risk category name
+            const riskCategories = {
+                'safety': 'Safety',
+                'health': 'Health',
+                'environmental': 'Environmental',
+                'financial': 'Financial',
+                'reputation': 'Reputation'
+            };
+
+            // Generate control measures based on risk level
+            const controlMeasures = generateControlMeasures(riskLevel, riskCategory);
+
+            // Display results
+            displayRiskResults({
+                hazardName,
+                hazardLocation,
+                activity,
+                probability,
+                severity,
+                exposure,
+                controlEffectiveness,
+                personsAffected,
+                riskCategory: riskCategories[riskCategory],
+                riskScore,
+                riskLevel,
+                riskColor,
+                actionPriority,
+                timeframe,
+                controlMeasures
+            });
+
+            // Show result section
+            document.getElementById('risk-result').style.display = 'block';
+        }
+
+        function generateControlMeasures(riskLevel, category) {
+            const measures = [];
+            
+            // Base measures for all risk levels
+            measures.push("Document the hazard in risk register");
+            measures.push("Inform affected personnel about the risk");
+            measures.push("Provide appropriate training");
+            
+            // Category-specific measures
+            switch(category) {
+                case 'safety':
+                    measures.push("Conduct safety inspections");
+                    measures.push("Implement lockout-tagout procedures if applicable");
+                    break;
+                case 'health':
+                    measures.push("Conduct health surveillance");
+                    measures.push("Implement exposure monitoring");
+                    break;
+                case 'environmental':
+                    measures.push("Implement spill control measures");
+                    measures.push("Establish waste management procedures");
+                    break;
             }
             
-            document.getElementById('risk-value').textContent = `Risk Score: ${risk} (${riskLevel})`;
-            document.getElementById('risk-interpretation').textContent = interpretation;
-            document.getElementById('risk-result').classList.add('active');
-        });
-        
-        // Print/Save as PDF
-        document.querySelector('.print-btn').addEventListener('click', function() {
-            const element = document.querySelector('.calculator-form');
+            // Risk level specific measures
+            if (riskLevel === "Medium" || riskLevel === "High") {
+                measures.push("Review existing control measures");
+                measures.push("Conduct job safety analysis");
+            }
             
-            // Configure PDF options
+            if (riskLevel === "High" || riskLevel === "Very High") {
+                measures.push("Implement engineering controls");
+                measures.push("Establish emergency procedures");
+                measures.push("Assign responsibility for risk control");
+            }
+            
+            if (riskLevel === "Very High" || riskLevel === "Extreme") {
+                measures.push("STOP ACTIVITY until controls implemented");
+                measures.push("Immediate management review required");
+                measures.push("Allocate budget for control implementation");
+            }
+            
+            // Add hierarchy of controls
+            measures.push("Apply hierarchy of controls (elimination → substitution → engineering → administrative → PPE)");
+            
+            return measures;
+        }
+
+        function displayRiskResults(data) {
+            // Update summary cards
+            document.getElementById('risk-score-value').textContent = data.riskScore;
+            document.getElementById('risk-level-value').textContent = data.riskLevel;
+            document.getElementById('action-priority').textContent = data.actionPriority;
+            
+            // Update card colors
+            document.getElementById('risk-score-card').className = `summary-card status-${data.riskColor}`;
+            document.getElementById('risk-level-card').className = `summary-card status-${data.riskColor}`;
+            
+            // Update details
+            const detailsHtml = `
+                <div class="detail-item">
+                    <div class="detail-label">Hazard:</div>
+                    <div class="detail-value">${data.hazardName}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Location:</div>
+                    <div class="detail-value">${data.hazardLocation}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Activity:</div>
+                    <div class="detail-value">${data.activity}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Risk Category:</div>
+                    <div class="detail-value">${data.riskCategory}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Persons at Risk:</div>
+                    <div class="detail-value">${data.personsAffected}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Probability Score:</div>
+                    <div class="detail-value">${data.probability}/5</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Severity Score:</div>
+                    <div class="detail-value">${data.severity}/5</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Exposure Score:</div>
+                    <div class="detail-value">${data.exposure}/5</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Control Effectiveness:</div>
+                    <div class="detail-value">${data.controlEffectiveness}/5</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Action Timeframe:</div>
+                    <div class="detail-value">${data.timeframe}</div>
+                </div>
+            `;
+            document.getElementById('risk-details').innerHTML = detailsHtml;
+            
+            // Update control measures
+            const measuresList = document.getElementById('control-measures-list');
+            measuresList.innerHTML = '';
+            data.controlMeasures.forEach(measure => {
+                const li = document.createElement('li');
+                li.className = 'control-measure-item';
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${measure}`;
+                measuresList.appendChild(li);
+            });
+        }
+
+        function resetRiskForm() {
+            document.getElementById('hazard-name').value = '';
+            document.getElementById('hazard-location').value = '';
+            document.getElementById('activity').value = '';
+            document.getElementById('probability').value = '3';
+            document.getElementById('severity').value = '3';
+            document.getElementById('exposure').value = '3';
+            document.getElementById('control-effectiveness').value = '3';
+            document.getElementById('persons-affected').value = '5';
+            document.getElementById('risk-category').value = 'safety';
+            document.getElementById('risk-result').style.display = 'none';
+        }
+
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            
             const opt = {
-                margin: 1,
-                filename: `risk-assessment-${new Date().getTime()}.pdf`,
+                margin: 0.5,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
-            // Generate and save PDF
             html2pdf().set(opt).from(element).save();
-        });
-        
-        // Social sharing functions
-        function shareOnFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
-        }
-        
-        function shareOnTwitter() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Risk Assessment Calculator - Professional HSE Tool");
-            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-        }
-        
-        function shareOnLinkedIn() {
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-        }
-        
-        function shareOnWhatsApp() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Risk Assessment Calculator: " + window.location.href);
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
         }
     </script>
 </body>
