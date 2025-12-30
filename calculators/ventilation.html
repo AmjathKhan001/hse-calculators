@@ -314,14 +314,135 @@
                 </div>
             </div>
             
-            <!-- Social Sharing & Related Calculators -->
-            <!-- Same as previous -->
+<!-- Social Sharing -->
+            <div class="social-sharing mt-4">
+                <div class="social-card">
+                    <h3><i class="fas fa-share-alt"></i> Share This Calculator</h3>
+                    <p>Help other safety professionals discover this tool</p>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn facebook" onclick="shareCalculator('Chemical Exposure Calculator').facebook()">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
+                        <a href="#" class="social-btn twitter" onclick="shareCalculator('Chemical Exposure Calculator').twitter()">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('Chemical Exposure Calculator').linkedin()">
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
+                        </a>
+                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Chemical Exposure Calculator').whatsapp()">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
             
+            <!-- Related Calculators -->
+            <div class="related-calculators mt-4">
+                <h3 class="section-title"><i class="fas fa-calculator"></i> Related Calculators</h3>
+                <div class="calculators-grid">
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Risk Assessment Calculator</h3>
+                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
+                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Noise Exposure Calculator</h3>
+                            <p>Determine daily noise exposure and compliance with occupational limits.</p>
+                            <a href="noise-exposure.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-card">
+                        <div class="calculator-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="calculator-content">
+                            <h3>Heat Stress Calculator</h3>
+                            <p>Assess heat stress risk based on temperature, humidity, and work intensity.</p>
+                            <a href="heat-stress.html" class="btn btn-primary btn-small">
+                                <i class="fas fa-play-circle"></i> Use Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <!-- Same as previous -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="../index.html" class="footer-logo">
+                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
+                        <span>HSE Calculator</span>
+                    </a>
+                    <p>Professional tools for health, safety, and environment professionals.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="risk-assessment.html">Calculators</a></li>
+                        <li><a href="../pages/products.html">Safety Products</a></li>
+                        <li><a href="../pages/tools.html">Tools</a></li>
+                        <li><a href="../pages/blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../pages/terms.html">Terms of Use</a></li>
+                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
+                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
+                <p>Professional tools for workplace safety and compliance</p>
+                <p class="disclaimer"><small><i class="fas fa-exclamation-triangle"></i> Disclaimer: This calculator provides estimates only. Always consult with qualified professionals for compliance decisions.</small></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/calculators.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
