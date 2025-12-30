@@ -61,20 +61,36 @@
             
             <div class="calculator-form" id="chemical-calculator-form">
                 <div class="form-group">
-                    <label for="chemical-name" class="form-label">Chemical Name/Substance:</label>
-                    <input type="text" id="chemical-name" class="form-control" placeholder="e.g., Toluene, Ammonia, etc." 
-                           data-tooltip="Enter the name of the chemical substance">
+                    <label for="chemical-select" class="form-label">Select Chemical:</label>
+                    <select id="chemical-select" class="form-control" data-tooltip="Select a chemical from the database or choose custom">
+                        <option value="">-- Select Chemical --</option>
+                        <option value="custom">Custom Chemical</option>
+                        <option value="108-88-3">Toluene (CAS: 108-88-3)</option>
+                        <option value="71-43-2">Benzene (CAS: 71-43-2)</option>
+                        <option value="7664-41-7">Ammonia (CAS: 7664-41-7)</option>
+                        <option value="630-08-0">Carbon Monoxide (CAS: 630-08-0)</option>
+                        <option value="107-13-1">Acrylonitrile (CAS: 107-13-1)</option>
+                        <option value="75-07-0">Acetaldehyde (CAS: 75-07-0)</option>
+                        <option value="107-02-8">Acrolein (CAS: 107-02-8)</option>
+                        <option value="64-19-7">Acetic Acid (CAS: 64-19-7)</option>
+                    </select>
                 </div>
                 
-                <div class="form-group">
-                    <label for="cas-number" class="form-label">CAS Number (optional):</label>
+                <div class="form-group" id="custom-chemical-group" style="display: none;">
+                    <label for="chemical-name" class="form-label">Chemical Name:</label>
+                    <input type="text" id="chemical-name" class="form-control" placeholder="Enter chemical name">
+                    
+                    <label for="cas-number" class="form-label mt-2">CAS Number:</label>
                     <input type="text" id="cas-number" class="form-control" placeholder="e.g., 108-88-3">
+                    
+                    <label for="molecular-weight" class="form-label mt-2">Molecular Weight (g/mol):</label>
+                    <input type="number" id="molecular-weight" class="form-control" min="1" step="0.01" placeholder="Optional for unit conversion">
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="exposure-concentration" class="form-label">Exposure Concentration (ppm or mg/m³):</label>
-                        <input type="number" id="exposure-concentration" class="form-control" min="0" step="0.01" value="50" 
+                        <label for="exposure-concentration" class="form-label">Exposure Concentration:</label>
+                        <input type="number" id="exposure-concentration" class="form-control" min="0" step="0.001" value="50" 
                                data-tooltip="Enter the measured or estimated exposure concentration">
                     </div>
                     
@@ -83,124 +99,205 @@
                         <select id="concentration-unit" class="form-control" data-tooltip="Select concentration unit">
                             <option value="ppm">ppm (parts per million)</option>
                             <option value="mg_m3">mg/m³ (milligrams per cubic meter)</option>
+                            <option value="ppb">ppb (parts per billion)</option>
+                            <option value="ug_m3">μg/m³ (micrograms per cubic meter)</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="exposure-duration" class="form-label">Exposure Duration (hours):</label>
-                    <input type="number" id="exposure-duration" class="form-control" min="0.1" max="24" step="0.1" value="8" 
-                           data-tooltip="Enter daily exposure duration in hours">
-                    <small class="form-text">Typical work shift is 8 hours</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="exposure-frequency" class="form-label">Exposure Frequency (days/week):</label>
-                    <input type="number" id="exposure-frequency" class="form-control" min="1" max="7" value="5" 
-                           data-tooltip="Enter number of exposure days per week">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exposure-duration" class="form-label">Exposure Duration:</label>
+                        <div class="input-group">
+                            <input type="number" id="exposure-duration" class="form-control" min="0.1" max="24" step="0.1" value="8">
+                            <span class="input-group-text">hours</span>
+                        </div>
+                        <small class="form-text">Daily exposure duration (typical: 8 hours)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exposure-frequency" class="form-label">Exposure Frequency:</label>
+                        <div class="input-group">
+                            <input type="number" id="exposure-frequency" class="form-control" min="1" max="7" value="5">
+                            <span class="input-group-text">days/week</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="exposure-standard" class="form-label">Exposure Standard:</label>
                     <select id="exposure-standard" class="form-control" data-tooltip="Select the applicable exposure standard">
-                        <option value="osha_peL">OSHA PEL (Permissible Exposure Limit)</option>
-                        <option value="acgih_tlv">ACGIH TLV (Threshold Limit Value)</option>
-                        <option value="niosh_rel">NIOSH REL (Recommended Exposure Limit)</option>
-                        <option value="weel">WEEL (Workplace Environmental Exposure Level)</option>
+                        <option value="osha_pel">OSHA PEL (8-hr TWA)</option>
+                        <option value="acgih_tlv">ACGIH TLV (8-hr TWA)</option>
+                        <option value="niosh_rel">NIOSH REL (10-hr TWA)</option>
+                        <option value="weel">WEEL</option>
                         <option value="custom">Custom Limit</option>
                     </select>
                 </div>
                 
                 <div class="form-group" id="custom-limit-group" style="display: none;">
-                    <label for="custom-limit" class="form-label">Custom Exposure Limit:</label>
-                    <input type="number" id="custom-limit" class="form-control" min="0" step="0.01" placeholder="Enter custom limit">
+                    <label for="custom-limit-value" class="form-label">Custom Exposure Limit:</label>
+                    <div class="input-group">
+                        <input type="number" id="custom-limit-value" class="form-control" min="0" step="0.01" placeholder="Enter limit value">
+                        <span class="input-group-text" id="limit-unit-display">ppm</span>
+                    </div>
+                    <select id="custom-limit-unit" class="form-control mt-2">
+                        <option value="ppm">ppm</option>
+                        <option value="mg_m3">mg/m³</option>
+                    </select>
                 </div>
                 
-                <button id="calculate-chemical" class="btn btn-primary">
+                <div class="form-group">
+                    <label for="work-week-hours" class="form-label">Work Week Hours:</label>
+                    <select id="work-week-hours" class="form-control">
+                        <option value="40">40 hours/week</option>
+                        <option value="48">48 hours/week</option>
+                        <option value="60">60 hours/week</option>
+                    </select>
+                </div>
+                
+                <button id="calculate-chemical" class="btn btn-primary btn-lg">
                     <i class="fas fa-flask"></i> Calculate Exposure
                 </button>
+                <button id="reset-form" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
                 
-                <div id="chemical-result" class="result-box">
-                    <h3>Chemical Exposure Assessment</h3>
-                    <div class="result-value" id="chemical-value"></div>
-                    <div class="result-interpretation" id="chemical-interpretation"></div>
+                <div id="chemical-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-clipboard-check"></i> Chemical Exposure Assessment</h3>
+                    <div class="result-header">
+                        <h4 id="result-chemical-name">Chemical: Unknown</h4>
+                        <div class="result-timestamp" id="calculation-time"></div>
+                    </div>
                     
-                    <div class="exposure-details mt-3" id="exposure-details"></div>
+                    <div class="result-summary">
+                        <div class="summary-card status-high" id="compliance-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Compliance Status</h5>
+                                <div class="summary-value" id="compliance-status">Not Calculated</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Exposure Ratio</h5>
+                                <div class="summary-value" id="exposure-ratio">0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-skull-crossbones"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Risk Level</h5>
+                                <div class="summary-value" id="risk-level">Low</div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="print-actions">
+                    <div class="result-details mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Exposure Details</h5>
+                        <div class="details-table" id="exposure-details"></div>
+                    </div>
+                    
+                    <div class="recommendations mt-4" id="recommendations">
+                        <h5><i class="fas fa-lightbulb"></i> Recommendations</h5>
+                        <ul id="recommendations-list"></ul>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
                         <button class="btn btn-primary print-btn" onclick="generatePDF('chemical-calculator-form', 'chemical-exposure')">
-                            <i class="fas fa-file-pdf"></i> Save as PDF
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
                         </button>
                         <button class="btn btn-secondary" onclick="window.print()">
                             <i class="fas fa-print"></i> Print
+                        </button>
+                        <button class="btn btn-success" id="save-report">
+                            <i class="fas fa-save"></i> Save Results
                         </button>
                     </div>
                 </div>
                 
                 <div class="calculator-info mt-4">
                     <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
-                    <p>1. <strong>Chemical Information:</strong> Enter the chemical name and optional CAS number.</p>
-                    <p>2. <strong>Exposure Data:</strong> Enter the measured or estimated exposure concentration and duration.</p>
-                    <p>3. <strong>Exposure Standard:</strong> Select the applicable occupational exposure limit.</p>
-                    <p>4. <strong>Calculation:</strong> The calculator determines the exposure ratio and compliance status.</p>
+                    <div class="info-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Select Chemical</h5>
+                                <p>Choose from common chemicals or enter custom chemical details</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Enter Exposure Data</h5>
+                                <p>Input measured concentration, duration, and frequency</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Select Standard</h5>
+                                <p>Choose the applicable occupational exposure limit standard</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Calculate & Review</h5>
+                                <p>Get exposure ratio, compliance status, and safety recommendations</p>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h5 class="mt-3">Common Exposure Limits (Example Values)</h5>
-                    <table class="risk-matrix">
-                        <thead>
-                            <tr>
-                                <th>Chemical</th>
-                                <th>OSHA PEL (8-hr TWA)</th>
-                                <th>ACGIH TLV</th>
-                                <th>NIOSH REL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Toluene</td>
-                                <td>200 ppm</td>
-                                <td>20 ppm</td>
-                                <td>100 ppm</td>
-                            </tr>
-                            <tr>
-                                <td>Benzene</td>
-                                <td>1 ppm</td>
-                                <td>0.5 ppm</td>
-                                <td>0.1 ppm</td>
-                            </tr>
-                            <tr>
-                                <td>Ammonia</td>
-                                <td>50 ppm</td>
-                                <td>25 ppm</td>
-                                <td>25 ppm</td>
-                            </tr>
-                            <tr>
-                                <td>Carbon Monoxide</td>
-                                <td>50 ppm</td>
-                                <td>25 ppm</td>
-                                <td>35 ppm</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="chemical-database mt-4">
+                        <h5><i class="fas fa-database"></i> Chemical Exposure Limits Reference</h5>
+                        <div class="table-responsive">
+                            <table class="risk-matrix">
+                                <thead>
+                                    <tr>
+                                        <th>Chemical</th>
+                                        <th>CAS Number</th>
+                                        <th>OSHA PEL (8-hr TWA)</th>
+                                        <th>ACGIH TLV (8-hr TWA)</th>
+                                        <th>NIOSH REL (10-hr TWA)</th>
+                                        <th>Molecular Weight</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="chemical-reference-table">
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Social Sharing -->
             <div class="social-sharing mt-4">
                 <div class="social-card">
-                    <h3>Share This Calculator</h3>
+                    <h3><i class="fas fa-share-alt"></i> Share This Calculator</h3>
                     <p>Help other safety professionals discover this tool</p>
                     <div class="social-buttons">
                         <a href="#" class="social-btn facebook" onclick="shareCalculator('Chemical Exposure Calculator').facebook()">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-facebook-f"></i> Facebook
                         </a>
                         <a href="#" class="social-btn twitter" onclick="shareCalculator('Chemical Exposure Calculator').twitter()">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-twitter"></i> Twitter
                         </a>
                         <a href="#" class="social-btn linkedin" onclick="shareCalculator('Chemical Exposure Calculator').linkedin()">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fab fa-linkedin-in"></i> LinkedIn
                         </a>
                         <a href="#" class="social-btn whatsapp" onclick="shareCalculator('Chemical Exposure Calculator').whatsapp()">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
                     </div>
                 </div>
@@ -208,7 +305,7 @@
             
             <!-- Related Calculators -->
             <div class="related-calculators mt-4">
-                <h3 class="section-title">Related Calculators</h3>
+                <h3 class="section-title"><i class="fas fa-calculator"></i> Related Calculators</h3>
                 <div class="calculators-grid">
                     <div class="calculator-card">
                         <div class="calculator-icon">
@@ -305,6 +402,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
                 <p>Professional tools for workplace safety and compliance</p>
+                <p class="disclaimer"><small><i class="fas fa-exclamation-triangle"></i> Disclaimer: This calculator provides estimates only. Always consult with qualified professionals for compliance decisions.</small></p>
             </div>
         </div>
     </footer>
@@ -314,189 +412,579 @@
     <script src="../js/calculators.js"></script>
     
     <script>
-        // Chemical Exposure Calculator specific logic
+        // Chemical Database with actual exposure limits (example values)
+        const chemicalDatabase = {
+            "108-88-3": { // Toluene
+                name: "Toluene",
+                cas: "108-88-3",
+                molecularWeight: 92.14,
+                limits: {
+                    osha_pel: { value: 200, unit: "ppm", note: "8-hr TWA" },
+                    acgih_tlv: { value: 20, unit: "ppm", note: "8-hr TWA" },
+                    niosh_rel: { value: 100, unit: "ppm", note: "10-hr TWA" },
+                    weel: { value: 50, unit: "ppm", note: "8-hr TWA" }
+                }
+            },
+            "71-43-2": { // Benzene
+                name: "Benzene",
+                cas: "71-43-2",
+                molecularWeight: 78.11,
+                limits: {
+                    osha_pel: { value: 1, unit: "ppm", note: "8-hr TWA" },
+                    acgih_tlv: { value: 0.5, unit: "ppm", note: "8-hr TWA" },
+                    niosh_rel: { value: 0.1, unit: "ppm", note: "10-hr TWA" },
+                    weel: { value: 0.5, unit: "ppm", note: "8-hr TWA" }
+                }
+            },
+            "7664-41-7": { // Ammonia
+                name: "Ammonia",
+                cas: "7664-41-7",
+                molecularWeight: 17.03,
+                limits: {
+                    osha_pel: { value: 50, unit: "ppm", note: "8-hr TWA" },
+                    acgih_tlv: { value: 25, unit: "ppm", note: "8-hr TWA" },
+                    niosh_rel: { value: 25, unit: "ppm", note: "10-hr TWA" },
+                    weel: { value: 25, unit: "ppm", note: "8-hr TWA" }
+                }
+            },
+            "630-08-0": { // Carbon Monoxide
+                name: "Carbon Monoxide",
+                cas: "630-08-0",
+                molecularWeight: 28.01,
+                limits: {
+                    osha_pel: { value: 50, unit: "ppm", note: "8-hr TWA" },
+                    acgih_tlv: { value: 25, unit: "ppm", note: "8-hr TWA" },
+                    niosh_rel: { value: 35, unit: "ppm", note: "10-hr TWA" },
+                    weel: { value: 25, unit: "ppm", note: "8-hr TWA" }
+                }
+            },
+            "107-13-1": { // Acrylonitrile
+                name: "Acrylonitrile",
+                cas: "107-13-1",
+                molecularWeight: 53.06,
+                limits: {
+                    osha_pel: { value: 2, unit: "ppm", note: "8-hr TWA" },
+                    acgih_tlv: { value: 2, unit: "ppm", note: "8-hr TWA" },
+                    niosh_rel: { value: 1, unit: "ppm", note: "10-hr TWA" }
+                }
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('calculate-chemical').addEventListener('click', calculateChemicalExposure);
+            // Initialize event listeners
+            initializeEventListeners();
             
-            // Show/hide custom limit field
+            // Populate chemical reference table
+            populateChemicalReference();
+            
+            // Set calculation timestamp
+            document.getElementById('calculation-time').textContent = 
+                new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+        });
+
+        function initializeEventListeners() {
+            // Chemical selection change
+            document.getElementById('chemical-select').addEventListener('change', function() {
+                const customGroup = document.getElementById('custom-chemical-group');
+                customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+                
+                if (this.value && this.value !== 'custom') {
+                    const chemical = chemicalDatabase[this.value];
+                    if (chemical) {
+                        document.getElementById('molecular-weight').value = chemical.molecularWeight || '';
+                    }
+                }
+            });
+
+            // Exposure standard change
             document.getElementById('exposure-standard').addEventListener('change', function() {
                 const customGroup = document.getElementById('custom-limit-group');
                 customGroup.style.display = this.value === 'custom' ? 'block' : 'none';
             });
-        });
-        
+
+            // Concentration unit change
+            document.getElementById('concentration-unit').addEventListener('change', function() {
+                updateLimitUnitDisplay();
+            });
+
+            // Calculate button
+            document.getElementById('calculate-chemical').addEventListener('click', calculateChemicalExposure);
+            
+            // Reset button
+            document.getElementById('reset-form').addEventListener('click', resetForm);
+            
+            // Save report button
+            document.getElementById('save-report').addEventListener('click', saveReport);
+        }
+
+        function populateChemicalReference() {
+            const table = document.getElementById('chemical-reference-table');
+            table.innerHTML = '';
+            
+            Object.values(chemicalDatabase).forEach(chemical => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${chemical.name}</strong></td>
+                    <td>${chemical.cas}</td>
+                    <td>${chemical.limits?.osha_pel?.value || 'N/A'} ${chemical.limits?.osha_pel?.unit || ''}</td>
+                    <td>${chemical.limits?.acgih_tlv?.value || 'N/A'} ${chemical.limits?.acgih_tlv?.unit || ''}</td>
+                    <td>${chemical.limits?.niosh_rel?.value || 'N/A'} ${chemical.limits?.niosh_rel?.unit || ''}</td>
+                    <td>${chemical.molecularWeight?.toFixed(2) || 'N/A'}</td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function updateLimitUnitDisplay() {
+            const unit = document.getElementById('concentration-unit').value;
+            const displayUnit = unit === 'mg_m3' ? 'mg/m³' : 
+                               unit === 'ug_m3' ? 'μg/m³' :
+                               unit === 'ppb' ? 'ppb' : 'ppm';
+            document.getElementById('limit-unit-display').textContent = displayUnit;
+        }
+
         function calculateChemicalExposure() {
-            // Get input values
-            const chemicalName = document.getElementById('chemical-name').value || 'Unknown Chemical';
-            const exposureConcentration = parseFloat(document.getElementById('exposure-concentration').value);
-            const concentrationUnit = document.getElementById('concentration-unit').value;
-            const exposureDuration = parseFloat(document.getElementById('exposure-duration').value);
-            const exposureFrequency = parseInt(document.getElementById('exposure-frequency').value);
-            const exposureStandard = document.getElementById('exposure-standard').value;
-            const customLimit = document.getElementById('custom-limit').value ? parseFloat(document.getElementById('custom-limit').value) : null;
-            
-            // Validate inputs
-            if (isNaN(exposureConcentration) || exposureConcentration < 0) {
-                alert('Please enter a valid exposure concentration (positive number).');
-                return;
-            }
-            
-            if (isNaN(exposureDuration) || exposureDuration <= 0 || exposureDuration > 24) {
-                alert('Please enter a valid exposure duration (0.1 to 24 hours).');
-                return;
-            }
-            
-            if (isNaN(exposureFrequency) || exposureFrequency < 1 || exposureFrequency > 7) {
-                alert('Please enter a valid exposure frequency (1 to 7 days).');
-                return;
-            }
-            
-            // Get exposure limit based on standard (example values for common chemicals)
-            let exposureLimit;
-            switch(exposureStandard) {
-                case 'osha_pel':
-                    exposureLimit = 100; // Default example value in ppm
-                    break;
-                case 'acgih_tlv':
-                    exposureLimit = 50; // Default example value in ppm
-                    break;
-                case 'niosh_rel':
-                    exposureLimit = 75; // Default example value in ppm
-                    break;
-                case 'custom':
-                    if (!customLimit || isNaN(customLimit) || customLimit <= 0) {
-                        alert('Please enter a valid custom exposure limit.');
-                        return;
+            try {
+                // Get all input values
+                const chemicalSelect = document.getElementById('chemical-select').value;
+                const isCustomChemical = chemicalSelect === 'custom';
+                
+                let chemicalName, casNumber, molecularWeight;
+                
+                if (isCustomChemical) {
+                    chemicalName = document.getElementById('chemical-name').value || 'Unknown Chemical';
+                    casNumber = document.getElementById('cas-number').value || 'N/A';
+                    molecularWeight = parseFloat(document.getElementById('molecular-weight').value) || null;
+                } else if (chemicalSelect && chemicalDatabase[chemicalSelect]) {
+                    const chemical = chemicalDatabase[chemicalSelect];
+                    chemicalName = chemical.name;
+                    casNumber = chemical.cas;
+                    molecularWeight = chemical.molecularWeight;
+                } else {
+                    chemicalName = 'Unknown Chemical';
+                    casNumber = 'N/A';
+                    molecularWeight = null;
+                }
+
+                const exposureConcentration = parseFloat(document.getElementById('exposure-concentration').value);
+                const concentrationUnit = document.getElementById('concentration-unit').value;
+                const exposureDuration = parseFloat(document.getElementById('exposure-duration').value);
+                const exposureFrequency = parseInt(document.getElementById('exposure-frequency').value);
+                const exposureStandard = document.getElementById('exposure-standard').value;
+                const workWeekHours = parseInt(document.getElementById('work-week-hours').value);
+                const customLimitValue = document.getElementById('custom-limit-value').value ? 
+                    parseFloat(document.getElementById('custom-limit-value').value) : null;
+                const customLimitUnit = document.getElementById('custom-limit-unit').value;
+
+                // Validate inputs
+                const validationErrors = validateInputs(
+                    exposureConcentration, exposureDuration, exposureFrequency, 
+                    exposureStandard, customLimitValue, isCustomChemical
+                );
+                
+                if (validationErrors.length > 0) {
+                    showError(validationErrors.join('\n'));
+                    return;
+                }
+
+                // Get exposure limit
+                let exposureLimit, limitUnit, limitSource;
+                
+                if (exposureStandard === 'custom') {
+                    exposureLimit = customLimitValue;
+                    limitUnit = customLimitUnit;
+                    limitSource = 'Custom Limit';
+                } else if (chemicalSelect && chemicalDatabase[chemicalSelect]) {
+                    const chemical = chemicalDatabase[chemicalSelect];
+                    const limitData = chemical.limits[exposureStandard];
+                    if (limitData) {
+                        exposureLimit = limitData.value;
+                        limitUnit = limitData.unit;
+                        limitSource = exposureStandard.toUpperCase().replace('_', ' ') + ' (' + limitData.note + ')';
+                    } else {
+                        exposureLimit = getDefaultLimit(exposureStandard);
+                        limitUnit = 'ppm';
+                        limitSource = exposureStandard.toUpperCase().replace('_', ' ') + ' (Default)';
                     }
-                    exposureLimit = customLimit;
-                    break;
+                } else {
+                    exposureLimit = getDefaultLimit(exposureStandard);
+                    limitUnit = 'ppm';
+                    limitSource = exposureStandard.toUpperCase().replace('_', ' ') + ' (Default)';
+                }
+
+                // Convert all concentrations to ppm for comparison
+                const concentrationPPM = convertToPPM(exposureConcentration, concentrationUnit, molecularWeight);
+                const limitPPM = convertToPPM(exposureLimit, limitUnit, molecularWeight);
+
+                // Calculate exposure metrics
+                const exposureRatio = concentrationPPM / limitPPM;
+                const dailyTWA = concentrationPPM * (exposureDuration / 8); // 8-hour normalized
+                const weeklyTWA = dailyTWA * exposureFrequency * (8 / workWeekHours);
+
+                // Determine compliance and risk
+                const assessment = assessExposure(exposureRatio, concentrationPPM, limitPPM);
+                
+                // Display results
+                displayResults({
+                    chemicalName,
+                    casNumber,
+                    concentration: exposureConcentration,
+                    concentrationUnit,
+                    concentrationPPM,
+                    exposureDuration,
+                    exposureFrequency,
+                    workWeekHours,
+                    exposureStandard: limitSource,
+                    exposureLimit: exposureLimit,
+                    limitUnit,
+                    limitPPM,
+                    exposureRatio,
+                    dailyTWA,
+                    weeklyTWA,
+                    complianceStatus: assessment.complianceStatus,
+                    riskLevel: assessment.riskLevel,
+                    colorClass: assessment.colorClass,
+                    interpretation: assessment.interpretation,
+                    recommendations: assessment.recommendations
+                });
+
+                // Show result section
+                document.getElementById('chemical-result').style.display = 'block';
+                
+                // Update timestamp
+                document.getElementById('calculation-time').textContent = 
+                    new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
+
+            } catch (error) {
+                console.error('Calculation error:', error);
+                showError('An error occurred during calculation. Please check your inputs.');
+            }
+        }
+
+        function validateInputs(concentration, duration, frequency, standard, customLimit, isCustom) {
+            const errors = [];
+            
+            if (isNaN(concentration) || concentration < 0) {
+                errors.push('Please enter a valid exposure concentration (positive number).');
+            }
+            
+            if (isNaN(duration) || duration <= 0 || duration > 24) {
+                errors.push('Please enter a valid exposure duration (0.1 to 24 hours).');
+            }
+            
+            if (isNaN(frequency) || frequency < 1 || frequency > 7) {
+                errors.push('Please enter a valid exposure frequency (1 to 7 days).');
+            }
+            
+            if (standard === 'custom' && (!customLimit || isNaN(customLimit) || customLimit <= 0)) {
+                errors.push('Please enter a valid custom exposure limit.');
+            }
+            
+            if (isCustom && document.getElementById('chemical-name').value.trim() === '') {
+                errors.push('Please enter a chemical name for custom chemical.');
+            }
+            
+            return errors;
+        }
+
+        function getDefaultLimit(standard) {
+            const defaults = {
+                osha_pel: 100,
+                acgih_tlv: 50,
+                niosh_rel: 75,
+                weel: 60
+            };
+            return defaults[standard] || 100;
+        }
+
+        function convertToPPM(value, unit, molecularWeight = 50) {
+            switch(unit) {
+                case 'mg_m3':
+                    // ppm = (mg/m³ × 24.45) / molecular weight
+                    return molecularWeight ? (value * 24.45) / molecularWeight : value;
+                case 'ug_m3':
+                    // Convert μg/m³ to mg/m³ first
+                    return molecularWeight ? ((value / 1000) * 24.45) / molecularWeight : value / 1000;
+                case 'ppb':
+                    // ppb to ppm conversion
+                    return value / 1000;
+                case 'ppm':
                 default:
-                    exposureLimit = 100;
+                    return value;
             }
-            
-            // Calculate exposure ratio (if concentration is in mg/m³, convert to ppm for comparison)
-            // Simplified conversion: For most gases at 25°C: mg/m³ = (ppm × molecular weight) / 24.45
-            let exposureRatio;
-            if (concentrationUnit === 'mg_m3') {
-                // Assume average molecular weight of 50 for conversion (actual depends on chemical)
-                const ppmEquivalent = (exposureConcentration * 24.45) / 50;
-                exposureRatio = ppmEquivalent / exposureLimit;
-            } else {
-                exposureRatio = exposureConcentration / exposureLimit;
+        }
+
+        function convertFromPPM(value, unit, molecularWeight = 50) {
+            switch(unit) {
+                case 'mg_m3':
+                    // mg/m³ = (ppm × molecular weight) / 24.45
+                    return molecularWeight ? (value * molecularWeight) / 24.45 : value;
+                case 'ug_m3':
+                    return molecularWeight ? ((value * molecularWeight) / 24.45) * 1000 : value * 1000;
+                case 'ppb':
+                    return value * 1000;
+                case 'ppm':
+                default:
+                    return value;
             }
+        }
+
+        function assessExposure(ratio, concentration, limit) {
+            let complianceStatus, riskLevel, colorClass, interpretation, recommendations = [];
             
-            // Calculate Time-Weighted Average (TWA) exposure
-            const weeklyTWA = exposureConcentration * exposureDuration * exposureFrequency / 40; // 40-hour work week
-            
-            // Determine compliance status and recommendations
-            let complianceStatus, interpretation, actionRequired, riskLevel;
-            
-            if (exposureRatio <= 0.5) {
+            if (ratio <= 0.1) {
+                complianceStatus = 'Well Within Limits';
+                riskLevel = 'Very Low';
+                colorClass = 'status-low';
+                interpretation = 'Exposure is significantly below the occupational exposure limit.';
+                recommendations = [
+                    'Continue routine monitoring as per normal schedule',
+                    'Maintain current control measures',
+                    'Document monitoring results'
+                ];
+            } else if (ratio <= 0.5) {
                 complianceStatus = 'Within Limits';
-                interpretation = 'Exposure is well below the occupational exposure limit';
-                actionRequired = 'Continue routine monitoring';
                 riskLevel = 'Low';
-            } else if (exposureRatio <= 1.0) {
-                complianceStatus = 'At Action Level';
-                interpretation = 'Exposure is at or approaching the limit';
-                actionRequired = 'Implement exposure controls and increase monitoring frequency';
+                colorClass = 'status-low';
+                interpretation = 'Exposure is below the occupational exposure limit.';
+                recommendations = [
+                    'Continue routine monitoring',
+                    'Review control measures annually',
+                    'Ensure proper ventilation'
+                ];
+            } else if (ratio <= 0.8) {
+                complianceStatus = 'Approaching Limit';
                 riskLevel = 'Moderate';
-            } else if (exposureRatio <= 2.0) {
-                complianceStatus = 'Above Limit';
-                interpretation = 'Exposure exceeds occupational exposure limit';
-                actionRequired = 'Immediate engineering controls required, consider respiratory protection';
+                colorClass = 'status-moderate';
+                interpretation = 'Exposure is approaching the occupational exposure limit.';
+                recommendations = [
+                    'Increase monitoring frequency',
+                    'Review and optimize engineering controls',
+                    'Consider administrative controls',
+                    'Provide additional training'
+                ];
+            } else if (ratio <= 1.0) {
+                complianceStatus = 'At Action Level';
                 riskLevel = 'High';
+                colorClass = 'status-high';
+                interpretation = 'Exposure is at or very close to the limit. Action required.';
+                recommendations = [
+                    'Implement immediate exposure controls',
+                    'Consider respiratory protection',
+                    'Conduct detailed exposure assessment',
+                    'Review work practices'
+                ];
+            } else if (ratio <= 2.0) {
+                complianceStatus = 'Above Limit';
+                riskLevel = 'Very High';
+                colorClass = 'status-very-high';
+                interpretation = 'Exposure exceeds occupational exposure limit. Immediate action required.';
+                recommendations = [
+                    'Stop activity immediately if feasible',
+                    'Implement engineering controls',
+                    'Require appropriate respiratory protection',
+                    'Conduct health surveillance',
+                    'Report to supervisor/safety officer'
+                ];
             } else {
                 complianceStatus = 'Significantly Above Limit';
-                interpretation = 'Exposure significantly exceeds occupational exposure limit';
-                actionRequired = 'Stop activity immediately, implement engineering controls, require respiratory protection';
-                riskLevel = 'Very High';
+                riskLevel = 'Extreme';
+                colorClass = 'status-extreme';
+                interpretation = 'Exposure significantly exceeds occupational exposure limit. Emergency action required.';
+                recommendations = [
+                    'EVACUATE AREA IMMEDIATELY',
+                    'Activate emergency procedures',
+                    'Use appropriate PPE',
+                    'Seek medical attention if exposed',
+                    'Conduct thorough investigation',
+                    'Implement hierarchy of controls'
+                ];
             }
             
-            // Display results
-            document.getElementById('chemical-value').innerHTML = `
-                <div class="result-item">
-                    <strong>Chemical:</strong> ${chemicalName}
-                </div>
-                <div class="result-item">
-                    <strong>Exposure Ratio:</strong> ${exposureRatio.toFixed(2)} (Limit: ${exposureLimit} ${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'})
-                </div>
-                <div class="result-item">
-                    <strong>Compliance Status:</strong> <span class="status-${riskLevel.toLowerCase().replace(' ', '-')}">${complianceStatus}</span>
-                </div>
-                <div class="result-item">
-                    <strong>Risk Level:</strong> ${riskLevel}
-                </div>
-            `;
+            // Add general recommendations
+            recommendations.push('Document all findings and actions taken');
+            recommendations.push('Review Safety Data Sheet (SDS) for specific guidance');
             
-            document.getElementById('chemical-interpretation').innerHTML = `
-                <p><strong>Interpretation:</strong> ${interpretation}</p>
-                <p><strong>Action Required:</strong> ${actionRequired}</p>
-            `;
-            
-            // Show exposure details
-            document.getElementById('exposure-details').innerHTML = `
-                <div class="exposure-table">
-                    <table class="result-table">
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Value</th>
-                                <th>Unit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Measured Concentration</td>
-                                <td>${exposureConcentration.toFixed(2)}</td>
-                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}</td>
-                            </tr>
-                            <tr>
-                                <td>Exposure Duration (Daily)</td>
-                                <td>${exposureDuration.toFixed(1)}</td>
-                                <td>hours</td>
-                            </tr>
-                            <tr>
-                                <td>Exposure Frequency</td>
-                                <td>${exposureFrequency}</td>
-                                <td>days/week</td>
-                            </tr>
-                            <tr>
-                                <td>Weekly TWA Exposure</td>
-                                <td>${weeklyTWA.toFixed(2)}</td>
-                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}-hours</td>
-                            </tr>
-                            <tr>
-                                <td>Selected Standard</td>
-                                <td colspan="2">${document.getElementById('exposure-standard').options[document.getElementById('exposure-standard').selectedIndex].text}</td>
-                            </tr>
-                            <tr>
-                                <td>Exposure Limit</td>
-                                <td>${exposureLimit}</td>
-                                <td>${concentrationUnit === 'mg_m3' ? 'mg/m³' : 'ppm'}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            `;
-            
-            document.getElementById('chemical-result').classList.add('active');
+            return {
+                complianceStatus,
+                riskLevel,
+                colorClass,
+                interpretation,
+                recommendations
+            };
         }
-        
-        function generatePDF(elementId, filename) {
-            const element = document.getElementById(elementId);
+
+        function displayResults(data) {
+            // Update chemical name
+            document.getElementById('result-chemical-name').textContent = 
+                `Chemical: ${data.chemicalName}${data.casNumber !== 'N/A' ? ` (CAS: ${data.casNumber})` : ''}`;
             
-            const opt = {
-                margin: 1,
-                filename: `${filename}-${new Date().getTime()}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            // Update summary cards
+            document.getElementById('compliance-status').textContent = data.complianceStatus;
+            document.getElementById('compliance-status').className = `summary-value ${data.colorClass}`;
+            document.getElementById('exposure-ratio').textContent = data.exposureRatio.toFixed(3);
+            document.getElementById('risk-level').textContent = data.riskLevel;
+            
+            // Update compliance card
+            const complianceCard = document.getElementById('compliance-card');
+            complianceCard.className = `summary-card ${data.colorClass}`;
+            
+            // Update details table
+            const detailsHtml = `
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit/Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Measured Concentration</td>
+                            <td>${data.concentration.toFixed(3)}</td>
+                            <td>${data.concentrationUnit === 'mg_m3' ? 'mg/m³' : 
+                                 data.concentrationUnit === 'ug_m3' ? 'μg/m³' :
+                                 data.concentrationUnit === 'ppb' ? 'ppb' : 'ppm'}</td>
+                        </tr>
+                        <tr>
+                            <td>Equivalent Concentration</td>
+                            <td>${data.concentrationPPM.toFixed(3)}</td>
+                            <td>ppm</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Duration</td>
+                            <td>${data.exposureDuration.toFixed(1)}</td>
+                            <td>hours/day</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Frequency</td>
+                            <td>${data.exposureFrequency}</td>
+                            <td>days/week</td>
+                        </tr>
+                        <tr>
+                            <td>Work Week</td>
+                            <td>${data.workWeekHours}</td>
+                            <td>hours/week</td>
+                        </tr>
+                        <tr>
+                            <td>Daily TWA (8-hr normalized)</td>
+                            <td>${data.dailyTWA.toFixed(3)}</td>
+                            <td>ppm</td>
+                        </tr>
+                        <tr>
+                            <td>Weekly TWA</td>
+                            <td>${data.weeklyTWA.toFixed(3)}</td>
+                            <td>ppm</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Standard</td>
+                            <td colspan="2">${data.exposureStandard}</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Limit</td>
+                            <td>${data.exposureLimit}</td>
+                            <td>${data.limitUnit}</td>
+                        </tr>
+                        <tr>
+                            <td>Exposure Ratio</td>
+                            <td><strong>${data.exposureRatio.toFixed(3)}</strong></td>
+                            <td>${data.exposureRatio < 1 ? '(Below Limit)' : '(Above Limit)'}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('exposure-details').innerHTML = detailsHtml;
+            
+            // Update recommendations
+            const recList = document.getElementById('recommendations-list');
+            recList.innerHTML = '';
+            data.recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.textContent = rec;
+                recList.appendChild(li);
+            });
+            
+            // Add interpretation
+            const interpretationItem = document.createElement('li');
+            interpretationItem.innerHTML = `<strong>Interpretation:</strong> ${data.interpretation}`;
+            recList.insertBefore(interpretationItem, recList.firstChild);
+        }
+
+        function resetForm() {
+            document.getElementById('chemical-select').value = '';
+            document.getElementById('custom-chemical-group').style.display = 'none';
+            document.getElementById('chemical-name').value = '';
+            document.getElementById('cas-number').value = '';
+            document.getElementById('molecular-weight').value = '';
+            document.getElementById('exposure-concentration').value = '50';
+            document.getElementById('concentration-unit').value = 'ppm';
+            document.getElementById('exposure-duration').value = '8';
+            document.getElementById('exposure-frequency').value = '5';
+            document.getElementById('exposure-standard').value = 'osha_pel';
+            document.getElementById('custom-limit-group').style.display = 'none';
+            document.getElementById('custom-limit-value').value = '';
+            document.getElementById('work-week-hours').value = '40';
+            document.getElementById('chemical-result').style.display = 'none';
+        }
+
+        function saveReport() {
+            const reportData = {
+                timestamp: new Date().toISOString(),
+                chemicalName: document.getElementById('result-chemical-name').textContent,
+                complianceStatus: document.getElementById('compliance-status').textContent,
+                exposureRatio: document.getElementById('exposure-ratio').textContent,
+                riskLevel: document.getElementById('risk-level').textContent
             };
             
-            html2pdf().set(opt).from(element).save();
+            // In a real application, you would save this to a database or localStorage
+            // For now, we'll just show a message
+            alert('Report saved successfully!\n\n' +
+                  'Chemical: ' + reportData.chemicalName + '\n' +
+                  'Status: ' + reportData.complianceStatus + '\n' +
+                  'Exposure Ratio: ' + reportData.exposureRatio + '\n' +
+                  'Risk Level: ' + reportData.riskLevel);
+            
+            // You could implement localStorage saving like this:
+            // const savedReports = JSON.parse(localStorage.getItem('chemicalReports') || '[]');
+            // savedReports.push(reportData);
+            // localStorage.setItem('chemicalReports', JSON.stringify(savedReports));
         }
-        
+
+        function showError(message) {
+            alert('Error: ' + message);
+        }
+
+        function generatePDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            const originalDisplay = element.style.display;
+            
+            // Ensure result is visible for PDF
+            document.getElementById('chemical-result').style.display = 'block';
+            
+            const opt = {
+                margin: 0.5,
+                filename: `${filename}-${new Date().getTime()}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                },
+                jsPDF: { 
+                    unit: 'in', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore original display state
+                element.style.display = originalDisplay;
+            });
+        }
+
         function shareCalculator(title) {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(`${title} - Professional HSE Tool`);
