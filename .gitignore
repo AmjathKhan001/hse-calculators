@@ -1,1 +1,302 @@
+# .gitignore for HSE Calculator Website
+# Generated: March 2025
 
+# ===============================
+# Operating System Files
+# ===============================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+.directory
+
+# ===============================
+# Editor and IDE Files
+# ===============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.code-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ===============================
+# Environment and Configuration Files
+# ===============================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+*.env
+
+# Secrets
+secrets.json
+credentials.json
+*.pem
+*.key
+*.cert
+*.crt
+
+# ===============================
+# Dependencies and Build Outputs
+# ===============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+.yarn/
+.yarnrc
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.gatsby/
+.cache/
+.cache/
+public/static/
+.svelte-kit/
+
+# ===============================
+# Temporary and Cache Files
+# ===============================
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# ===============================
+# Development Files
+# ===============================
+
+# Local development files
+.local/
+*.local
+*.dev
+.devcontainer/
+
+# Debug files
+debug/
+*.debug
+
+# ===============================
+# Testing Files
+# ===============================
+.nyc_output
+.nyc_output/
+*.spec.js
+*.test.js
+__tests__/
+test-results/
+
+# ===============================
+# Image and Asset Processing Files
+# ===============================
+
+# Image processing
+*.psd
+*.ai
+*.sketch
+*.xd
+*.fig
+
+# Raw images (keep optimized versions only)
+raw/
+originals/
+
+# ===============================
+# Database Files
+# ===============================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# ===============================
+# Backup Files
+# ===============================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# ===============================
+# Compression Files
+# ===============================
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+
+# ===============================
+# Documentation Files
+# ===============================
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+
+# ===============================
+# Project Specific (Vercel/Static Site)
+# ===============================
+
+# Vercel specific
+.vercel/
+.vercel_build_output/
+.vercel_build_output/
+
+# Analytics and tracking (if any)
+analytics/
+stats/
+
+# Uploads directory (user uploaded content)
+uploads/
+
+# User generated content
+user-content/
+
+# ===============================
+# Security Sensitive Files
+# ===============================
+
+# API keys, passwords, etc.
+config.local.js
+config.local.json
+keys/
+private/
+secrets/
+
+# SSL certificates
+ssl/
+certificates/
+
+# ===============================
+# Custom Project Directories to Ignore
+# ===============================
+
+# Development tools
+tools/
+
+# Experimental features
+experimental/
+
+# Archive old versions
+archive/
+old/
+
+# Backup directories
+backup/
+_backup/
+
+# ===============================
+# Custom Files (Add your own below)
+# ===============================
+
+# HSE Calculator specific
+# Uncomment and modify as needed
+
+# Google Analytics/AdSense config
+# ga-config.js
+# adsense-config.json
+
+# Backup of calculations
+# calculation-backups/
+
+# Temporary calculation exports
+# exports/temp/
+
+# User session data (if any)
+# sessions/
+# cache/sessions/
+
+# ===============================
+# DO NOT IGNORE (Important for HSE Calculator)
+# ===============================
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!CHANGELOG.md
+
+# Essential website files (DO NOT IGNORE)
+!.gitkeep
+!.gitattributes
+
+# ===============================
+# Platform Specific
+# ===============================
+
+# Windows
+[Ll]ogs/
+[Pp]ackages/
+[Tt]emp/
+[Ww]indows/
+
+# Linux/Unix
+*~
+.fuse_hidden*
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ===============================
+# Notes
+# ===============================
+# This .gitignore file is configured for a static website project
+# using HTML, CSS, JavaScript hosted on Vercel
+# 
+# Add any project-specific files or directories to ignore below:
+#
+# Example:
+# /specific-directory-to-ignore/
+# *.specific-file-extension
