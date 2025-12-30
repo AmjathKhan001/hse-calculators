@@ -4,174 +4,236 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPE Selection Calculator | HSE Calculator</title>
-    <meta name="description" content="Determine appropriate Personal Protective Equipment based on hazard assessment and workplace requirements.">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/utilities.css">
-    <link rel="stylesheet" href="../css/calculator.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DRRTSHLC01"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DRRTSHLC01');
-    </script>
-    
-    <!-- HTML2PDF for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <meta name="description" content="Select appropriate personal protective equipment based on workplace hazards and risk assessment.">
+    <!-- Same head content -->
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="../index.html" class="logo">
-                    <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                    <span>HSE Calculator</span>
-                </a>
-                
-                <div class="nav-links" id="navLinks">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                    <a href="risk-assessment.html" class="nav-link active"><i class="fas fa-calculator"></i> Calculators</a>
-                    <a href="../pages/products.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Safety Products</a>
-                    <a href="../pages/tools.html" class="nav-link"><i class="fas fa-tools"></i> Tools</a>
-                    <a href="../pages/blog.html" class="nav-link"><i class="fas fa-blog"></i> Blog</a>
-                    <a href="../index.html#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-                </div>
-                
-                <div class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <!-- Same header -->
 
-    <!-- Calculator Content -->
     <section class="calculator-section">
         <div class="container">
             <h1 class="section-title">PPE Selection Calculator</h1>
-            <p class="section-subtitle">Determine appropriate Personal Protective Equipment based on hazard assessment and workplace requirements.</p>
+            <p class="section-subtitle">Select appropriate personal protective equipment based on workplace hazards and risk assessment.</p>
             
             <div class="calculator-form" id="ppe-calculator-form">
                 <div class="form-group">
-                    <h4>Hazard Assessment</h4>
-                    <p class="form-text">Select all hazards present in the work environment:</p>
+                    <label for="task-description" class="form-label">Task Description:</label>
+                    <input type="text" id="task-description" class="form-control" placeholder="e.g., Welding, Chemical handling, Woodworking">
+                </div>
+                
+                <div class="hazard-assessment">
+                    <h4 class="section-title">Hazard Assessment</h4>
                     
-                    <div class="hazard-checkboxes">
-                        <div class="checkbox-row">
+                    <div class="form-group">
+                        <label class="form-label">Physical Hazards:</label>
+                        <div class="checkbox-group">
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="impact" class="hazard-checkbox">
-                                <span class="checkbox-text">Impact/Falling Objects</span>
+                                <input type="checkbox" id="impact-hazard">
+                                <span class="checkbox-text">Impact/Flying Objects</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="chemical" class="hazard-checkbox">
-                                <span class="checkbox-text">Chemical Splash</span>
+                                <input type="checkbox" id="cut-hazard">
+                                <span class="checkbox-text">Cutting/Sharp Objects</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="heat" class="hazard-checkbox">
-                                <span class="checkbox-text">Heat/Fire</span>
+                                <input type="checkbox" id="fall-hazard">
+                                <span class="checkbox-text">Fall Hazards</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="crush-hazard">
+                                <span class="checkbox-text">Crushing/Pinching</span>
                             </label>
                         </div>
-                        
-                        <div class="checkbox-row">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Chemical Hazards:</label>
+                        <div class="checkbox-group">
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="electrical" class="hazard-checkbox">
-                                <span class="checkbox-text">Electrical Hazards</span>
+                                <input type="checkbox" id="splash-hazard">
+                                <span class="checkbox-text">Splashes/Sprays</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="noise" class="hazard-checkbox">
+                                <input type="checkbox" id="vapor-hazard">
+                                <span class="checkbox-text">Vapors/Fumes</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="dust-hazard">
+                                <span class="checkbox-text">Dust/Particulates</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="corrosive-hazard">
+                                <span class="checkbox-text">Corrosive Materials</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Environmental Hazards:</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="noise-hazard">
                                 <span class="checkbox-text">Noise Exposure</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="dust" class="hazard-checkbox">
-                                <span class="checkbox-text">Dust/Particulates</span>
+                                <input type="checkbox" id="heat-hazard">
+                                <span class="checkbox-text">Heat/Flame</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="cold-hazard">
+                                <span class="checkbox-text">Cold Temperature</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="electrical-hazard">
+                                <span class="checkbox-text">Electrical Hazards</span>
                             </label>
                         </div>
-                        
-                        <div class="checkbox-row">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Biological Hazards:</label>
+                        <div class="checkbox-group">
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="biological" class="hazard-checkbox">
-                                <span class="checkbox-text">Biological Hazards</span>
+                                <input type="checkbox" id="bloodborne-hazard">
+                                <span class="checkbox-text">Bloodborne Pathogens</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="radiation" class="hazard-checkbox">
-                                <span class="checkbox-text">Radiation</span>
+                                <input type="checkbox" id="infectious-hazard">
+                                <span class="checkbox-text">Infectious Materials</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" name="hazards" value="fall" class="hazard-checkbox">
-                                <span class="checkbox-text">Fall Hazards</span>
+                                <input type="checkbox" id="mold-hazard">
+                                <span class="checkbox-text">Mold/Biological Agents</span>
                             </label>
                         </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="work-activity" class="form-label">Work Activity:</label>
-                    <select id="work-activity" class="form-control" data-tooltip="Select the primary work activity">
-                        <option value="welding">Welding/Cutting</option>
-                        <option value="chemical-handling">Chemical Handling</option>
-                        <option value="construction">Construction</option>
-                        <option value="manufacturing">Manufacturing</option>
-                        <option value="laboratory">Laboratory Work</option>
-                        <option value="maintenance">Maintenance/Repair</option>
-                        <option value="cleaning">Cleaning/Jantorial</option>
-                        <option value="office">Office Work</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
                     <label for="exposure-level" class="form-label">Exposure Level:</label>
-                    <select id="exposure-level" class="form-control" data-tooltip="Select the level of hazard exposure">
-                        <option value="low">Low (Intermittent, Controlled)</option>
-                        <option value="medium" selected>Medium (Regular, Some Controls)</option>
-                        <option value="high">High (Continuous, Limited Controls)</option>
-                        <option value="extreme">Extreme (Emergency, No Controls)</option>
+                    <select id="exposure-level" class="form-control">
+                        <option value="low">Low - Infrequent, short duration</option>
+                        <option value="medium" selected>Medium - Regular, moderate duration</option>
+                        <option value="high">High - Continuous, long duration</option>
+                        <option value="extreme">Extreme - Emergency response</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="work-duration" class="form-label">Work Duration:</label>
-                    <select id="work-duration" class="form-control" data-tooltip="Select typical work duration">
-                        <option value="short">Short-term (&lt; 2 hours)</option>
-                        <option value="medium" selected>Medium (2-6 hours)</option>
-                        <option value="long">Long-term (&gt; 6 hours)</option>
-                        <option value="continuous">Continuous/Shift Work</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="environment-conditions" class="form-label">Environmental Conditions:</label>
-                    <select id="environment-conditions" class="form-control" data-tooltip="Select environmental conditions">
-                        <option value="indoor">Indoor/Controlled</option>
-                        <option value="outdoor" selected>Outdoor</option>
+                    <label for="work-environment" class="form-label">Work Environment:</label>
+                    <select id="work-environment" class="form-control">
+                        <option value="indoor">Indoor - Controlled environment</option>
+                        <option value="outdoor" selected>Outdoor - Weather exposure</option>
                         <option value="confined">Confined Space</option>
-                        <option value="hot">Hot Environment</option>
-                        <option value="cold">Cold Environment</option>
-                        <option value="wet">Wet/Humid</option>
+                        <option value="height">Working at Height</option>
+                        <option value="water">Water/Flooded areas</option>
                     </select>
                 </div>
                 
-                <button id="calculate-ppe" class="btn btn-primary">
-                    <i class="fas fa-hard-hat"></i> Determine PPE Requirements
+                <div class="form-group">
+                    <label for="task-duration" class="form-label">Task Duration:</label>
+                    <select id="task-duration" class="form-control">
+                        <option value="short">Short (under 1 hour)</option>
+                        <option value="medium" selected>Medium (1-4 hours)</option>
+                        <option value="long">Long (4-8 hours)</option>
+                        <option value="extended">Extended (over 8 hours)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="worker-mobility" class="form-label">Worker Mobility Required:</label>
+                    <select id="worker-mobility" class="form-control">
+                        <option value="stationary">Stationary - Limited movement</option>
+                        <option value="moderate" selected>Moderate - Some movement</option>
+                        <option value="high">High - Frequent movement</option>
+                        <option value="extreme">Extreme - Climbing, crawling</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="compatibility-required" class="form-label">PPE Compatibility Required:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="vision-required" checked>
+                            <span class="checkbox-text">Vision (glasses, face shield)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="communication-required">
+                            <span class="checkbox-text">Communication (radio, hearing)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="dexterity-required">
+                            <span class="checkbox-text">Fine Dexterity Required</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="thermal-comfort">
+                            <span class="checkbox-text">Thermal Comfort Needed</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button id="calculate-ppe" class="btn btn-primary btn-lg">
+                    <i class="fas fa-hard-hat"></i> Generate PPE Recommendation
                 </button>
                 
-                <div id="ppe-result" class="result-box">
-                    <h3>PPE Requirements</h3>
-                    <div class="result-value" id="ppe-value"></div>
-                    <div class="result-interpretation" id="ppe-interpretation"></div>
+                <div id="ppe-result" class="result-box" style="display: none;">
+                    <h3><i class="fas fa-shield-alt"></i> PPE Selection Recommendations</h3>
                     
-                    <div class="ppe-recommendations mt-3" id="ppe-recommendations"></div>
+                    <div class="result-summary">
+                        <div class="summary-card" id="head-protection-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Head Protection</h5>
+                                <div class="summary-value" id="head-protection">Required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="respiratory-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-lungs"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Respiratory</h5>
+                                <div class="summary-value" id="respiratory-protection">Not Required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-card" id="body-protection-card">
+                            <div class="summary-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="summary-content">
+                                <h5>Body Protection</h5>
+                                <div class="summary-value" id="body-protection">Required</div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="print-actions">
+                    <div class="ppe-details mt-4">
+                        <h5><i class="fas fa-clipboard-list"></i> Recommended PPE Checklist</h5>
+                        <div class="ppe-checklist" id="ppe-checklist"></div>
+                    </div>
+                    
+                    <div class="ppe-specifications mt-4">
+                        <h5><i class="fas fa-tags"></i> Equipment Specifications</h5>
+                        <div id="ppe-specifications"></div>
+                    </div>
+                    
+                    <div class="ppe-compatibility mt-4">
+                        <h5><i class="fas fa-puzzle-piece"></i> Compatibility Notes</h5>
+                        <div id="compatibility-notes"></div>
+                    </div>
+                    
+                    <div class="ppe-maintenance mt-4">
+                        <h5><i class="fas fa-tools"></i> Maintenance & Inspection</h5>
+                        <div id="maintenance-schedule"></div>
+                    </div>
+                    
+                    <div class="print-actions mt-4">
                         <button class="btn btn-primary print-btn" onclick="generatePDF('ppe-calculator-form', 'ppe-selection')">
-                            <i class="fas fa-file-pdf"></i> Save as PDF
+                            <i class="fas fa-file-pdf"></i> Save as PDF Report
                         </button>
                         <button class="btn btn-secondary" onclick="window.print()">
                             <i class="fas fa-print"></i> Print
@@ -180,592 +242,594 @@
                 </div>
                 
                 <div class="calculator-info mt-4">
-                    <h4><i class="fas fa-info-circle"></i> How to Use This Calculator</h4>
-                    <p>1. <strong>Hazard Assessment:</strong> Select all hazards present in the work environment.</p>
-                    <p>2. <strong>Work Activity:</strong> Select the primary work activity being performed.</p>
-                    <p>3. <strong>Exposure Level:</strong> Determine the level of hazard exposure.</p>
-                    <p>4. <strong>Calculation:</strong> The calculator determines required PPE based on OSHA and ANSI standards.</p>
+                    <h4><i class="fas fa-info-circle"></i> PPE Standards & Regulations</h4>
                     
-                    <h5 class="mt-3">PPE Hierarchy of Controls</h5>
-                    <table class="risk-matrix">
-                        <thead>
-                            <tr>
-                                <th>Control Level</th>
-                                <th>Method</th>
-                                <th>Effectiveness</th>
-                                <th>Example</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1. Elimination</td>
-                                <td>Remove Hazard</td>
-                                <td>Most Effective</td>
-                                <td>Use less toxic chemical</td>
-                            </tr>
-                            <tr>
-                                <td>2. Substitution</td>
-                                <td>Replace Hazard</td>
-                                <td>Very Effective</td>
-                                <td>Use water-based instead of solvent-based</td>
-                            </tr>
-                            <tr>
-                                <td>3. Engineering</td>
-                                <td>Isolate Hazard</td>
-                                <td>Effective</td>
-                                <td>Ventilation systems, machine guards</td>
-                            </tr>
-                            <tr>
-                                <td>4. Administrative</td>
-                                <td>Change Procedures</td>
-                                <td>Moderately Effective</td>
-                                <td>Training, job rotation, warnings</td>
-                            </tr>
-                            <tr>
-                                <td>5. PPE</td>
-                                <td>Protect Worker</td>
-                                <td>Least Effective</td>
-                                <td>Safety glasses, gloves, respirators</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="ppe-standards-table">
+                        <h5>Common PPE Standards</h5>
+                        <table class="risk-matrix">
+                            <thead>
+                                <tr>
+                                    <th>PPE Type</th>
+                                    <th>ANSI Standard</th>
+                                    <th>EN Standard</th>
+                                    <th>Key Requirements</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Head Protection</td>
+                                    <td>ANSI Z89.1</td>
+                                    <td>EN 397</td>
+                                    <td>Impact resistance, dielectric</td>
+                                </tr>
+                                <tr>
+                                    <td>Eye Protection</td>
+                                    <td>ANSI Z87.1</td>
+                                    <td>EN 166</td>
+                                    <td>Impact, optical clarity</td>
+                                </tr>
+                                <tr>
+                                    <td>Hearing Protection</td>
+                                    <td>ANSI S3.19</td>
+                                    <td>EN 352</td>
+                                    <td>Noise Reduction Rating (NRR)</td>
+                                </tr>
+                                <tr>
+                                    <td>Respiratory</td>
+                                    <td>NIOSH 42 CFR 84</td>
+                                    <td>EN 149</td>
+                                    <td>Filter efficiency, fit factor</td>
+                                </tr>
+                                <tr>
+                                    <td>Hand Protection</td>
+                                    <td>ANSI/ISEA 105</td>
+                                    <td>EN 388</td>
+                                    <td>Cut, abrasion, puncture resistance</td>
+                                </tr>
+                                <tr>
+                                    <td>Foot Protection</td>
+                                    <td>ANSI Z41</td>
+                                    <td>EN ISO 20345</td>
+                                    <td>Impact, compression, slip resistance</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="ppe-hierarchy mt-4">
+                        <h5><i class="fas fa-sitemap"></i> PPE Selection Hierarchy</h5>
+                        <div class="hierarchy-steps">
+                            <div class="hierarchy-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h6>Hazard Identification</h6>
+                                    <p>Identify all potential hazards in the work area</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h6>Risk Assessment</h6>
+                                    <p>Evaluate severity and probability of exposure</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h6>Engineering Controls</h6>
+                                    <p>Implement engineering solutions first</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h6>Administrative Controls</h6>
+                                    <p>Implement work procedures and training</p>
+                                </div>
+                            </div>
+                            <div class="hierarchy-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h6>PPE Selection</h6>
+                                    <p>Select appropriate PPE as last line of defense</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Social Sharing & Related Calculators -->
+            <!-- Same as previous -->
             
-            <!-- Social Sharing -->
-            <div class="social-sharing mt-4">
-                <div class="social-card">
-                    <h3>Share This Calculator</h3>
-                    <p>Help other safety professionals discover this tool</p>
-                    <div class="social-buttons">
-                        <a href="#" class="social-btn facebook" onclick="shareCalculator('PPE Selection Calculator').facebook()">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-btn twitter" onclick="shareCalculator('PPE Selection Calculator').twitter()">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-btn linkedin" onclick="shareCalculator('PPE Selection Calculator').linkedin()">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-btn whatsapp" onclick="shareCalculator('PPE Selection Calculator').whatsapp()">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Related Calculators -->
-            <div class="related-calculators mt-4">
-                <h3 class="section-title">Related Calculators</h3>
-                <div class="calculators-grid">
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Risk Assessment Calculator</h3>
-                            <p>Calculate risk levels based on probability and severity to prioritize safety measures.</p>
-                            <a href="risk-assessment.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-skull-crossbones"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Chemical Exposure Calculator</h3>
-                            <p>Calculate chemical exposure levels and assess workplace compliance.</p>
-                            <a href="chemical-exposure.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="calculator-card">
-                        <div class="calculator-icon">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="calculator-content">
-                            <h3>Fall Protection Calculator</h3>
-                            <p>Calculate fall distances, clearance requirements, and anchor point strength.</p>
-                            <a href="fall-protection.html" class="btn btn-primary btn-small">
-                                <i class="fas fa-play-circle"></i> Use Calculator
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="../index.html" class="footer-logo">
-                        <img src="../assets/logo.png" alt="HSE Calculator Logo" class="logo-img">
-                        <span>HSE Calculator</span>
-                    </a>
-                    <p>Professional tools for health, safety, and environment professionals.</p>
-                    <div class="footer-social">
-                        <a href="https://www.facebook.com/Amjathkhan.s" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://x.com/amjikhan" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/amjathkhan_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/amjathkhan-shiekusman/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="risk-assessment.html">Calculators</a></li>
-                        <li><a href="../pages/products.html">Safety Products</a></li>
-                        <li><a href="../pages/tools.html">Tools</a></li>
-                        <li><a href="../pages/blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="../pages/privacy.html">Privacy Policy</a></li>
-                        <li><a href="../pages/terms.html">Terms of Use</a></li>
-                        <li><a href="../pages/affiliate-disclosure.html">Affiliate Disclosure</a></li>
-                        <li><a href="../pages/sitemap.html">Sitemap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@amjathkhan.com">contact@amjathkhan.com</a></li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+919750816163">+91-9750816163</a></li>
-                        <li><i class="fas fa-globe"></i> <a href="https://www.amjathkhan.com/" target="_blank">www.amjathkhan.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 HSE Calculator. All rights reserved.</p>
-                <p>Professional tools for workplace safety and compliance</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Same as previous -->
 
-    <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/calculators.js"></script>
-    
     <script>
-        // PPE Selection Calculator specific logic
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('calculate-ppe').addEventListener('click', calculatePPERequirements);
+            document.getElementById('calculate-ppe').addEventListener('click', calculatePPESelection);
         });
-        
-        function calculatePPERequirements() {
-            // Get selected hazards
-            const hazardCheckboxes = document.querySelectorAll('.hazard-checkbox:checked');
-            const selectedHazards = Array.from(hazardCheckboxes).map(cb => cb.value);
+
+        function calculatePPESelection() {
+            // Get task description
+            const taskDescription = document.getElementById('task-description').value || 'General Task';
             
-            // Get other inputs
-            const workActivity = document.getElementById('work-activity').value;
-            const exposureLevel = document.getElementById('exposure-level').value;
-            const workDuration = document.getElementById('work-duration').value;
-            const environmentConditions = document.getElementById('environment-conditions').value;
-            
-            // Validate at least one hazard selected
-            if (selectedHazards.length === 0) {
-                alert('Please select at least one hazard from the hazard assessment.');
-                return;
-            }
-            
-            // Determine required PPE based on hazards
-            const ppeRequirements = {
-                head: [],
-                eyes: [],
-                hearing: [],
-                respiratory: [],
-                hands: [],
-                body: [],
-                feet: [],
-                fall: []
+            // Get hazard checkboxes
+            const hazards = {
+                physical: {
+                    impact: document.getElementById('impact-hazard').checked,
+                    cut: document.getElementById('cut-hazard').checked,
+                    fall: document.getElementById('fall-hazard').checked,
+                    crush: document.getElementById('crush-hazard').checked
+                },
+                chemical: {
+                    splash: document.getElementById('splash-hazard').checked,
+                    vapor: document.getElementById('vapor-hazard').checked,
+                    dust: document.getElementById('dust-hazard').checked,
+                    corrosive: document.getElementById('corrosive-hazard').checked
+                },
+                environmental: {
+                    noise: document.getElementById('noise-hazard').checked,
+                    heat: document.getElementById('heat-hazard').checked,
+                    cold: document.getElementById('cold-hazard').checked,
+                    electrical: document.getElementById('electrical-hazard').checked
+                },
+                biological: {
+                    bloodborne: document.getElementById('bloodborne-hazard').checked,
+                    infectious: document.getElementById('infectious-hazard').checked,
+                    mold: document.getElementById('mold-hazard').checked
+                }
             };
             
-            // Head Protection
-            if (selectedHazards.includes('impact') || workActivity === 'construction' || 
-                workActivity === 'manufacturing' || workActivity === 'maintenance') {
-                ppeRequirements.head.push({
-                    item: 'Hard Hat',
-                    type: 'Type I (top impact)',
-                    class: exposureLevel === 'high' || exposureLevel === 'extreme' ? 'Class E (Electrical)' : 'Class G (General)',
-                    standard: 'ANSI/ISEA Z89.1',
-                    notes: 'Replace after any significant impact or every 5 years'
-                });
-            }
+            // Get other parameters
+            const exposureLevel = document.getElementById('exposure-level').value;
+            const workEnvironment = document.getElementById('work-environment').value;
+            const taskDuration = document.getElementById('task-duration').value;
+            const workerMobility = document.getElementById('worker-mobility').value;
             
-            // Eye Protection
-            if (selectedHazards.includes('impact') || selectedHazards.includes('chemical') || 
-                selectedHazards.includes('dust') || workActivity === 'welding' || 
-                workActivity === 'chemical-handling') {
-                
-                let eyeProtection = {
-                    item: 'Safety Glasses',
-                    type: 'Basic Impact',
-                    standard: 'ANSI Z87.1',
-                    notes: 'Side shields required for side impact hazards'
-                };
-                
-                if (selectedHazards.includes('chemical')) {
-                    eyeProtection = {
-                        item: 'Chemical Goggles',
-                        type: 'Splash-proof',
-                        standard: 'ANSI Z87.1 D3',
-                        notes: 'Indirect venting recommended for chemical splash'
-                    };
-                }
-                
-                if (workActivity === 'welding') {
-                    eyeProtection = {
-                        item: 'Welding Helmet/Goggles',
-                        type: 'Auto-darkening filter',
-                        standard: 'ANSI Z87.1, Z49.1',
-                        notes: `Shade ${exposureLevel === 'high' ? '10-14' : '9-13'} depending on welding process`
-                    };
-                }
-                
-                ppeRequirements.eyes.push(eyeProtection);
-            }
+            // Get compatibility requirements
+            const compatibility = {
+                vision: document.getElementById('vision-required').checked,
+                communication: document.getElementById('communication-required').checked,
+                dexterity: document.getElementById('dexterity-required').checked,
+                thermal: document.getElementById('thermal-comfort').checked
+            };
             
-            // Hearing Protection
-            if (selectedHazards.includes('noise')) {
-                let nrr = 25; // Noise Reduction Rating
-                if (exposureLevel === 'high') nrr = 30;
-                if (exposureLevel === 'extreme') nrr = 33;
-                
-                ppeRequirements.hearing.push({
-                    item: workDuration === 'long' || workDuration === 'continuous' ? 'Ear Muffs' : 'Ear Plugs',
-                    type: workDuration === 'long' || workDuration === 'continuous' ? 'Electronic/Communicating' : 'Disposable Foam',
-                    class: `NRR ${nrr} dB`,
-                    standard: 'ANSI S3.19',
-                    notes: 'Fit testing recommended for optimal protection'
-                });
-            }
+            // Generate PPE recommendations
+            const ppeRecommendations = generatePPERecommendations(
+                hazards, exposureLevel, workEnvironment, 
+                taskDuration, workerMobility, compatibility
+            );
             
-            // Respiratory Protection
-            if (selectedHazards.includes('dust') || selectedHazards.includes('chemical') || 
-                selectedHazards.includes('biological') || selectedHazards.includes('fumes')) {
-                
-                let respiratorType = 'N95 Particulate Respirator';
-                let filterClass = 'N95';
-                
-                if (selectedHazards.includes('chemical') || selectedHazards.includes('fumes')) {
-                    respiratorType = 'Half-face Respirator with Cartridges';
-                    filterClass = exposureLevel === 'high' ? 'OV/AG/P100' : 'OV/AG';
-                }
-                
-                if (exposureLevel === 'extreme' || selectedHazards.includes('biological')) {
-                    respiratorType = 'Powered Air Purifying Respirator (PAPR)';
-                    filterClass = 'HEPA';
-                }
-                
-                ppeRequirements.respiratory.push({
-                    item: respiratorType,
-                    type: filterClass,
-                    standard: 'NIOSH 42 CFR Part 84',
-                    notes: 'Medical evaluation and fit testing required'
-                });
-            }
-            
-            // Hand Protection
-            if (selectedHazards.includes('chemical') || selectedHazards.includes('heat') || 
-                selectedHazards.includes('impact') || workActivity !== 'office') {
-                
-                let gloveType = 'General Purpose';
-                let material = 'Leather/Nitrile';
-                
-                if (selectedHazards.includes('chemical')) {
-                    gloveType = 'Chemical Resistant';
-                    material = exposureLevel === 'high' ? 'Butyl/Viton' : 'Nitrile/Neoprene';
-                }
-                
-                if (selectedHazards.includes('heat')) {
-                    gloveType = 'Heat Resistant';
-                    material = exposureLevel === 'high' ? 'Aluminized/Kevlar' : 'Leather';
-                }
-                
-                if (selectedHazards.includes('cut')) {
-                    gloveType = 'Cut Resistant';
-                    material = 'Kevlar/Stainless Steel Mesh';
-                }
-                
-                ppeRequirements.hands.push({
-                    item: 'Safety Gloves',
-                    type: gloveType,
-                    material: material,
-                    standard: 'ANSI/ISEA 105',
-                    notes: 'Check chemical compatibility for chemical hazards'
-                });
-            }
-            
-            // Body Protection
-            if (selectedHazards.includes('chemical') || selectedHazards.includes('heat') || 
-                workActivity === 'welding' || workActivity === 'chemical-handling') {
-                
-                let bodyProtection = 'Lab Coat/Coveralls';
-                
-                if (selectedHazards.includes('chemical') && exposureLevel === 'high') {
-                    bodyProtection = 'Chemical Splash Suit';
-                }
-                
-                if (selectedHazards.includes('heat') || workActivity === 'welding') {
-                    bodyProtection = 'Fire-Resistant Clothing (FRC)';
-                }
-                
-                ppeRequirements.body.push({
-                    item: bodyProtection,
-                    type: environmentConditions === 'hot' ? 'Lightweight/Cooling' : 'Standard',
-                    material: selectedHazards.includes('chemical') ? 'Tychem/Tyvek' : 'Cotton/FR',
-                    standard: 'NFPA 2112 (FR), NFPA 1991 (Chemical)',
-                    notes: 'Ensure proper fit and coverage'
-                });
-            }
-            
-            // Foot Protection
-            if (selectedHazards.includes('impact') || selectedHazards.includes('electrical') || 
-                workActivity !== 'office') {
-                
-                let footProtection = 'Safety Toe Shoes';
-                let protection = 'Steel/Composite Toe';
-                
-                if (selectedHazards.includes('electrical')) {
-                    protection = 'Electrical Hazard (EH) Rated';
-                }
-                
-                if (selectedHazards.includes('chemical')) {
-                    protection = 'Chemical Resistant/Waterproof';
-                }
-                
-                ppeRequirements.feet.push({
-                    item: footProtection,
-                    type: protection,
-                    standard: 'ASTM F2413',
-                    notes: 'Replace when soles are worn or damaged'
-                });
-            }
-            
-            // Fall Protection
-            if (selectedHazards.includes('fall') || workActivity === 'construction' || 
-                environmentConditions === 'confined') {
-                
-                ppeRequirements.fall.push({
-                    item: 'Full Body Harness',
-                    type: exposureLevel === 'high' ? 'Retractable Lifeline' : 'Shock-absorbing Lanyard',
-                    class: 'ANSI Z359.11',
-                    capacity: '310 lbs',
-                    standard: 'OSHA 1926.502',
-                    notes: 'Anchor point must support 5,000 lbs'
-                });
-            }
-            
-            // Special PPE based on environment
-            if (environmentConditions === 'hot') {
-                ppeRequirements.body.push({
-                    item: 'Cooling Vest',
-                    type: 'Phase Change or Evaporative',
-                    notes: 'Required for work in temperatures above 90°F'
-                });
-            }
-            
-            if (environmentConditions === 'cold') {
-                ppeRequirements.body.push({
-                    item: 'Insulated Clothing',
-                    type: 'Layered System',
-                    notes: 'Monitor for hypothermia symptoms'
-                });
-            }
+            // Generate maintenance schedule
+            const maintenance = generateMaintenanceSchedule(exposureLevel, taskDuration);
             
             // Display results
-            let totalPPEItems = 0;
-            Object.keys(ppeRequirements).forEach(category => {
-                totalPPEItems += ppeRequirements[category].length;
+            displayPPEResults({
+                taskDescription,
+                hazards,
+                exposureLevel,
+                workEnvironment,
+                taskDuration,
+                workerMobility,
+                compatibility,
+                ppeRecommendations,
+                maintenance
             });
             
-            document.getElementById('ppe-value').innerHTML = `
-                <div class="result-item">
-                    <strong>Total Required PPE Items:</strong> ${totalPPEItems}
-                </div>
-                <div class="result-item">
-                    <strong>Hazards Identified:</strong> ${selectedHazards.length}
-                </div>
-                <div class="result-item">
-                    <strong>Exposure Level:</strong> ${exposureLevel.charAt(0).toUpperCase() + exposureLevel.slice(1)}
-                </div>
-                <div class="result-item">
-                    <strong>Work Activity:</strong> ${document.getElementById('work-activity').options[document.getElementById('work-activity').selectedIndex].text}
-                </div>
-            `;
+            document.getElementById('ppe-result').style.display = 'block';
+        }
+
+        function generatePPERecommendations(hazards, exposureLevel, workEnvironment, taskDuration, workerMobility, compatibility) {
+            const recommendations = {
+                head: [],
+                eye: [],
+                hearing: [],
+                respiratory: [],
+                hand: [],
+                foot: [],
+                body: [],
+                fall: [],
+                specialized: []
+            };
             
-            document.getElementById('ppe-interpretation').innerHTML = `
-                <p><strong>Assessment:</strong> Based on your hazard assessment, the following PPE is required to ensure worker safety.</p>
-                <p><strong>Important:</strong> All PPE must be properly fitted, maintained, and workers trained in its use.</p>
-            `;
+            // Head protection
+            if (hazards.physical.impact || workEnvironment === 'height' || workEnvironment === 'confined') {
+                recommendations.head.push({
+                    item: 'Safety Helmet',
+                    type: 'Type I, Class G (General)',
+                    standard: 'ANSI Z89.1 / EN 397',
+                    notes: 'Dielectric if electrical hazards present',
+                    required: true
+                });
+            }
             
-            // Display PPE recommendations in a structured format
-            let recommendationsHTML = '<div class="ppe-categories">';
+            // Eye protection
+            if (hazards.physical.impact || hazards.chemical.splash || hazards.environmental.heat) {
+                recommendations.eye.push({
+                    item: 'Safety Glasses',
+                    type: 'Side-shield protection',
+                    standard: 'ANSI Z87.1+ / EN 166',
+                    notes: 'Anti-fog coating recommended',
+                    required: true
+                });
+                
+                if (hazards.chemical.splash || hazards.environmental.heat) {
+                    recommendations.eye.push({
+                        item: 'Face Shield',
+                        type: 'Additional protection',
+                        standard: 'ANSI Z87.1 / EN 166',
+                        notes: 'Wear over safety glasses',
+                        required: true
+                    });
+                }
+            }
             
-            Object.keys(ppeRequirements).forEach(category => {
-                if (ppeRequirements[category].length > 0) {
-                    const categoryName = category.charAt(0).toUpperCase() + category.slice(1) + ' Protection';
-                    recommendationsHTML += `
-                        <div class="ppe-category">
-                            <h5>${categoryName}</h5>
-                            <div class="ppe-items">
-                    `;
+            // Hearing protection
+            if (hazards.environmental.noise) {
+                const exposureFactor = exposureLevel === 'high' || exposureLevel === 'extreme' ? 1.5 : 1;
+                recommendations.hearing.push({
+                    item: 'Hearing Protection',
+                    type: exposureFactor > 1 ? 'Earmuffs (NRR 25+)' : 'Earplugs (NRR 20+)',
+                    standard: 'ANSI S3.19 / EN 352',
+                    notes: 'Double protection for extreme noise',
+                    required: true
+                });
+            }
+            
+            // Respiratory protection
+            if (hazards.chemical.vapor || hazards.chemical.dust || hazards.biological.any()) {
+                let respiratorType = 'N95 Mask';
+                let standard = 'NIOSH 42 CFR 84';
+                
+                if (hazards.chemical.vapor) {
+                    respiratorType = 'Organic Vapor Cartridge';
+                }
+                if (hazards.chemical.corrosive) {
+                    respiratorType = 'Acid Gas Cartridge';
+                }
+                if (hazards.biological.bloodborne || hazards.biological.infectious) {
+                    respiratorType = 'N95 or better for biological';
+                }
+                
+                recommendations.respiratory.push({
+                    item: 'Respirator',
+                    type: respiratorType,
+                    standard: standard,
+                    notes: 'Fit testing required',
+                    required: true
+                });
+            }
+            
+            // Hand protection
+            if (hazards.physical.cut || hazards.chemical.splash || hazards.environmental.heat || hazards.environmental.cold) {
+                let gloveType = 'General Purpose';
+                let material = 'Nitrile';
+                let standard = 'ANSI/ISEA 105';
+                
+                if (hazards.physical.cut) {
+                    gloveType = 'Cut Resistant';
+                    material = 'Kevlar/Steel Mesh';
+                }
+                if (hazards.chemical.corrosive) {
+                    gloveType = 'Chemical Resistant';
+                    material = 'Butyl Rubber';
+                }
+                if (hazards.environmental.heat) {
+                    gloveType = 'Heat Resistant';
+                    material = 'Leather/Kevlar';
+                }
+                if (hazards.environmental.cold) {
+                    gloveType = 'Cold Insulated';
+                    material = 'Insulated Leather';
+                }
+                
+                recommendations.hand.push({
+                    item: 'Safety Gloves',
+                    type: `${gloveType} Gloves`,
+                    material: material,
+                    standard: standard,
+                    notes: compatibility.dexterity ? 'Select for dexterity' : 'Standard thickness',
+                    required: true
+                });
+            }
+            
+            // Foot protection
+            if (hazards.physical.impact || hazards.physical.crush || hazards.environmental.electrical) {
+                recommendations.foot.push({
+                    item: 'Safety Boots',
+                    type: hazards.environmental.electrical ? 'Dielectric Boots' : 'Steel Toe',
+                    standard: 'ANSI Z41 / EN ISO 20345',
+                    features: 'Steel toe, slip resistant sole',
+                    required: true
+                });
+            }
+            
+            // Body protection
+            if (hazards.chemical.splash || hazards.environmental.heat || workEnvironment === 'outdoor') {
+                let clothingType = 'Coveralls';
+                let material = 'Cotton/Polyester';
+                
+                if (hazards.chemical.splash) {
+                    clothingType = 'Chemical Splash Suit';
+                    material = 'Tyvek or similar';
+                }
+                if (hazards.environmental.heat) {
+                    clothingType = 'Flame Resistant Clothing';
+                    material = 'Nomex or FR Cotton';
+                }
+                if (hazards.chemical.corrosive) {
+                    clothingType = 'Acid Resistant Suit';
+                    material = 'PVC or Rubber';
+                }
+                
+                recommendations.body.push({
+                    item: 'Protective Clothing',
+                    type: clothingType,
+                    material: material,
+                    notes: workEnvironment === 'outdoor' ? 'Weather appropriate' : 'Standard issue',
+                    required: true
+                });
+            }
+            
+            // Fall protection
+            if (hazards.physical.fall || workEnvironment === 'height') {
+                recommendations.fall.push({
+                    item: 'Fall Arrest System',
+                    type: 'Full Body Harness',
+                    components: 'Harness, lanyard, anchor point',
+                    standard: 'ANSI Z359 / EN 361',
+                    notes: 'Requires proper training',
+                    required: true
+                });
+            }
+            
+            // Specialized equipment
+            if (workEnvironment === 'confined') {
+                recommendations.specialized.push({
+                    item: 'Confined Space Equipment',
+                    type: 'Retrieval system, gas monitor',
+                    notes: 'Entry permit required',
+                    required: true
+                });
+            }
+            
+            if (workEnvironment === 'water') {
+                recommendations.specialized.push({
+                    item: 'Flotation Device',
+                    type: 'Personal Flotation Device (PFD)',
+                    standard: 'USCG Approved',
+                    notes: 'Type III or better',
+                    required: true
+                });
+            }
+            
+            return recommendations;
+        }
+
+        function generateMaintenanceSchedule(exposureLevel, taskDuration) {
+            const schedules = {
+                inspection: {
+                    daily: [],
+                    weekly: [],
+                    monthly: [],
+                    quarterly: []
+                },
+                replacement: [],
+                cleaning: []
+            };
+            
+            // Inspection schedules based on exposure
+            if (exposureLevel === 'high' || exposureLevel === 'extreme') {
+                schedules.inspection.daily.push('Visual inspection of all PPE before use');
+                schedules.inspection.daily.push('Check for damage, wear, or deterioration');
+            } else {
+                schedules.inspection.weekly.push('Complete PPE inspection');
+            }
+            
+            // Replacement schedules
+            const replacementItems = [
+                { item: 'Respirator filters', frequency: 'Monthly or when breathing becomes difficult' },
+                { item: 'Earplug inserts', frequency: 'Weekly or when dirty/damaged' },
+                { item: 'Safety glasses', frequency: 'When scratched or damaged' },
+                { item: 'Gloves', frequency: 'Daily for disposable, weekly for reusable' },
+                { item: 'Hard hat', frequency: 'Every 5 years or after impact' }
+            ];
+            
+            schedules.replacement = replacementItems;
+            
+            // Cleaning schedules
+            schedules.cleaning = [
+                'Clean reusable PPE after each use',
+                'Use manufacturer-recommended cleaning agents',
+                'Store PPE in clean, dry location',
+                'Allow PPE to dry completely before storage'
+            ];
+            
+            return schedules;
+        }
+
+        function displayPPEResults(data) {
+            // Update summary cards
+            document.getElementById('head-protection').textContent = 
+                data.ppeRecommendations.head.length > 0 ? 'Required' : 'Not Required';
+            document.getElementById('respiratory-protection').textContent = 
+                data.ppeRecommendations.respiratory.length > 0 ? 'Required' : 'Not Required';
+            document.getElementById('body-protection').textContent = 
+                data.ppeRecommendations.body.length > 0 ? 'Required' : 'Not Required';
+            
+            // Update card colors
+            document.getElementById('head-protection-card').className = 
+                `summary-card ${data.ppeRecommendations.head.length > 0 ? 'status-high' : 'status-low'}`;
+            document.getElementById('respiratory-card').className = 
+                `summary-card ${data.ppeRecommendations.respiratory.length > 0 ? 'status-high' : 'status-low'}`;
+            document.getElementById('body-protection-card').className = 
+                `summary-card ${data.ppeRecommendations.body.length > 0 ? 'status-high' : 'status-low'}`;
+            
+            // Display PPE checklist
+            const checklistHtml = generateChecklistHTML(data.ppeRecommendations);
+            document.getElementById('ppe-checklist').innerHTML = checklistHtml;
+            
+            // Display specifications
+            const specsHtml = generateSpecificationsHTML(data.ppeRecommendations);
+            document.getElementById('ppe-specifications').innerHTML = specsHtml;
+            
+            // Display compatibility notes
+            const compatHtml = generateCompatibilityHTML(data.compatibility);
+            document.getElementById('compatibility-notes').innerHTML = compatHtml;
+            
+            // Display maintenance schedule
+            const maintHtml = generateMaintenanceHTML(data.maintenance);
+            document.getElementById('maintenance-schedule').innerHTML = maintHtml;
+        }
+
+        function generateChecklistHTML(recommendations) {
+            let html = '<div class="checklist-container">';
+            
+            Object.keys(recommendations).forEach(category => {
+                if (recommendations[category].length > 0) {
+                    html += `<div class="checklist-category">`;
+                    html += `<h6>${category.toUpperCase()} PROTECTION</h6>`;
+                    html += `<ul>`;
                     
-                    ppeRequirements[category].forEach(item => {
-                        recommendationsHTML += `
-                            <div class="ppe-item">
-                                <div class="ppe-item-title">${item.item}</div>
-                                <div class="ppe-item-details">
-                                    ${item.type ? `<div><strong>Type:</strong> ${item.type}</div>` : ''}
-                                    ${item.material ? `<div><strong>Material:</strong> ${item.material}</div>` : ''}
-                                    ${item.class ? `<div><strong>Class:</strong> ${item.class}</div>` : ''}
-                                    ${item.standard ? `<div><strong>Standard:</strong> ${item.standard}</div>` : ''}
-                                    ${item.notes ? `<div><strong>Notes:</strong> ${item.notes}</div>` : ''}
-                                </div>
-                            </div>
-                        `;
+                    recommendations[category].forEach(item => {
+                        html += `<li class="checklist-item">`;
+                        html += `<input type="checkbox" id="check-${category}-${item.item.replace(/\s+/g, '-')}">`;
+                        html += `<label for="check-${category}-${item.item.replace(/\s+/g, '-')}">`;
+                        html += `<strong>${item.item}</strong> - ${item.type}`;
+                        if (item.notes) html += `<br><small>${item.notes}</small>`;
+                        html += `</label>`;
+                        html += `</li>`;
                     });
                     
-                    recommendationsHTML += `
-                            </div>
-                        </div>
-                    `;
+                    html += `</ul></div>`;
                 }
             });
             
-            recommendationsHTML += '</div>';
-            document.getElementById('ppe-recommendations').innerHTML = recommendationsHTML;
-            
-            document.getElementById('ppe-result').classList.add('active');
+            html += '</div>';
+            return html;
         }
-        
+
+        function generateSpecificationsHTML(recommendations) {
+            let html = '<div class="specs-container">';
+            
+            Object.keys(recommendations).forEach(category => {
+                recommendations[category].forEach(item => {
+                    html += `<div class="spec-item">`;
+                    html += `<h6>${item.item}</h6>`;
+                    html += `<div class="spec-details">`;
+                    if (item.type) html += `<p><strong>Type:</strong> ${item.type}</p>`;
+                    if (item.material) html += `<p><strong>Material:</strong> ${item.material}</p>`;
+                    if (item.standard) html += `<p><strong>Standard:</strong> ${item.standard}</p>`;
+                    if (item.features) html += `<p><strong>Features:</strong> ${item.features}</p>`;
+                    if (item.notes) html += `<p><strong>Notes:</strong> ${item.notes}</p>`;
+                    html += `</div></div>`;
+                });
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function generateCompatibilityHTML(compatibility) {
+            let html = '<div class="compatibility-notes">';
+            
+            if (compatibility.vision) {
+                html += `<div class="compatibility-item">`;
+                html += `<i class="fas fa-glasses"></i>`;
+                html += `<span>Ensure eye protection fits over prescription glasses</span>`;
+                html += `</div>`;
+            }
+            
+            if (compatibility.communication) {
+                html += `<div class="compatibility-item">`;
+                html += `<i class="fas fa-broadcast-tower"></i>`;
+                html += `<span>Select hearing protection compatible with communication devices</span>`;
+                html += `</div>`;
+            }
+            
+            if (compatibility.dexterity) {
+                html += `<div class="compatibility-item">`;
+                html += `<i class="fas fa-hand-paper"></i>`;
+                html += `<span>Choose gloves that allow fine motor skills</span>`;
+                html += `</div>`;
+            }
+            
+            if (compatibility.thermal) {
+                html += `<div class="compatibility-item">`;
+                html += `<i class="fas fa-temperature-low"></i>`;
+                html += `<span>Consider thermal comfort for extended wear</span>`;
+                html += `</div>`;
+            }
+            
+            html += `<div class="compatibility-item">`;
+            html += `<i class="fas fa-exclamation-triangle"></i>`;
+            html += `<span>Test PPE compatibility before task begins</span>`;
+            html += `</div>`;
+            
+            html += '</div>';
+            return html;
+        }
+
+        function generateMaintenanceHTML(maintenance) {
+            let html = '<div class="maintenance-container">';
+            
+            // Inspection schedule
+            html += `<div class="maintenance-section">`;
+            html += `<h6>Inspection Schedule</h6>`;
+            
+            Object.keys(maintenance.inspection).forEach(frequency => {
+                if (maintenance.inspection[frequency].length > 0) {
+                    html += `<div class="frequency-group">`;
+                    html += `<strong>${frequency.charAt(0).toUpperCase() + frequency.slice(1)}:</strong>`;
+                    html += `<ul>`;
+                    maintenance.inspection[frequency].forEach(item => {
+                        html += `<li>${item}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            });
+            
+            html += `</div>`;
+            
+            // Replacement schedule
+            html += `<div class="maintenance-section">`;
+            html += `<h6>Replacement Schedule</h6>`;
+            html += `<ul>`;
+            maintenance.replacement.forEach(item => {
+                html += `<li><strong>${item.item}:</strong> ${item.frequency}</li>`;
+            });
+            html += `</ul></div>`;
+            
+            // Cleaning instructions
+            html += `<div class="maintenance-section">`;
+            html += `<h6>Cleaning Instructions</h6>`;
+            html += `<ul>`;
+            maintenance.cleaning.forEach(instruction => {
+                html += `<li>${instruction}</li>`;
+            });
+            html += `</ul></div>`;
+            
+            html += '</div>';
+            return html;
+        }
+
         function generatePDF(elementId, filename) {
             const element = document.getElementById(elementId);
             
             const opt = {
-                margin: 1,
+                margin: 0.5,
                 filename: `${filename}-${new Date().getTime()}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(element).save();
         }
-        
-        function shareCalculator(title) {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(`${title} - Professional HSE Tool`);
-            
-            return {
-                facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank'),
-                twitter: () => window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank'),
-                linkedin: () => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank'),
-                whatsapp: () => window.open(`https://api.whatsapp.com/send?text=${text}: ${url}`, '_blank')
-            };
-        }
     </script>
-    
-    <style>
-        .hazard-checkboxes {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        
-        .checkbox-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .checkbox-row:last-child {
-            margin-bottom: 0;
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .checkbox-text {
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        
-        .ppe-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .ppe-category {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        
-        .ppe-category h5 {
-            color: #3498db;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f8f9fa;
-        }
-        
-        .ppe-items {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .ppe-item {
-            background: #f8f9fa;
-            border-radius: 6px;
-            padding: 15px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .ppe-item-title {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .ppe-item-details div {
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        
-        .ppe-item-details strong {
-            color: #34495e;
-            min-width: 70px;
-            display: inline-block;
-        }
-    </style>
 </body>
 </html>
